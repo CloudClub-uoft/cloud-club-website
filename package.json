@@ -1,0 +1,19 @@
+{
+  "name": "cloud-club-website",
+  "version": "0.1.0",
+  "description": "CloudClub website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudClub-uoft/cloud-club-website.git"
+  },
+  "author": "CloudClub",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CloudClub-uoft/cloud-club-website/issues"
+  },
+  "homepage": "https://github.com/CloudClub-uoft/cloud-club-website#readme"
+}
