@@ -1,0 +1,16 @@
+[
+    {
+        "id": "some-uuid",
+        "name": "Jayden Lefebvre",
+        "discipline": "EngSci",
+        "year": "2T4",
+        "bio": "Nothing to see here."
+    },
+    {
+        "id": "some-other-uuid",
+        "name": "Someone Else",
+        "discipline": "ChemEng",
+        "year": "2T3",
+        "bio": "Nothing to see here too."
+    }
+]

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/CloudClub-uoft/cloud-club-website/issues"
   },
-  "homepage": "https://github.com/CloudClub-uoft/cloud-club-website#readme"
+  "homepage": "https://github.com/CloudClub-uoft/cloud-club-website#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
