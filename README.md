@@ -16,4 +16,4 @@ Website for the UofT CloudClub.
 ## Testing
 
 3. Start the server by executing `node .` in the terminal.
-4. View the webpage by navigating to `localhost:3000` in your browser.
+4. View the webpage by navigating to `localhost` in your browser.
