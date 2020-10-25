@@ -11,22 +11,25 @@ http.listen(port, () => {
     console.log(`CloudClub Website listening on localhost:`+port)
 });
 
-const io = require('socket.io')(http);
+//Server's listening-speaking end
+const serverSocket = require('socket.io')(http);
 
 function numClients(){
-    let a = Object.keys(io.sockets.sockets).length;
+    let a = Object.keys(serverSocket.sockets.sockets).length;
     return a ? a : 1;
 }
 
 //LISTEN for when a client connects to this socket!
-io.on('connection', socket => {
+serverSocket.on('connection', clientSocket => {
     //Socket is a representation of the client's connection to the server
-    console.log("Client (ID: "+socket.id+") connected! ("+numClients()+" total)")
-    io.emit('numclients', numClients());
+    console.log("Client (ID: "+clientSocket.id+") connected! ("+numClients()+" total)")
+    serverSocket.emit('numclients', numClients());
 
-    //Must be nested - the server itself can't listen for disconnects, this is the nature of Internet.
-    socket.on('disconnect', () => {
-        console.log("Client (ID: "+socket.id+") disconnected! ("+numClients()+" total)");
-        io.emit('numclients', numClients());
+    //`serverSocket` vs `clientSocket` is IMPORTANT conceptually
+
+    //Must be nested - the server itself can't listen for disconnects; alas, this is the nature of Internet.
+    clientSocket.on('disconnect', () => {
+        console.log("Client (ID: "+clientSocket.id+") disconnected! ("+numClients()+" total)");
+        serverSocket.emit('numclients', numClients());
     });
 });
