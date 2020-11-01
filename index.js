@@ -19,13 +19,22 @@ function numClients(){
     return a ? a : 1;
 }
 
+var buttonPresses = 10;
+
 //LISTEN for when a client connects to this socket!
 serverSocket.on('connection', clientSocket => {
     //Socket is a representation of the client's connection to the server
     console.log("Client (ID: "+clientSocket.id+") connected! ("+numClients()+" total)")
     serverSocket.emit('numclients', numClients());
+    clientSocket.emit('buttonPresses', buttonPresses);
 
     //`serverSocket` vs `clientSocket` is IMPORTANT conceptually
+
+    clientSocket.on('buttonPress', () => {
+        buttonPresses++;
+        console.log("Client "+clientSocket.id+" pressed the button! "+buttonPresses+" presses.");
+        serverSocket.emit('buttonPresses', buttonPresses);
+    });
 
     //Must be nested - the server itself can't listen for disconnects; alas, this is the nature of Internet.
     clientSocket.on('disconnect', () => {

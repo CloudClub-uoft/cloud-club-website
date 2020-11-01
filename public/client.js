@@ -10,4 +10,20 @@ function updateNumclients(numusers){
 }
 
 //Client socket listens for an event "numclients" and takes WHATEVER DATA -> updateNumclients
-socket.on('numclients', updateNumclients)
+socket.on('numclients', updateNumclients);
+
+//When the server sends and event 'buttonPresses', it also passes an integer -> update the page
+socket.on('buttonPresses', presses => {
+    document.getElementById('buttonPresses').innerHTML = ""+presses+" presses.";
+});
+
+//Arrow notation
+
+
+//When the user presses a button 'button', ping the server -> event 'buttonPress
+function buttonPressed(){
+    socket.emit('buttonPress');
+    console.log("Button Pressed!");
+}
+
+//Listener - Event name, functionality
