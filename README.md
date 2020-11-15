@@ -20,8 +20,8 @@ Website for the UofT CloudClub.
 
 ## To-Do
 
-- [] Static Routing (`public` folder)
-  - [] Create our server `index.js`
-  - [] Import Express, create server (See Express.js Quickstart)
-  - [] Create new folder `public`
-  - [] Static routing ALL to `public` folder (See Express.js Documentation)
+- [ ] Static Routing (`public` folder)
+  - [ ] Create our server `index.js`
+  - [ ] Import Express, create server (See Express.js Quickstart)
+  - [ ] Create new folder `public`
+  - [ ] Static routing ALL to `public` folder (See Express.js Documentation)
