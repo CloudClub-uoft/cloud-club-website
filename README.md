@@ -17,3 +17,11 @@ Website for the UofT CloudClub.
 
 3. Start the server by executing `node .` in the terminal.
 4. View the webpage by navigating to `localhost` in your browser.
+
+## To-Do
+
+- [] Static Routing (`public` folder)
+  - [] Create our server `index.js`
+  - [] Import Express, create server (See Express.js Quickstart)
+  - [] Create new folder `public`
+  - [] Static routing ALL to `public` folder (See Express.js Documentation)
