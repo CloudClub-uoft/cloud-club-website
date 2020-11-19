@@ -20,6 +20,28 @@ Website for the UofT CloudClub.
 
 ## To-Do
 
+### Frontend
+
+Consistent fonts, color scheme, etc.
+
+- [ ] **Header** - Adam and Ansh
+  - [ ] Team logo
+  - [ ] Team name
+  - [ ] Navigation bar (use placeholders for now)
+  - [ ] Scrolls with page
+  - [ ] ...
+- [ ] **Footer** - Adam and Ansh
+  - [ ] Social media links
+  - [ ] Contact emails
+  - [ ] ...
+- [ ] **Home Page Content** - Tamim and Ian
+  - [ ] "Banner"
+  - [ ] Introductory paragraph
+  - [ ] "Learn more", "get involved", etc. promotional material
+  - [ ] ...
+
+### Backend
+
 - [ ] Static Routing (`public` folder)
   - [ ] Create our server `index.js`
   - [ ] Import Express, create server (See Express.js Quickstart)
