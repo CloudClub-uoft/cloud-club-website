@@ -47,3 +47,7 @@ Consistent fonts, color scheme, etc.
   - [X] Import Express, create server (See Express.js Quickstart)
   - [X] Create new folder `public`
   - [X] Static routing ALL to `public` folder (See Express.js Documentation)
+
+- [ ] POST/GET Routes to SQL
+  - [ ] Login - POST body has `username`, `password` -> check credentials, return error code or 200
+  - [ ] Team Members - GET list of CloudClub team members
