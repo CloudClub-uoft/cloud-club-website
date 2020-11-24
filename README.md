@@ -39,6 +39,9 @@ Consistent fonts, color scheme, etc.
   - [ ] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
   - [ ] ...
+- [ ] **Team Page Content** - Lavaya
+  - [ ] Team headshots and bios
+  - [ ] See Bootstrap's carousel example
 
 ### Backend
 
