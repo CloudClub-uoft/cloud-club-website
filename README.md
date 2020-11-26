@@ -39,11 +39,14 @@ Consistent fonts, color scheme, etc.
   - [ ] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
   - [ ] ...
+- [ ] **Team Page Content** - Lavaya
+  - [ ] Team headshots and bios
+  - [ ] See Bootstrap's carousel example
 
 ### Backend
 
-- [ ] Static Routing (`public` folder)
-  - [ ] Create our server `index.js`
-  - [ ] Import Express, create server (See Express.js Quickstart)
-  - [ ] Create new folder `public`
-  - [ ] Static routing ALL to `public` folder (See Express.js Documentation)
+- [X] Static Routing (`public` folder)
+  - [X] Create our server `index.js`
+  - [X] Import Express, create server (See Express.js Quickstart)
+  - [X] Create new folder `public`
+  - [X] Static routing ALL to `public` folder (See Express.js Documentation)
