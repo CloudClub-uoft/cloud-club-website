@@ -48,9 +48,9 @@ Consistent fonts, color scheme, etc.
   - [X] Create new folder `public`
   - [X] Static routing ALL to `public` folder (See Express.js Documentation)
 
-- [ ] Express.js SQL API
-  - [ ] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
-  - [ ] Team Members - GET list of CloudClub team members, return
+- [X] Express.js SQL API
+  - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
+  - [x] Team Members - GET list of CloudClub team members, return
 
 For each of the SQL Route tasks, I recommend taking the following approach. Remember - we're building an API here!
 
