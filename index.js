@@ -34,6 +34,13 @@ app.post('/login', (req, res)=> {
     });
 })
 
+// Member list GET request
+app.get('/members', (req, res)=> {
+    database.query('SELECT * FROM `clubmembers`', function(error, results, fields) {
+        res.json(results);
+    })
+})
+
 //Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res)=> {
     // Perform some comparison, operation, etc. on the request body, 
