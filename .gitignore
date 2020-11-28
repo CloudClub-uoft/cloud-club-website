@@ -1,2 +1,5 @@
+# Dependencies
+node_modules/
+
 # OS X metadata
 .DS_Store
