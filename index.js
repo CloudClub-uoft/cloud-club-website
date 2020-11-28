@@ -1,10 +1,14 @@
+// Packages
 const express = require('express')
 const app = express()
-const port = 80 
 const http = require('http').createServer(app);
 const mysql = require('mysql')
+const bodyParser = require('body-parser')
 
-//Connect to the database
+const port = 80 
+app.use(bodyParser.json());
+
+// Connect to the database
 const database = mysql.createConnection({
     host: 'sql2.freemysqlhosting.net',
     user: 'sql2377507',
@@ -15,6 +19,20 @@ const database = mysql.createConnection({
 
 app.use(express.static('public'))
 
+// Login POST request
+app.post('/login', (req, res)=> {
+    var user = req.body.user;
+    var password = req.body.password;
+    var sql = 'SELECT * FROM `logins` WHERE `username`=' + database.escape(user) + ' AND `password`=' + database.escape(password);
+    database.query(sql, function(error, results, fields) {
+        if (results.length > 0) {
+            res.send('Login Successful');
+        } else {
+            res.send('Login Unsuccessful');
+        }
+        res.end();
+    });
+})
 
 //Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res)=> {
