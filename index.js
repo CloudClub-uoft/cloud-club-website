@@ -21,7 +21,7 @@ app.use(express.static('public'))
 
 // Login POST request
 app.post('/login', (req, res)=> {
-    var user = req.body.user;
+    var user = req.body.username;
     var password = req.body.password;
     var sql = 'SELECT * FROM `logins` WHERE `username`=' + database.escape(user) + ' AND `password`=' + database.escape(password);
     database.query(sql, function(error, results, fields) {
