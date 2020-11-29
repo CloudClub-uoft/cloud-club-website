@@ -25,6 +25,7 @@ app.post('/login', (req, res)=> {
     var password = req.body.password;
     var sql = 'SELECT * FROM `logins` WHERE `username`=' + database.escape(user) + ' AND `password`=' + database.escape(password);
     database.query(sql, function(error, results, fields) {
+        if (error) res.status(500).json({ "Error": "Internal Server Error 500" });
         if (results.length > 0) {
             res.send('Login Successful');
         } else {
