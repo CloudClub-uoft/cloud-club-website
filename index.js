@@ -27,9 +27,9 @@ app.post('/login', (req, res)=> {
     database.query(sql, function(error, results, fields) {
         if (error) res.status(500).json({ "Error": "Internal Server Error 500" });
         if (results.length > 0) {
-            res.send('Login Successful');
+            res.status(200).send('Login Successful');
         } else {
-            res.send('Login Unsuccessful');
+            res.status(401).send('Login Unsuccessful');
         }
         res.end();
     });
@@ -38,7 +38,7 @@ app.post('/login', (req, res)=> {
 // Member list GET request
 app.get('/members', (req, res)=> {
     database.query('SELECT * FROM `clubmembers`', function(error, results, fields) {
-        res.json(results);
+        res.status(200).json(results);
     })
 })
 
