@@ -4,6 +4,7 @@ const app = express()
 const http = require('http').createServer(app);
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt');
 
 const port = 80 
 app.use(bodyParser.json());
