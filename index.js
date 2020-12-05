@@ -1,12 +1,13 @@
 // Packages
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const http = require('http').createServer(app);
-const mysql = require('mysql')
-const bodyParser = require('body-parser')
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
-const port = 80 
+const saltRounds = 10;
+const port = 80;
 app.use(bodyParser.json());
 
 // Connect to the database
@@ -18,7 +19,7 @@ const database = mysql.createConnection({
     database: 'sql2377507'
 });
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Login POST request
 app.post('/login', (req, res)=> {
@@ -34,14 +35,37 @@ app.post('/login', (req, res)=> {
         }
         res.end();
     });
-})
+});
 
 // Member list GET request
 app.get('/members', (req, res)=> {
     database.query('SELECT * FROM `clubmembers`', function(error, results, fields) {
         res.status(200).json(results);
-    })
-})
+    });
+});
+
+// Registration POST request
+app.post('/register', (req, res)=> {
+    var user = req.body.username;
+    var password = req.body.password;
+    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(error, results, fields) {
+        if (results.length == 0) {
+            if (password.length > 8) {
+                bcrypt.hash(password, saltRounds, (err, hash)=> {
+                    database.query('INSERT INTO `logins`(username, password) VALUES (?, ?)', [user, hash], function(error, results, fields) {
+                        if (error) res.json({ "Error": "Internal Server Error 500" });
+                        res.status(201).send('Successfully registered');
+                    });
+                });
+            } else {
+                res.status(400).send('Password too short');
+            };
+        } else {
+            res.status(409).send('User already exists');
+        }
+        res.end();
+    });
+});
 
 //Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res)=> {
@@ -65,9 +89,9 @@ app.post('/endpoint', (req, res)=> {
         //OR
         res.status(404).json({
             'error' : "Resource not found!"
-        })
+        });
     });
-})
+});
 
 http.listen(port, () => {
 });
