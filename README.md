@@ -24,9 +24,8 @@ Website for the UofT CloudClub.
 
 Consistent fonts, color scheme, etc.
 
-- [ ] **Header** - Adam and Ansh
-  - [ ] Copy header from Team Page
-  - [ ] Working Nav links
+- [X] **Header** - Jayden and Lavanya
+  - [X] Working Nav links
 - [X] **Footer** - Adam and Ansh
   - [X] Social media links
   - [X] Contact emails
@@ -34,10 +33,13 @@ Consistent fonts, color scheme, etc.
   - [X] "Banner"
   - [X] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
-  - [ ] Carousel of images - game screenshots, etc.
+  - [X] Set up carousel
+  - [X] Add game screenshots to carousel
+- [ ] **Login and Register** - Tamim and Ian
+  - [ ] Login page (username and password)
+  - [ ] Register page (username, first name, last name, email, password, confirm password)
 - [ ] **Team Page Content** - Lavaya and Yunjia
-  - [ ] Team headshots and bios, grid of "cards"
-  - [ ] See Bootstrap's Album example
+  - [ ] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
 
 ## Backend
 
