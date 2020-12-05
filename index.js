@@ -27,7 +27,7 @@ app.post('/login', (req, res)=> {
     var password = req.body.password;
     var sql = 'SELECT * FROM `logins` WHERE `username`=' + database.escape(user) + ' AND `password`=' + database.escape(password);
     database.query(sql, function(error, results, fields) {
-        if (error) res.status(500).json({ "Error": "Internal Server Error 500" });
+        if (error) res.status(500).send('Internal Server Error 500');
         if (results.length > 0) {
             res.status(200).send('Login Successful');
         } else {
@@ -50,15 +50,16 @@ app.post('/register', (req, res)=> {
     var password = req.body.password;
     database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(error, results, fields) {
         if (results.length == 0) {
-            if (password.length > 8) {
+            if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
                 bcrypt.hash(password, saltRounds, (err, hash)=> {
                     database.query('INSERT INTO `logins`(username, password) VALUES (?, ?)', [user, hash], function(error, results, fields) {
-                        if (error) res.json({ "Error": "Internal Server Error 500" });
+                        if (error) res.send('Internal Server Error 500');
                         res.status(201).send('Successfully registered');
                     });
                 });
             } else {
-                res.status(400).send('Password too short');
+                // TO-DO: specify which requirements are not met
+                res.status(400).send('Password does not meet the requirements');
             };
         } else {
             res.status(409).send('User already exists');
