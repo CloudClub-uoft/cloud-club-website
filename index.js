@@ -26,17 +26,17 @@ app.post('/login', (req, res)=> {
     var user = req.body.username;
     var password = req.body.password;
     database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
-        if (err) res.status(500).send('Internal Server Error 500');
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         if (result.length == 1) {
                 bcrypt.compare(password, result[0].password, function(err, result) {
                     if (result) {
-                        res.status(200).send('Login Sucessful');
+                        res.status(200).json({'Message': 'Login Sucessful'});
                     } else {
-                        res.status(401).send("User not found or password incorrect");
+                        res.status(401).json({'Message': 'User not found or password incorrect'});
                     };
                 });
         } else {
-            res.status(401).send('User not found or password incorrect');
+            res.status(401).json({'Message': 'User not found or password incorrect'});
         }
     });
 });
@@ -44,6 +44,7 @@ app.post('/login', (req, res)=> {
 // Member list GET request
 app.get('/members', (req, res)=> {
     database.query('SELECT * FROM `clubmembers`', function(err, result, fields) {
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         res.status(200).json(result);
     });
 });
@@ -53,23 +54,22 @@ app.post('/register', (req, res)=> {
     var user = req.body.username;
     var password = req.body.password;
     database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
-        if (err) result.send('Internal Server Error 500');
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         if (result.length == 0) {
             if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
                 bcrypt.hash(password, saltRounds, (err, hash)=> {
                     database.query('INSERT INTO `logins`(username, password) VALUES (?, ?)', [user, hash], function(err, result, fields) {
-                        if (err) result.send('Internal Server Error 500');
-                        res.status(201).send('Successfully registered');
+                        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
+                        res.status(201).json({'Message': 'Successfully registered'});
                     });
                 });
             } else {
                 // TO-DO: specify which requirements are not met
-                res.status(400).send('Password does not meet the requirements');
+                res.status(400).json({'Message': 'Password does not meet the requirements'});
             };
         } else {
-            res.status(409).send('User already exists');
+            res.status(409).json({'Message': 'User already exists'});
         }
-        res.end();
     });
 });
 
