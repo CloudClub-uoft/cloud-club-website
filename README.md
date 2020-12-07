@@ -52,8 +52,13 @@ Consistent fonts, color scheme, etc.
 - [X] Express.js SQL API
   - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
   - [x] Team Members - GET list of CloudClub team members, return
+  - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+    - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+    - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+    - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+    - [x] Build response: 50X for SQL error, 201 for successful creation
 
-For each of the SQL Route tasks, I recommend taking the following approach. Remember - we're building an API here!
+For each of the SQL Route tasks, I recommend taking the following approach.
 
 - What **functionality** am I aiming to achieve? (i.e. checking login credentials)
 - What kind of **request** is being made? What **data** is included, if any? (i.e. POST request with username and password)

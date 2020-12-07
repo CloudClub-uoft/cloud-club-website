@@ -1,11 +1,13 @@
 // Packages
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const http = require('http').createServer(app);
-const mysql = require('mysql')
-const bodyParser = require('body-parser')
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
-const port = 80 
+const saltRounds = 10;
+const port = 80;
 app.use(bodyParser.json());
 
 // Connect to the database
@@ -17,30 +19,59 @@ const database = mysql.createConnection({
     database: 'sql2377507'
 });
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Login POST request
 app.post('/login', (req, res)=> {
     var user = req.body.username;
     var password = req.body.password;
-    var sql = 'SELECT * FROM `logins` WHERE `username`=' + database.escape(user) + ' AND `password`=' + database.escape(password);
-    database.query(sql, function(error, results, fields) {
-        if (error) res.status(500).json({ "Error": "Internal Server Error 500" });
-        if (results.length > 0) {
-            res.send('Login Successful');
+    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
+        if (err) res.status(500).send('Internal Server Error 500');
+        if (result.length == 1) {
+                bcrypt.compare(password, result[0].password, function(err, result) {
+                    if (result) {
+                        res.status(200).send('Login Sucessful');
+                    } else {
+                        res.status(401).send("User not found or password incorrect");
+                    };
+                });
         } else {
-            res.send('Login Unsuccessful');
+            res.status(401).send('User not found or password incorrect');
         }
-        res.end();
     });
-})
+});
 
 // Member list GET request
 app.get('/members', (req, res)=> {
-    database.query('SELECT * FROM `clubmembers`', function(error, results, fields) {
-        res.json(results);
-    })
-})
+    database.query('SELECT * FROM `clubmembers`', function(err, result, fields) {
+        res.status(200).json(result);
+    });
+});
+
+// Registration POST request
+app.post('/register', (req, res)=> {
+    var user = req.body.username;
+    var password = req.body.password;
+    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
+        if (err) result.send('Internal Server Error 500');
+        if (result.length == 0) {
+            if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
+                bcrypt.hash(password, saltRounds, (err, hash)=> {
+                    database.query('INSERT INTO `logins`(username, password) VALUES (?, ?)', [user, hash], function(err, result, fields) {
+                        if (err) result.send('Internal Server Error 500');
+                        res.status(201).send('Successfully registered');
+                    });
+                });
+            } else {
+                // TO-DO: specify which requirements are not met
+                res.status(400).send('Password does not meet the requirements');
+            };
+        } else {
+            res.status(409).send('User already exists');
+        }
+        res.end();
+    });
+});
 
 //Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res)=> {
@@ -64,9 +95,9 @@ app.post('/endpoint', (req, res)=> {
         //OR
         res.status(404).json({
             'error' : "Resource not found!"
-        })
+        });
     });
-})
+});
 
 http.listen(port, () => {
 });
