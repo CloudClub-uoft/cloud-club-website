@@ -18,15 +18,14 @@ Website for the UofT CloudClub.
 3. Start the server by executing `node .` in the terminal.
 4. View the webpage by navigating to `localhost` in your browser.
 
-## To-Do
+# Development
 
-### Frontend
+## Frontend
 
 Consistent fonts, color scheme, etc.
 
-- [ ] **Header** - Adam and Ansh
-  - [ ] Copy header from Team Page
-  - [ ] Working Nav links
+- [X] **Header** - Jayden and Lavanya
+  - [X] Working Nav links
 - [X] **Footer** - Adam and Ansh
   - [X] Social media links
   - [X] Contact emails
@@ -34,15 +33,37 @@ Consistent fonts, color scheme, etc.
   - [X] "Banner"
   - [X] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
-  - [ ] Carousel of images - game screenshots, etc.
+  - [X] Set up carousel
+  - [X] Add game screenshots to carousel
+- [ ] **Login and Register** - Tamim and Ian
+  - [ ] Login page (username and password)
+  - [ ] Register page (username, first name, last name, email, password, confirm password)
 - [ ] **Team Page Content** - Lavaya and Yunjia
-  - [ ] Team headshots and bios, grid of "cards"
-  - [ ] See Bootstrap's Album example
+  - [ ] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
 
-### Backend
+## Backend
 
 - [X] Static Routing (`public` folder)
   - [X] Create our server `index.js`
   - [X] Import Express, create server (See Express.js Quickstart)
   - [X] Create new folder `public`
   - [X] Static routing ALL to `public` folder (See Express.js Documentation)
+
+- [X] Express.js SQL API
+  - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
+  - [x] Team Members - GET list of CloudClub team members, return
+  - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+    - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+    - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+    - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+    - [x] Build response: 50X for SQL error, 201 for successful creation
+
+For each of the SQL Route tasks, I recommend taking the following approach.
+
+- What **functionality** am I aiming to achieve? (i.e. checking login credentials)
+- What kind of **request** is being made? What **data** is included, if any? (i.e. POST request with username and password)
+- Where in the API should I put an Express route sub-address (aka "**endpoint**")? (i.e. '/login')
+- What kind of **interactions** am I going to have with the SQL database? (i.e. data retrieval for an entry with a given username)
+- What SQL **commands** do I use to achieve this? (Check *W3Schools* or another reference)
+- Am I making any **comparisons** or decisions with this data? (i.e. comparing given credentials to those in database)
+- What is my **response** to the client? (i.e. status code 200 'OK' with user info on success, OR status code 403 'Forbidden' with more error details)

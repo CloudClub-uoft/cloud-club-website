@@ -7,22 +7,78 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <!-- HEADER CODE -->
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">CloudClub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Homepage <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="teampage.html">The Team</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Projects</a>
+            </li> -->
+          </ul>
+          <!-- <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            
+          </form> -->
+        </div>
+      </nav>
+    </header>
 
     <!-- BODY CODE -->
 
-    <!-- Test Header -->
-    <nav class="site-header sticky-top py-1">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-          <a class="py-2 d-none d-md-inline-block" href="">Test Header</a>
+    <!-- Carousel -->
+    <div id="mainCarousel" class="carousel slide overflow-hidden" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mainCarousel" data-slide-to="1"></li>
+        <li data-target="#mainCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="../assets/CloudClub.png" alt="First slide" style="height: 100vh; object-fit: cover;">
+          <div class="container">
+            <div class="carousel-caption text-left">
+              <h3>CloudClub's First Game</h3>
+              <p><a href="https://fast-ocean-31681.herokuapp.com/Mario%20Game/index.html" >Skule Adventure!</p>
+              <p><a class="btn btn-md btn-primary" href="#" role="button">Check it out!</a></p>
+            </div>
+          </div>
         </div>
-    </nav>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../assets/CloudClub-Green.png" alt="Second slide" style="height: 100vh; object-fit: cover;"> 
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../assets/CloudClub-Purple.png" alt="Third slide" style="height: 100vh; object-fit: cover;">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 
-    <!-- Test Main Page -->
+    <!-- Introduction -->
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
         <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 font-weight-normal">CloudClub</h1>
+          <h1 class="display-4 font-weight-normal">What is CloudClub?</h1>
           <p class="lead font-weight-normal">A team of aspiring engineers. A desire to learn more. A drive to explore the power of cloud technologies.</p>
         </div>
     </div>
@@ -41,10 +97,6 @@
       </div>
     </div> -->
 
-    <!-- Logo -->
-    <div class="h-50 position-relative overflow-hidden text-center" style="background-color: #50BDE4">
-      <img src="../assets/CloudClub.png" class="img-fluid" alt="Responsive image">
-    </div>
 
 
     <!-- Projects -->
