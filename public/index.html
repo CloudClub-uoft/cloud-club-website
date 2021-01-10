@@ -100,24 +100,44 @@
 
 
     <!-- Projects -->
-    <div class=" flex-md-equal w-100 my-md-3 pl-md-3"> <!-- remove d-md-flex-->
+    <!--Adam's Changes 
+- Each container underneath the description of each project was replaced so that it has a background image of a part of the project
+- Buttons were added to each of these containers 
+- Two errors noticed were that the container for project 3 is wider than the other two, and the second container sits higher up than the 
+other two, however no solution for these problems were found 
+    -->
+    <div class= "flex-md-equal w-100 my-md-3 pl-md-3"> <!-- remove d-md-flex-->
         <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
           <div class="my-3 py-3">
             <h2 class="display-5">Project 1</h2>
             <p class="lead">Descript</p>
           </div>
-          <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+          <div class=" bg-light shadow-sm  container  d-flex flex-column-reverse mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('#'); ">
+            <div class= "p-5"> <a href = "#" class = "btn btn-primary my-auto">Visit the project page</a></div>
+          </div>
         </div>
         <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
           <div class="my-3 p-3">
             <h2 class="display-5">Project 2</h2>
             <p class="lead">Descript</p>
+            <div class = "bg-dark shadow-sm container d-flex flex-column-reverse mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('#');"> 
+              <div class= "p-5"> <a href = "#" class = "btn btn-primary my-auto">Visit the project page</a></div>
+            </div>
+          </div>      
+        </div>      
+        <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="my-3 py-3">
+            <h2 class="display-5">Project 3</h2>
+            <p class="lead">Descript</p>
           </div>
-          <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+          <div class="bg-light shadow-sm container d-flex flex-column-reverse mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('#');">
+            <div class= "p-5"> <a href = "#" class = "btn btn-primary my-auto">Visit the project page</a></div>
+          </div>
         </div>
     </div>
+  
 
-    <!-- Test Footer -->
+  <!-- Test Footer -->
     <footer class="container py-5">
         <div class="row">
           <div class="col-12 col-md">
