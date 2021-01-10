@@ -23,23 +23,33 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+// Dynamic Routes
+// Register GET request
+app.get('/login', (req,res)=> {
+    res.render('login')
+});
+
+app.get('/register', (req,res)=> {
+    res.render('register')
+});
+
 // Login POST request
 // TO-DO: Session creation
 app.post('/login', (req, res)=> {
-    var user = req.body.username;
+    var email = req.body.email;
     var password = req.body.password;
-    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
+    database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], function(err, result, fields) {
         if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         if (result.length == 1) {
                 bcrypt.compare(password, result[0].password, function(err, result) {
                     if (result) {
                         res.status(200).json({'Message': 'Login Sucessful'});
                     } else {
-                        res.status(401).json({'Message': 'User not found or password incorrect'});
+                        res.status(401).json({'Message': 'Email not found or password incorrect'});
                     };
                 });
         } else {
-            res.status(401).json({'Message': 'User not found or password incorrect'});
+            res.status(401).json({'Message': 'Email not found or password incorrect'});
         }
     });
 });
@@ -51,13 +61,6 @@ app.get('/members', (req, res)=> {
         res.status(200).json(result);
     });
 });
-
-// Register GET request
-
-app.get('/register', (req,res)=> {
-    res.render('register')
-});
-
 
 // Registration POST request
 app.post('/register', (req, res)=> {
