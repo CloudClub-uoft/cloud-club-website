@@ -24,21 +24,22 @@ Website for the UofT CloudClub.
 
 Consistent fonts, color scheme, etc.
 
-- [ ] **Header** - Adam and Ansh
-  - [ ] Team logo
-  - [ ] Team name
-  - [ ] Navigation bar (use placeholders for now)
-  - [ ] Scrolls with page
-  - [ ] ...
-- [ ] **Footer** - Adam and Ansh
-  - [ ] Social media links
-  - [ ] Contact emails
-  - [ ] ...
-- [ ] **Home Page Content** - Tamim and Ian
-  - [ ] "Banner"
-  - [ ] Introductory paragraph
+- [X] **Header** - Jayden and Lavanya
+  - [X] Working Nav links
+- [X] **Footer** - Adam and Ansh
+  - [X] Social media links
+  - [X] Contact emails
+- [X] **Home Page Content** - Tamim and Ian
+  - [X] "Banner"
+  - [X] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
-  - [ ] ...
+  - [X] Set up carousel
+  - [X] Add game screenshots to carousel
+- [ ] **Login and Register** - Tamim and Ian
+  - [ ] Login page (username and password)
+  - [ ] Register page (username, first name, last name, email, password, confirm password)
+- [ ] **Team Page Content** - Lavaya and Yunjia
+  - [ ] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
 
 ## Backend
 
