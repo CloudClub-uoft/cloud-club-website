@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 const port = 80;
-app.use(bodyParser.json());
 
 // Connect to the database
 const database = mysql.createConnection({
@@ -19,25 +18,38 @@ const database = mysql.createConnection({
     database: 'sql2377507'
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+// Dynamic Routes
+// Register GET request
+app.get('/login', (req,res)=> {
+    res.render('login')
+});
+
+app.get('/register', (req,res)=> {
+    res.render('register')
+});
+
 // Login POST request
+// TO-DO: Session creation
 app.post('/login', (req, res)=> {
-    var user = req.body.username;
+    var email = req.body.email;
     var password = req.body.password;
-    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
-        if (err) res.status(500).send('Internal Server Error 500');
+    database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], function(err, result, fields) {
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         if (result.length == 1) {
                 bcrypt.compare(password, result[0].password, function(err, result) {
                     if (result) {
-                        res.status(200).send('Login Sucessful');
+                        res.status(200).json({'Message': 'Login Sucessful'});
                     } else {
-                        res.status(401).send("User not found or password incorrect");
+                        res.status(401).json({'Message': 'Email not found or password incorrect'});
                     };
                 });
         } else {
-            res.status(401).send('User not found or password incorrect');
+            res.status(401).json({'Message': 'Email not found or password incorrect'});
         }
     });
 });
@@ -45,6 +57,7 @@ app.post('/login', (req, res)=> {
 // Member list GET request
 app.get('/members', (req, res)=> {
     database.query('SELECT * FROM `clubmembers`', function(err, result, fields) {
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         res.status(200).json(result);
     });
 });
@@ -58,26 +71,29 @@ app.get('/register', (req,res)=> {
 
 // Registration POST request
 app.post('/register', (req, res)=> {
-    var user = req.body.username;
+    var first = req.body.firstName;
+    var last = req.body.lastName;
+    var email = req.body.email;
     var password = req.body.password;
-    database.query('SELECT * FROM `logins` WHERE `username`= ?', [user], function(err, result, fields) {
-        if (err) result.send('Internal Server Error 500');
+    // TO-DO: email validation
+    database.query('SELECT * FROM `logins` WHERE `email`=?', [email], function(err, result, fields) {
+        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
         if (result.length == 0) {
             if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
                 bcrypt.hash(password, saltRounds, (err, hash)=> {
-                    database.query('INSERT INTO `logins`(username, password) VALUES (?, ?)', [user, hash], function(err, result, fields) {
-                        if (err) result.send('Internal Server Error 500');
-                        res.status(201).send('Successfully registered');
+                    if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
+                    database.query('INSERT INTO `logins`(`first-name`, `last-name`, email, password) VALUES (?, ?, ?, ?)', [first, last, email, hash], function(err, result, fields) {
+                        if (err) res.status(500).json({'Error': 'Internal Server Error 500'});
+                        res.status(201).json({'Message': 'Successfully registered'});
                     });
                 });
             } else {
                 // TO-DO: specify which requirements are not met
-                res.status(400).send('Password does not meet the requirements');
+                res.status(400).json({'Message': 'Password does not meet the requirements'});
             };
         } else {
-            res.status(409).send('User already exists');
+            res.status(409).json({'Message': 'User already exists'});
         }
-        res.end();
     });
 });
 
