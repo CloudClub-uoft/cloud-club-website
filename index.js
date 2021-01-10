@@ -62,6 +62,13 @@ app.get('/members', (req, res)=> {
     });
 });
 
+// Register GET request
+
+app.get('/register', (req,res)=> {
+    res.render('register')
+});
+
+
 // Registration POST request
 app.post('/register', (req, res)=> {
     var first = req.body.firstName;
