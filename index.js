@@ -20,6 +20,7 @@ const database = mysql.createConnection({
 });
 
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
 // Login POST request
 app.post('/login', (req, res)=> {
@@ -48,6 +49,13 @@ app.get('/members', (req, res)=> {
         res.status(200).json(result);
     });
 });
+
+// Register GET request
+
+app.get('/register', (req,res)=> {
+    res.render('register')
+});
+
 
 // Registration POST request
 app.post('/register', (req, res)=> {
