@@ -1,2 +1,6 @@
+# Dependencies
+node_modules/
+.vscode
+
 # OS X metadata
 .DS_Store
