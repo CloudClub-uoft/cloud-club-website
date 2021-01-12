@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>CloudClub</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="./assets/favicon.png" />
+	</head>
+
+	<style>
+		#project-stab {
+
+			padding-left: 15px;
+			padding-right: 15px;
+
+		}
+	</style>
+
+	<body>
+		
+		<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+			crossorigin="anonymous"></script>
+
+		<!-- HEADER CODE -->
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<a class="navbar-brand" href="#">CloudClub</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Homepage <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="teampage.html">The Team</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="projects.html">Projects</a>
+						</li>						
+						<li class="nav-item">
+							<a class="nav-link" href="https://github.com/CloudClub-uoft">GitHub</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Projects -->
+		<!--Adam's Changes 
+		- Each container underneath the description of each project was replaced so that it has a background image of a part of the project
+		- Buttons were added to each of these containers 
+		- Two errors noticed were that the container for project 3 is wider than the other two, and the second container sits higher up than the 
+			other two, however no solution for these problems were found 
+		-->
+		<div class="flex-md-equal w-100 my-md-3 pl-md-3">
+			<!-- remove d-md-flex-->
+			<div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+				<div class="my-3 py-3">
+					<h2 class="display-5">Skule Adventures!</h2>
+					<p class="lead">Skule Adventures is a arcade style platformer created by engineering students in the games division of Cloud Club. The game revolves around a first year engineer trying to traverse the UofT campus and make there way to their final exam at the dreaded examination center. From the Sandford Fleming pit to the Lassonde mining building, you'll have to make your way through the perils of first year.
+						The game itself was developed using JavaScript, in particular an object oriented library called Phaser JS. This library allowed for us to quickly test and deploy a working game in no time. There were 3 main components to the development of this game, the front-end assets, the level design, and all the behind the scenes logic that drive the game. The next steps in our game development story is going to be to add online multiplayer co-op!</p>
+				</div>
+				<div class=" bg-light shadow-sm  container  d-flex flex-column-reverse mx-auto"
+					style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('/assets/player.png'); ">
+					<div class="p-5"><a href="https://fast-ocean-31681.herokuapp.com/Mario%20Game/index.html" class="btn btn-primary my-auto">Play the game!</a></div>
+				</div>
+			</div>
+			<div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+				<div class="my-3 p-3">
+					<h2 class="display-5">This Website</h2>
+					<p class="lead">The website team has developed this website over the fall 2020 semester with awesome frameworks such as Bootstrap, Node.js, Express and MySQL. We have already created the login and registration systems for the website and intend to tie it together with services that we create in the future.</p>
+					<div class="bg-dark shadow-sm container d-flex flex-column-reverse mx-auto"
+						style="width: 100%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('/assets/boot.png');">
+						<div class="p-5"> <a href="#" class="btn btn-primary my-auto">Homepage</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+				<div class="my-3 py-3">
+					<h2 class="display-5">AI and ML Division</h2>
+					<p class="lead">A new division at CloudClub that aimes to harness the powere of popular ML tools like PyTorch. Stay tuned as we work on projects using image generation and AI based game players.</p>
+				</div>
+				<div class="bg-light shadow-sm container d-flex flex-column-reverse mx-auto"
+					style="width: 100%; height: 300px; border-radius: 21px 21px 0 0; background-image: url('/assets/CloudAI.png');">
+					<div class="p-5"> <a href="" class="btn btn-primary my-auto">Coming Soon!</a></div>
+				</div>
+			</div>
+
+		<!-- Test Footer -->
+		<footer class="container py-5">
+			<div class="row">
+				<div class="col-12 col-md">
+					<small class="d-block mb-3 text-muted">2020-2021. CloudClub. Affiliated with the Engineering
+						Society at the
+						University of Toronto.</small>
+				</div>
+			</div>
+		</footer>
+
+	</body>
+
+</html>
