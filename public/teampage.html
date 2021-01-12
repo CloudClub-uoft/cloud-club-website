@@ -11,6 +11,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="icon" type="image/png" href="./assets/favicon.png" />
 </head>
+
+<script>
+
+  function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+
+</script>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">CloudClub</a>
@@ -30,7 +39,7 @@
           <a class="nav-link" href="projects.html" tabindex="-1" aria-disabled="true">Projects</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/CloudClub-uoft">GitHub</a>
+          <a class="nav-link" href="#" onclick='openInNewTab("https://github.com/CloudClub-uoft");''>GitHub</a>
         </li>
       </ul>
       <!-- <form class="form-inline mt-2 mt-md-0">

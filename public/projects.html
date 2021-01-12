@@ -10,6 +10,15 @@
 		<link rel="icon" type="image/png" href="./assets/favicon.png" />
 	</head>
 
+	<script>
+
+		function openInNewTab(url) {
+		  var win = window.open(url, '_blank');
+		  win.focus();
+		}
+	  
+	  </script>
+
 	<style>
 		#project-stab {
 
@@ -49,7 +58,7 @@
 							<a class="nav-link" href="projects.html">Projects</a>
 						</li>						
 						<li class="nav-item">
-							<a class="nav-link" href="https://github.com/CloudClub-uoft">GitHub</a>
+							<a class="nav-link" href="#" onclick='openInNewTab("https://github.com/CloudClub-uoft");''>GitHub</a>
 						</li>
 					</ul>
 				</div>
