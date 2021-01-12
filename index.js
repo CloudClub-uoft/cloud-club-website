@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
-const port = 80;
+const PORT = process.env.PORT || 3000;
 
 // Connect to the database
 const database = mysql.createConnection({
@@ -123,5 +123,6 @@ app.post('/endpoint', (req, res)=> {
     });
 });
 
-http.listen(port, () => {
+http.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}.`)
 });
