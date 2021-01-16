@@ -33,7 +33,10 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Dynamic Routes
-// Register GET request
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 app.get('/login', (req, res) => {
   res.render('login');
 });
@@ -60,7 +63,7 @@ app.post('/login', (req, res) => {
           });
 
           res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
-          res.status(200).json({ Message: 'Login Sucessful' });
+          res.redirect(200, '/home').json({ Message: 'Login Sucessful' });
         } else {
           res.status(401).json({ Message: 'Email not found or password incorrect' });
         }
@@ -97,7 +100,7 @@ app.post('/register', (req, res) => {
           database.query('INSERT INTO `logins`(`first-name`, `last-name`, email, password) VALUES (?, ?, ?, ?)', [first, last, email, hash], (err3) => {
             if (err3) res.status(500).json({ Error: 'Internal Server Error 500' });
 
-            res.redirect(201, '/').json({ Message: 'Successfully registered' });
+            res.status(201).json({ Message: 'Successfully registered' });
           });
         });
       } else {
@@ -141,19 +144,23 @@ app.post('/refresh', (req, res) => {
 });
 
 // JWT token check
-app.get('/check', (req, res) => {
-  const { token } = req.cookies;
-  let payload;
-  try {
-    payload = jwt.verify(token, jwtKey);
-  } catch (err) {
-    if (err instanceof jwt.JsonWebTokenError) {
-      res.status(401).json({ Error: 'Unauthorized 401' });
+app.get('/auth', (req, res) => {
+  if (req.cookies.token === undefined) {
+    res.status(401).json({ Message: 'User is not logged in' });
+  } else {
+    const { token } = req.cookies.token;
+    let payload;
+    try {
+      payload = jwt.verify(token, jwtKey);
+    } catch (err) {
+      if (err instanceof jwt.JsonWebTokenError) {
+        res.status(401).json({ Error: 'Unauthorized 401' });
+      }
+      res.status(400).json({ Message: 'Bad Request 400' });
     }
-    res.status(200).json({ Message: 'User is not logged in' });
-  }
 
-  res.status(200).json({ Message: `${payload.username} is logged in` });
+    res.status(200).json({ Message: `${payload.username} is logged in`, Email: `${payload.username}` });
+  }
 });
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
