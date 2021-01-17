@@ -72,9 +72,35 @@ Consistent fonts, color scheme, etc.
 
 - [X] Express.js SQL API
   - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
-  - [x] Team Members - GET list of CloudClub team members, return
-  - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
-    - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
-    - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
-    - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
-    - [x] Build response: 50X for SQL error, 201 for successful creation
+  - [ ] Tokens and Persistence - Matt
+- [x] Team Members - GET list of CloudClub team members, return
+- [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+  - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+  - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+  - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+  - [x] Build response: 50X for SQL error, 201 for successful creation
+
+- [ ] Forum SQL API
+  - [ ] New Post
+    - [ ] Create table - Jayden
+      - [ ] Post ID (internally generated)
+      - [ ] User ID (token/metadata)
+      - [ ] Subject line (Plaintext)
+      - [ ] Body (Markdown text)
+      - [ ] Timestamp (internally generated)
+    - [ ] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
+    - [ ] Check for all necessary data fields and types (see SQL table)
+    - [ ] Create new table entry, return 201 Created
+  - [ ] Get N Latest Posts
+    - [ ] Check that N is a positive number less than 100 (if not do 40X)
+    - [ ] Get N latest based on Post ID
+    - [ ] Return with message
+- [ ] Game High Score API - Jayden
+  - [ ] Build Table
+    - [ ] Username
+    - [ ] Score
+    - [ ] Date
+  - [ ] Get Top N Highest Scores
+    - [ ] Check N is reasonable
+    - [ ] Get
+    - [ ] Return

@@ -54,6 +54,37 @@ app.post('/login', (req, res)=> {
     });
 });
 
+// New Post - who? when? what?
+
+app.post('/newpost', (req, res)=> {
+    // Making a new post, the request contains all the info we need
+
+    // Check auth token
+
+    // Check data + types
+
+    // SQL CREATE - return upon success or internal server error
+});
+
+app.post('/getposts', (req, res)=> {
+    // Getting the N lastest posts
+
+    // SQL SELECT (select last N in table based on id)
+
+    var response = { 
+        message: "Posts fetched successfully.",
+        posts: [ 
+            {
+                "id" : 0, 
+                "uid" : "jlefebvre55", 
+                "subject" : "Hello World", 
+                "body" : "What's up forum. This is the first post ever! - JL",
+                "timestamp" : 1234567
+            }
+        ] 
+    }
+});
+
 // Member list GET request
 app.get('/members', (req, res)=> {
     database.query('SELECT * FROM `clubmembers`', function(err, result, fields) {
