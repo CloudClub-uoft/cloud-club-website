@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
           });
 
           res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
-          res.redirect(200, '/home').json({ Message: 'Login Sucessful' });
+          res.status(200).json({ Message: 'Login Sucessful' });
         } else {
           res.status(401).json({ Message: 'Email not found or password incorrect' });
         }
@@ -145,22 +145,20 @@ app.post('/refresh', (req, res) => {
 
 // JWT token check
 app.get('/auth', (req, res) => {
-  if (req.cookies.token === undefined) {
-    res.status(401).json({ Message: 'User is not logged in' });
-  } else {
-    const { token } = req.cookies.token;
-    let payload;
-    try {
-      payload = jwt.verify(token, jwtKey);
-    } catch (err) {
-      if (err instanceof jwt.JsonWebTokenError) {
-        res.status(401).json({ Error: 'Unauthorized 401' });
-      }
-      res.status(400).json({ Message: 'Bad Request 400' });
-    }
-
-    res.status(200).json({ Message: `${payload.username} is logged in`, Email: `${payload.username}` });
+  const { token } = req.cookies;
+  if (!token) {
+    res.status(401).end();
   }
+  let payload;
+  try {
+    payload = jwt.verify(token, jwtKey);
+  } catch (e) {
+    if (e instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ Error: 'Unauthorized 401' });
+    }
+    return res.status(400).json({ Error: 'Bad Request 400' });
+  }
+  res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
 });
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql

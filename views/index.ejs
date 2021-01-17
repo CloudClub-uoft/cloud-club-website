@@ -170,18 +170,16 @@
           $.ajax({
             url: '/auth',
             type: 'GET',
-            cache: false,
-            dataType: 'json',
             statusCode: {
               401: function(response) {
                 $('.loginout').text('Log In').attr('href','/login');
               },
               400: function(response) {
-                alert(response.responseJSON.Message);
+                alert(response.responseJSON.Error);
               },
               200: function(response){
                 $('.loginout').text('Log Out').attr('href','/logout');
-                $('.email').text(response.responseJSON.Email);
+                $('.email').text(response.Email);
               }
             }
           })
