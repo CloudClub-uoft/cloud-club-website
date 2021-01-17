@@ -25,6 +25,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
   crossorigin="anonymous"></script>
+  <!-- js-cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
   
   <!-- HEADER CODE -->
   <header>
@@ -166,6 +168,14 @@
       </footer>
       
       <script type="text/javascript">
+      window.setInterval(function(){
+        $.ajax({
+          url: 'refresh',
+          type: 'POST'
+        })
+        console.log("refreshed");
+      }, 240*1000);
+
         $(document).ready(function() {
           $.ajax({
             url: '/auth',

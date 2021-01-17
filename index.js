@@ -15,7 +15,7 @@ const port = 80;
 
 // jsonwebtoken settings
 const jwtKey = 'my_secret_key';
-const jwtExpiry = 300;
+const jwtExpiry = 300; // 5 min
 
 // Connect to the database
 const database = mysql.createConnection({
@@ -113,10 +113,11 @@ app.post('/register', (req, res) => {
   });
 });
 
+// Refresh token POST request
 app.post('/refresh', (req, res) => {
   const { token } = req.cookies;
   if (!token) {
-    res.status(401).json({ Error: 'Unauthorized 401' });
+    return res.status(401).json({ Error: 'Unauthorized 401' });
   }
 
   let payload;
@@ -124,30 +125,29 @@ app.post('/refresh', (req, res) => {
     payload = jwt.verify(token, jwtKey);
   } catch (err) {
     if (err instanceof jwt.JsonWebTokenError) {
-      res.status(401).json({ Error: 'Unauthorized 401' });
+      return res.status(401).json({ Error: 'Unauthorized 401' });
     }
-    res.status(400).json({ Error: 'Bad Request 400' });
+    return res.status(400).json({ Error: 'Bad Request 400' });
   }
 
   const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
   if (payload.exp - nowUnixSeconds > 30) {
-    res.status(400).json({ Error: 'Bad Request 400' });
+    return res.status(400).json({ Error: 'Bad Request 400' });
   }
 
   const newToken = jwt.sign({ username: payload.username }, jwtKey, {
     algorithm: 'HS256',
     expiresIn: jwtExpiry,
   });
-
   res.cookie('token', newToken, { maxAge: jwtExpiry * 1000 });
   res.end();
 });
 
-// JWT token check
+// JWT token GET request
 app.get('/auth', (req, res) => {
   const { token } = req.cookies;
   if (!token) {
-    res.status(401).end();
+    return res.status(401).end();
   }
   let payload;
   try {
