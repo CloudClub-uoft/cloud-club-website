@@ -168,15 +168,15 @@
       </footer>
       
       <script type="text/javascript">
-      window.setInterval(function(){
-        $.ajax({
-          url: 'refresh',
-          type: 'POST'
-        })
-        console.log("refreshed");
-      }, 240*1000);
+        function refresh(){
+          $.ajax({
+            url: 'refresh',
+            type: 'POST'
+          })
+        }
 
         $(document).ready(function() {
+          refresh();
           $.ajax({
             url: '/auth',
             type: 'GET',
@@ -194,6 +194,8 @@
             }
           })
         });
+
+        window.setInterval(refresh(), 60*60*1000); // 1 hour refresh
       </script>
     </body>
 </html>

@@ -15,7 +15,7 @@ const port = 80;
 
 // jsonwebtoken settings
 const jwtKey = 'my_secret_key';
-const jwtExpiry = 300; // 5 min
+const jwtExpiry = 7 * 24 * 60; // 1 week
 
 // Connect to the database
 const database = mysql.createConnection({
@@ -127,11 +127,6 @@ app.post('/refresh', (req, res) => {
     if (err instanceof jwt.JsonWebTokenError) {
       return res.status(401).json({ Error: 'Unauthorized 401' });
     }
-    return res.status(400).json({ Error: 'Bad Request 400' });
-  }
-
-  const nowUnixSeconds = Math.round(Number(new Date()) / 1000);
-  if (payload.exp - nowUnixSeconds > 30) {
     return res.status(400).json({ Error: 'Bad Request 400' });
   }
 
