@@ -14,7 +14,7 @@ const saltRounds = 10;
 const port = 80;
 
 // jsonwebtoken settings
-const jwtKey = 'my_secret_key';
+const jwtKey = 'qTvwckE3Gs';
 const jwtExpiry = 7 * 24 * 60; // 1 week
 
 // Connect to the database
@@ -43,35 +43,6 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
   res.render('register');
-});
-
-// Login POST request
-app.post('/login', (req, res) => {
-  const { email } = req.body;
-  const { password } = req.body;
-  database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], (err1, result1) => {
-    if (err1) res.status(500).json({ Error: 'Internal Server Error 500' });
-
-    if (result1.length === 1) {
-      bcrypt.compare(password, result1[0].password, (err2, result2) => {
-        if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
-
-        if (result2) {
-          const token = jwt.sign({ email }, jwtKey, {
-            algorithm: 'HS256',
-            expiresIn: jwtExpiry,
-          });
-
-          res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
-          res.status(200).json({ Message: 'Login Sucessful' });
-        } else {
-          res.status(401).json({ Message: 'Email not found or password incorrect' });
-        }
-      });
-    } else {
-      res.status(401).json({ Message: 'Email not found or password incorrect' });
-    }
-  });
 });
 
 // Member list GET request
@@ -111,6 +82,61 @@ app.post('/register', (req, res) => {
   });
 });
 
+// Login POST request
+app.post('/login', (req, res) => {
+  const { email } = req.body;
+  const { password } = req.body;
+  database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], (err1, result1) => {
+    if (err1) res.status(500).json({ Error: 'Internal Server Error 500' });
+
+    if (result1.length === 1) {
+      bcrypt.compare(password, result1[0].password, (err2, result2) => {
+        if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
+
+        if (result2) {
+          const token = jwt.sign({ email }, jwtKey, {
+            algorithm: 'HS256',
+            expiresIn: jwtExpiry,
+          });
+          console.log(email);
+          console.log(token);
+
+          res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
+          res.status(200).json({ Message: 'Login Sucessful' });
+        } else {
+          res.status(401).json({ Message: 'Email not found or password incorrect' });
+        }
+      });
+    } else {
+      res.status(401).json({ Message: 'Email not found or password incorrect' });
+    }
+  });
+});
+
+app.get('/logout', (req, res) => {
+  const { token } = req.cookies;
+  res.cookie('token', token, { maxAge: 0 });
+  return res.redirect('back');
+});
+
+// JWT token authentication GET request
+app.get('/auth', (req, res) => {
+  const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).end();
+  }
+  let payload;
+  try {
+    payload = jwt.verify(token, jwtKey);
+  } catch (e) {
+    if (e instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ Error: 'Unauthorized 401' });
+    }
+    return res.status(400).json({ Error: 'Bad Request 400' });
+  }
+  return res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
+});
+
 // Refresh token POST request
 app.post('/refresh', (req, res) => {
   const { token } = req.cookies;
@@ -127,31 +153,13 @@ app.post('/refresh', (req, res) => {
     }
     return res.status(400).json({ Error: 'Bad Request 400' });
   }
-
-  const newToken = jwt.sign({ username: payload.username }, jwtKey, {
+  const { email } = payload;
+  const newToken = jwt.sign({ email }, jwtKey, {
     algorithm: 'HS256',
     expiresIn: jwtExpiry,
   });
   res.cookie('token', newToken, { maxAge: jwtExpiry * 1000 });
   return res.end();
-});
-
-// JWT token GET request
-app.get('/auth', (req, res) => {
-  const { token } = req.cookies;
-  if (!token) {
-    return res.status(401).end();
-  }
-  let payload;
-  try {
-    payload = jwt.verify(token, jwtKey);
-  } catch (e) {
-    if (e instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ Error: 'Unauthorized 401' });
-    }
-    return res.status(400).json({ Error: 'Bad Request 400' });
-  }
-  return res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
 });
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql

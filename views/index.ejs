@@ -176,7 +176,6 @@
         }
 
         $(document).ready(function() {
-          refresh();
           $.ajax({
             url: '/auth',
             type: 'GET',
@@ -190,6 +189,7 @@
               200: function(response){
                 $('.loginout').text('Log Out').attr('href','/logout');
                 $('.email').text(response.Email);
+                console.log(response);
               }
             }
           })
