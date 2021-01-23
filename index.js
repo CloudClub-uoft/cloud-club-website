@@ -88,7 +88,6 @@ app.post('/register', (req, res) => {
   const last = req.body.lastName;
   const { email } = req.body;
   const { password } = req.body;
-  // TO-DO: email validation
   database.query('SELECT * FROM `logins` WHERE `email`=?', [email], (err1, result) => {
     if (err1) res.status(500).json({ Error: 'Internal Server Error 500' });
 
@@ -104,7 +103,6 @@ app.post('/register', (req, res) => {
           });
         });
       } else {
-        // TO-DO: specify which requirements are not met
         res.status(400).json({ Message: 'Password does not meet the requirements' });
       }
     } else {
@@ -135,7 +133,7 @@ app.post('/refresh', (req, res) => {
     expiresIn: jwtExpiry,
   });
   res.cookie('token', newToken, { maxAge: jwtExpiry * 1000 });
-  res.end();
+  return res.end();
 });
 
 // JWT token GET request
@@ -153,7 +151,7 @@ app.get('/auth', (req, res) => {
     }
     return res.status(400).json({ Error: 'Bad Request 400' });
   }
-  res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
+  return res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
 });
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
