@@ -18,6 +18,15 @@ const database = mysql.createConnection({
     database: 'sql2377507'
 });
 
+// Create Table
+/* database.connect(function(err) {
+    if(err) throw err;
+    var sql = "Create TABLE forum (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), date VARCHAR(255))";
+    database.query(sql, function(err, result){
+        if (err) throw err;
+    });
+}); */
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -60,10 +69,35 @@ app.post('/newpost', (req, res)=> {
     // Making a new post, the request contains all the info we need
 
     // Check auth token
+    jwt.verify(token, (err,verifiedJwt) => {
+        if(err){
+            res.status(404).json({
+                'error': "Not Valid"
+            });
+        }else{
+            res.send(verifiedJwt)
+        }
+    });
 
     // Check data + types
 
+    // waiting for table creation
+
     // SQL CREATE - return upon success or internal server error
+
+    var sql = "INSERT INTO forum (name, date) VALUES ?";
+    database.query(sql, function(err, result) {
+        if (err) {
+            res.status(500).json({
+                'Error': "Internal Server Error 500"
+            });
+        } else{
+            res.status(201).json({
+                "Message": "Post Created"
+            });
+        }
+    });
+
 });
 
 app.post('/getposts', (req, res)=> {
