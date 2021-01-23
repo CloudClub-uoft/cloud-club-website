@@ -22,6 +22,8 @@ Website for the UofT CloudClub.
 
 ## Frontend
 
+### V1
+
 Consistent fonts, color scheme, etc.
 
 - [X] **Header** - Jayden and Lavanya
@@ -32,14 +34,33 @@ Consistent fonts, color scheme, etc.
 - [X] **Home Page Content** - Tamim and Ian
   - [X] "Banner"
   - [X] Introductory paragraph
-  - [ ] "Learn more", "get involved", etc. promotional material
   - [X] Set up carousel
   - [X] Add game screenshots to carousel
 - [ ] **Login and Register** - Tamim and Ian
-  - [ ] Login page (username and password)
-  - [ ] Register page (username, first name, last name, email, password, confirm password)
-- [ ] **Team Page Content** - Lavaya and Yunjia
-  - [ ] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
+  - [X] Login page (username and password)
+  - [X] Register page (username, first name, last name, email, password, confirm password)
+  - [ ] Functionality and login persistence
+  - [ ] User/account settings page
+- [X] **Team Page Content** - Lavaya and Yunjia
+  - [X] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
+
+### V2
+- [ ] Landing Page - Lavanya & Adam
+  - [ ] Game screenshot graphics clarity
+  - [ ] Center footer
+  - [ ] Formatting the project snippets (centering image/title, padding textbox)
+- [X] Team page - Jayden
+  - [ ] Mobile hamburger nav not working
+  - [X] Header ("Our Team")
+  - [X] Profile images stretch/squish
+- [ ] Nav to login and register - Tamim
+- [X] Login and Register - Jayden
+  - [X] Register page layout broken
+- [ ] Project page - Ian
+  - [ ] Typos?
+  - [ ] Tiled images - centering? or other fix?
+- [ ] Transfer all pages to EJS
+  - [ ] Header and footer directives
 
 ## Backend
 
@@ -57,13 +78,3 @@ Consistent fonts, color scheme, etc.
     - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
     - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
     - [x] Build response: 50X for SQL error, 201 for successful creation
-
-For each of the SQL Route tasks, I recommend taking the following approach.
-
-- What **functionality** am I aiming to achieve? (i.e. checking login credentials)
-- What kind of **request** is being made? What **data** is included, if any? (i.e. POST request with username and password)
-- Where in the API should I put an Express route sub-address (aka "**endpoint**")? (i.e. '/login')
-- What kind of **interactions** am I going to have with the SQL database? (i.e. data retrieval for an entry with a given username)
-- What SQL **commands** do I use to achieve this? (Check *W3Schools* or another reference)
-- Am I making any **comparisons** or decisions with this data? (i.e. comparing given credentials to those in database)
-- What is my **response** to the client? (i.e. status code 200 'OK' with user info on success, OR status code 403 'Forbidden' with more error details)

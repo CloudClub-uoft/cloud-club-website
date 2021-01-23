@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 
 // bcrypt settings
 const saltRounds = 10;
-const port = 80;
+const port = process.env.PORT || 80;
 
 // jsonwebtoken settings
 const jwtKey = 'qTvwckE3Gs';
