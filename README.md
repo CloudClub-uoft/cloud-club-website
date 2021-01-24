@@ -53,6 +53,7 @@ Consistent fonts, color scheme, etc.
   - [ ] Mobile hamburger nav not working
   - [X] Header ("Our Team")
   - [X] Profile images stretch/squish
+  - [X] Proper nav tab highlight
 - [ ] Nav to login and register - Tamim
 - [X] Login and Register - Jayden
   - [X] Register page layout broken
