@@ -70,7 +70,7 @@ app.post('/register', (req, res) => {
           database.query('INSERT INTO `logins`(`first-name`, `last-name`, email, password) VALUES (?, ?, ?, ?)', [first, last, email, hash], (err3) => {
             if (err3) res.status(500).json({ Error: 'Internal Server Error 500' });
 
-            res.status(201).json({ Message: 'Successfully registered' });
+            res.status(201).json({ Message: 'Successfully registered, you may now login' });
           });
         });
       } else {
@@ -98,8 +98,6 @@ app.post('/login', (req, res) => {
             algorithm: 'HS256',
             expiresIn: jwtExpiry,
           });
-          console.log(email);
-          console.log(token);
 
           res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
           res.status(200).json({ Message: 'Login Sucessful' });
