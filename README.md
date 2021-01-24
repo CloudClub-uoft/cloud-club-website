@@ -82,12 +82,12 @@ Consistent fonts, color scheme, etc.
 
 - [ ] Forum SQL API
   - [ ] New Post
-    - [ ] Create table - Jayden
-      - [ ] Post ID (internally generated)
-      - [ ] User ID (token/metadata)
-      - [ ] Subject line (Plaintext)
-      - [ ] Body (Markdown text)
-      - [ ] Timestamp (internally generated)
+    - [X] Create table - Jayden
+      - [X] Post ID (internally generated)
+      - [X] User ID (token/metadata)
+      - [X] Subject line (Plaintext)
+      - [X] Body (Markdown text)
+      - [X] Timestamp (internally generated)
     - [ ] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
     - [ ] Check for all necessary data fields and types (see SQL table)
     - [ ] Create new table entry, return 201 Created
@@ -95,11 +95,15 @@ Consistent fonts, color scheme, etc.
     - [ ] Check that N is a positive number less than 100 (if not do 40X)
     - [ ] Get N latest based on Post ID
     - [ ] Return with message
+- [ ] Login Session Management - Matt
+  - [ ] Make sure it works -> pull request
+  - [ ] Migrate to a server-side session approach, see Harsimrat's resources
+  - [ ] Build redis cache DB
 - [ ] Game High Score API - Jayden
-  - [ ] Build Table
-    - [ ] Username
-    - [ ] Score
-    - [ ] Date
+  - [X] Build Table
+    - [X] Username
+    - [X] Score
+    - [X] Date
   - [ ] Get Top N Highest Scores
     - [ ] Check N is reasonable
     - [ ] Get
