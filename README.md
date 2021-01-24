@@ -18,9 +18,11 @@ Website for the UofT CloudClub.
 3. Start the server by executing `node .` in the terminal.
 4. View the webpage by navigating to `localhost` in your browser.
 
-## To-Do
+# Development
 
-### Frontend
+## Frontend
+
+### V1
 
 Consistent fonts, color scheme, etc.
 
@@ -39,11 +41,60 @@ Consistent fonts, color scheme, etc.
   - [ ] Introductory paragraph
   - [ ] "Learn more", "get involved", etc. promotional material
   - [ ] ...
+- [X] **Header** - Jayden and Lavanya
+  - [X] Working Nav links
+- [X] **Footer** - Adam and Ansh
+  - [X] Social media links
+  - [X] Contact emails
+- [X] **Home Page Content** - Tamim and Ian
+  - [X] "Banner"
+  - [X] Introductory paragraph
+  - [X] Set up carousel
+  - [X] Add game screenshots to carousel
+- [ ] **Login and Register** - Tamim and Ian
+  - [X] Login page (username and password)
+  - [X] Register page (username, first name, last name, email, password, confirm password)
+  - [ ] Functionality and login persistence
+  - [ ] User/account settings page
+- [X] **Team Page Content** - Lavaya and Yunjia
+  - [X] Team headshots and bios, grid of "cards" (See Bootstrap's Album example)
 
-### Backend
+### V2
+- [ ] Landing Page - Lavanya & Adam
+  - [ ] Game screenshot graphics clarity
+  - [ ] Center footer
+  - [ ] Formatting the project snippets (centering image/title, padding textbox)
+- [X] Team page - Jayden
+  - [ ] Mobile hamburger nav not working
+  - [X] Header ("Our Team")
+  - [X] Profile images stretch/squish
+- [ ] Nav to login and register - Tamim
+- [X] Login and Register - Jayden
+  - [X] Register page layout broken
+- [ ] Project page - Ian
+  - [ ] Typos?
+  - [ ] Tiled images - centering? or other fix?
+- [ ] Transfer all pages to EJS
+  - [ ] Header and footer directives
+
+## Backend
 
 - [ ] Static Routing (`public` folder)
   - [ ] Create our server `index.js`
   - [ ] Import Express, create server (See Express.js Quickstart)
   - [ ] Create new folder `public`
   - [ ] Static routing ALL to `public` folder (See Express.js Documentation)
+- [X] Static Routing (`public` folder)
+  - [X] Create our server `index.js`
+  - [X] Import Express, create server (See Express.js Quickstart)
+  - [X] Create new folder `public`
+  - [X] Static routing ALL to `public` folder (See Express.js Documentation)
+
+- [X] Express.js SQL API
+  - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
+  - [x] Team Members - GET list of CloudClub team members, return
+  - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+    - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+    - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+    - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+    - [x] Build response: 50X for SQL error, 201 for successful creation
