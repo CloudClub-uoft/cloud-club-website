@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>CloudClub</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+			integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="./assets/favicon.png" />
+	</head>
+
+	<script>
+
+		function openInNewTab(url) {
+		  var win = window.open(url, '_blank');
+		  win.focus();
+		}
+	  
+	  </script>
+
+	<style>
+		#project-stab {
+
+			padding-left: 15px;
+			padding-right: 15px;
+
+		}
+	</style>
+
+	<body>
+		<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+			crossorigin="anonymous"></script>
+
+		<!-- HEADER CODE -->
+		<header>
+            <!-- Note: changed header from fixed top to sticky-top on this page.
+            Ideally, header is only fixed on the homepage (to fit the carousel nicely with viewport sizing) -->
+			<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+				<a class="navbar-brand" href="/">CloudClub</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Homepage <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="teampage.html">The Team</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="projects.html">Projects</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="forum.html">Forum</a>
+                        </li>						
+						<li class="nav-item">
+							<a class="nav-link" href="" onclick='openInNewTab("https://github.com/CloudClub-uoft");''>GitHub</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+        </header>
+
+        
+        <!-- List Group -->
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Newest Posts
+              <span class="badge badge-primary badge-pill">14</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Older Posts
+              <span class="badge badge-primary badge-pill">2</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Some other stat/option
+              <span class="badge badge-primary badge-pill">1</span>
+            </li>
+        </ul>
+
+        <!-- Pagination -->
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+
+        <div class="text-center">
+            <h1>Post Format 1</h1>
+        </div>
+
+        <!-- Sorting Options -->
+        <!-- Example single danger button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort By
+            </button>
+            <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Views</a>
+            <a class="dropdown-item" href="#">Date</a>
+            <a class="dropdown-item" href="#">Relevance</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Another option</a>
+            </div>
+        </div>
+        
+        <!-- Ascend/Descend -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Order
+            </button>
+            <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Ascending</a>
+            <a class="dropdown-item" href="#">Descending</a>
+            </div>
+        </div>
+
+		<table class="table w-100">
+			<thead>
+			  <tr>
+				<th scope="col">Post #</th>
+				<th scope="col">Title</th>
+				<th scope="col">User</th>
+				<th scope="col">Date</th>
+				<th scope="col">Views</th>
+				<th scope="col">Replies</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<th scope="row">1</th>
+				<td>Mark</td>
+				<td>Otto</td>
+				<td>@mdo</td>
+				<td>@mdo</td>
+				<td>@mdo</td>
+			  </tr>
+			  <tr>
+				<th scope="row">2</th>
+				<td>Jacob</td>
+				<td>Thornton</td>
+				<td>@fat</td>
+				<td>@fat</td>
+				<td>@fat</td>
+			  </tr>
+			  <tr>
+				<th scope="row">3</th>
+				<td>Larry</td>
+				<td>the Bird</td>
+				<td>@twitter</td>
+				<td>@twitter</td>
+				<td>@twitter</td>
+			  </tr>
+			</tbody>
+          </table>
+          
+          <br>
+          <div class="text-center">
+              <h1>Post Format 2</h1>
+          </div>
+          
+          <!-- Nice Format - Like CS50AI edX forum -->
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Title</h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1">This should be a short preview of text in the post. </p>
+              <small>Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+              </div>
+              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+              </div>
+              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+              <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+          </div>
+
+		<!-- Test Footer -->
+		<footer class="container py-5">
+			<div class="row">
+				<div class="col-12 col-md">
+					<small class="d-block mb-3 text-muted">2020-2021. CloudClub. Affiliated with the Engineering
+						Society at the
+						University of Toronto.</small>
+				</div>
+			</div>
+		</footer>
+
+	</body>
+
+</html>
