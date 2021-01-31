@@ -1,34 +1,46 @@
 // Packages
+require('dotenv').config();
+
 const express = require('express');
 
 const app = express();
 const http = require('http').createServer(app);
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const session = require('express-session');
+const redis = require('redis');
+const RedisStore = require('connect-redis')(session);
 
-// bcrypt settings
-const saltRounds = 10;
+// Configuration
 const port = process.env.PORT || 80;
 
-// jsonwebtoken settings
-const jwtKey = 'qTvwckE3Gs';
-const jwtExpiry = 7 * 24 * 60; // 1 week
+// bcrypt settings
+const saltRounds = process.env.ENC_ROUNDS;
 
 // Connect to the database
 const database = mysql.createConnection({
-  host: 'sql2.freemysqlhosting.net',
-  user: 'sql2377507',
-  password: 'lD1%xR6%',
-  port: 3306,
-  database: 'sql2377507',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
+  database: process.env.DB_USER,
 });
+
+const redisClient = redis.createClient({
+  host: 'localhost',
+  port: 6379,
+});
+
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: 'SECRET',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
@@ -94,12 +106,10 @@ app.post('/login', (req, res) => {
         if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
 
         if (result2) {
-          const token = jwt.sign({ email }, jwtKey, {
-            algorithm: 'HS256',
-            expiresIn: jwtExpiry,
-          });
 
-          res.cookie('token', token, { maxAge: jwtExpiry * 1000 });
+
+
+
           res.status(200).json({ Message: 'Login Sucessful' });
         } else {
           res.status(401).json({ Message: 'Email not found or password incorrect' });
@@ -112,51 +122,18 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  const { token } = req.cookies;
-  res.cookie('token', token, { maxAge: 0 });
+
   return res.redirect('back');
 });
 
 // JWT token authentication GET request
 app.get('/auth', (req, res) => {
-  const { token } = req.cookies;
-  if (!token) {
-    return res.status(401).end();
-  }
-  let payload;
-  try {
-    payload = jwt.verify(token, jwtKey);
-  } catch (e) {
-    if (e instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ Error: 'Unauthorized 401' });
-    }
-    return res.status(400).json({ Error: 'Bad Request 400' });
-  }
-  return res.status(200).json({ Message: 'Logged in', Email: `${payload.email}` });
+
 });
 
 // Refresh token POST request
 app.post('/refresh', (req, res) => {
-  const { token } = req.cookies;
-  if (!token) {
-    return res.status(401).json({ Error: 'Unauthorized 401' });
-  }
 
-  let payload;
-  try {
-    payload = jwt.verify(token, jwtKey);
-  } catch (err) {
-    if (err instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ Error: 'Unauthorized 401' });
-    }
-    return res.status(400).json({ Error: 'Bad Request 400' });
-  }
-  const { email } = payload;
-  const newToken = jwt.sign({ email }, jwtKey, {
-    algorithm: 'HS256',
-    expiresIn: jwtExpiry,
-  });
-  res.cookie('token', newToken, { maxAge: jwtExpiry * 1000 });
   return res.end();
 });
 
