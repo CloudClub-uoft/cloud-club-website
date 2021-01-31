@@ -32,9 +32,14 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
+app.set('layout', 'layouts/layout')
+
 // Dynamic Routes
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', );
 });
 
 app.get('/login', (req, res) => {
@@ -45,11 +50,12 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
-// Member list GET request
+// Member list GET request // cloudclub.ca/members
 app.get('/members', (req, res) => {
   database.query('SELECT * FROM `clubmembers`', (err, result) => {
     if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
-    res.status(200).json(result);
+    //res.status(200).json(result);
+    res.render('members', {selected: 'teampage', res: result})
   });
 });
 
@@ -186,4 +192,5 @@ app.post('/endpoint', (req, res) => {
 });
 
 http.listen(port, () => {
+  console.log(`Server started on port ${port}`)
 });
