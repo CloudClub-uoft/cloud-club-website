@@ -57,6 +57,11 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
+app.set('layout', 'layouts/layout')
+
 // Dynamic Routes
 app.get('/', (req, res) => {
   const sesh = req.session;
