@@ -23,6 +23,11 @@ app.set('view engine', 'ejs');
 // Dynamic routing
 require('./routes/routing').boot(app, db);
 
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
+app.set('layout', 'layouts/layout')
+
 // Static Documentation
 app.use('/api', express.static('docs'));
 
