@@ -74,6 +74,7 @@ Consistent fonts, color scheme, etc.
     - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
     - [ ] Pass to page via `render`
     - [ ] Build divs from that
+- [ ] API Documentation
 
 ### Forum
 
