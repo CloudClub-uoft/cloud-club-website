@@ -60,14 +60,12 @@ Consistent fonts, color scheme, etc.
   - [X] Typos?
   - [X] Tiled images - centering? or other fix?
 - [ ] EJS - Matthew and Harsimrat
-  - [X] EJS Tutorial(s)
+  - [ ] EJS Tutorial(s)
   - [ ] Move all pages to EJS, make all future pages in EJS
-  - [ ] Header+nav (w/ login and register pages), footer partials
-  - [ ] Dynamic nav "active" class selection
+  - [ ] Header, footer, nav directives
+  - [ ] Every page needs navbar item to login and register pages
 - [ ] Container Page for Dungeon Crawler
   - [ ] Issues/request/feedback on the sidebars
-
-- [ ] API Documentation
 
 ### Forum
 
