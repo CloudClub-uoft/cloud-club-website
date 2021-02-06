@@ -1,6 +1,5 @@
 // Packages
 const express = require('express');
-
 const app = express();
 const http = require('http').createServer(app);
 const mysql = require('mysql');
@@ -8,6 +7,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+if(require('dotenv').config().error){
+  throw new Error("Failed to load .env file");
+}
 
 // bcrypt settings
 const saltRounds = 10;
@@ -19,11 +21,10 @@ const jwtExpiry = 7 * 24 * 60; // 1 week
 
 // Connect to the database
 const database = mysql.createConnection({
-  host: 'sql2.freemysqlhosting.net',
-  user: 'sql2377507',
-  password: 'lD1%xR6%',
-  port: 3306,
-  database: 'sql2377507',
+  host: process.env.SQLHOST,
+  user: process.env.SQLUSER,
+  password: process.env.SQLPASSWORD,
+  port: process.env.SQLPORT
 });
 
 // Create Table
@@ -253,4 +254,5 @@ app.post('/endpoint', (req, res) => {
 });
 
 http.listen(port, () => {
+  console.log('CloudClub server now listening on port '+port);
 });
