@@ -18,7 +18,7 @@ const port = process.env.PORT || 80;
 // bcrypt settings
 const saltRounds = process.env.ENC_ROUNDS;
 
-// Connect to the database
+// Connect to the SQL database
 const database = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -27,14 +27,16 @@ const database = mysql.createConnection({
   database: process.env.DB_USER,
 });
 
+// Configure Redis client
 const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 });
 
+// Conncet to Redis database
 app.use(session({
   store: new RedisStore({ client: redisClient }),
-  secret: 'SECRET',
+  secret: process.env.REDIS_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
@@ -46,7 +48,11 @@ app.set('view engine', 'ejs');
 
 // Dynamic Routes
 app.get('/', (req, res) => {
-  res.render('index');
+  const sesh = req.session;
+  if (sesh.email) {
+    return res.render('index', { email: sesh.email });
+  }
+  return res.render('index', { email: false });
 });
 
 app.get('/login', (req, res) => {
@@ -106,10 +112,9 @@ app.post('/login', (req, res) => {
         if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
 
         if (result2) {
-
-
-
-
+          const sesh = req.session;
+          sesh.email = req.body.email;
+          sesh.password = req.body.password;
           res.status(200).json({ Message: 'Login Sucessful' });
         } else {
           res.status(401).json({ Message: 'Email not found or password incorrect' });
@@ -122,20 +127,14 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-
+  req.session.destroy((err) => {
+    if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
+  });
   return res.redirect('back');
 });
 
-// JWT token authentication GET request
-app.get('/auth', (req, res) => {
-
-});
-
 // Refresh token POST request
-app.post('/refresh', (req, res) => {
-
-  return res.end();
-});
+app.post('/refresh', (req, res) => res.end());
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res) => {
