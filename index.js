@@ -105,24 +105,21 @@ app.post('/login', (req, res) => {
   const { email } = req.body;
   const { password } = req.body;
   database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], (err1, result1) => {
-    if (err1) res.status(500).json({ Error: 'Internal Server Error 500' });
-
+    if (err1) return res.status(401).json({ Message: 'Email not found or password incorrect' });
     if (result1.length === 1) {
       bcrypt.compare(password, result1[0].password, (err2, result2) => {
         if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
 
         if (result2) {
           const sesh = req.session;
-          sesh.email = req.body.email;
-          sesh.password = req.body.password;
-          res.status(200).json({ Message: 'Login Sucessful' });
-        } else {
-          res.status(401).json({ Message: 'Email not found or password incorrect' });
+          sesh.email = email;
+          sesh.password = password;
+          return res.status(200).json({ Message: 'Login Sucessful' });
         }
+        return res.status(401).json({ Message: 'Email not found or password incorrect' });
       });
-    } else {
-      res.status(401).json({ Message: 'Email not found or password incorrect' });
     }
+    return 0;
   });
 });
 
