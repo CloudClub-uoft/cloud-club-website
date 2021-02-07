@@ -78,14 +78,14 @@ Consistent fonts, color scheme, etc.
       - [ ] JS API fetch (for now just have a fake object)
       - [ ] For each entry in the JSON object, create a row element in the table DOM
     - [ ] Structure
-      - [ ] Post subject line/title
-      - [ ] View count
-      - [ ] Reply count
-      - [ ] User who posted
-      - [ ] Timestamp
-      - [ ] Posts per page
-      - [ ] Page selection
-      - [ ] Sorting
+      - [X] Post subject line/title
+      - [X] View count
+      - [X] Reply count
+      - [X] User who posted
+      - [X] Timestamp
+      - [X] Posts per page
+      - [X] Page selection
+      - [ ] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
 - [ ] View Post
 - [ ] New Post
 
