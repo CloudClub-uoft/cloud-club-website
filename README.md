@@ -59,13 +59,21 @@ Consistent fonts, color scheme, etc.
 - [X] Project page - Ian
   - [X] Typos?
   - [X] Tiled images - centering? or other fix?
-- [ ] EJS - Matthew and Harsimrat
-  - [ ] EJS Tutorial(s)
-  - [ ] Move all pages to EJS, make all future pages in EJS
-  - [ ] Header, footer, nav directives
-  - [ ] Every page needs navbar item to login and register pages
 - [ ] Container Page for Dungeon Crawler
   - [ ] Issues/request/feedback on the sidebars
+
+
+### EJS Transition
+- [ ] EJS - Matthew and Harsimrat
+  - [X] EJS Tutorial(s)
+  - [ ] Every page needs navbar item to login and register pages
+  - [ ] Copy Harsimrat's example
+    - [ ] Header (w/ `active` selection), footer
+    - [ ] assets directories (CSS, JS)
+  - [ ] Build forum page in EJS
+    - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
+    - [ ] Pass to page via `render`
+    - [ ] Build divs from that
 
 ### Forum
 
