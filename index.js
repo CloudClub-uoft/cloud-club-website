@@ -27,10 +27,22 @@ const database = mysql.createConnection({
   database: process.env.DB_USER,
 });
 
+database.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to MySQL database');
+});
+
 // Configure Redis client
 const redisClient = redis.createClient({
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
+});
+
+redisClient.on('error', (err) => {
+  console.log(`Redis connection failed: ${err}`);
+});
+redisClient.on('connect', () => {
+  console.log('Connected to Redis database');
 });
 
 // Conncet to Redis database
@@ -105,7 +117,7 @@ app.post('/login', (req, res) => {
   const { email } = req.body;
   const { password } = req.body;
   database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], (err1, result1) => {
-    if (err1) return res.status(401).json({ Message: 'Email not found or password incorrect' });
+    if (err1) res.status(401).json({ Message: 'Email not found or password incorrect' });
     if (result1.length === 1) {
       bcrypt.compare(password, result1[0].password, (err2, result2) => {
         if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
@@ -119,19 +131,16 @@ app.post('/login', (req, res) => {
         return res.status(401).json({ Message: 'Email not found or password incorrect' });
       });
     }
-    return 0;
   });
 });
 
+// logout GET request
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
   });
   return res.redirect('back');
 });
-
-// Refresh token POST request
-app.post('/refresh', (req, res) => res.end());
 
 // Example API - For more examples, see this repository: https://github.com/CloudClub-uoft/crud-nodejs-mysql
 app.post('/endpoint', (req, res) => {
@@ -159,4 +168,5 @@ app.post('/endpoint', (req, res) => {
 });
 
 http.listen(port, () => {
+  console.log(`Listening on ${port}`);
 });
