@@ -5,41 +5,32 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>CloudClub</title>
 
-
 		<!--data table-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-	<script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js'></script>
-	<script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js'></script>
-	<link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'>
-	<link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css'>
-	
+		<script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js'></script>
+		<script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js'></script>
+		<link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'>
+		<link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css'>
 	</head>
 
 	<script>
-
 		function openInNewTab(url) {
 		  var win = window.open(url, '_blank');
 		  win.focus();
 		}
-	  
-	  </script>
+	</script>
 
 	<style>
 		#project-stab { 
-
 			padding-left: 15px;
 			padding-right: 15px;
-
 		}
 	</style>
 
 	<body>
-		<!-- jQuery and Bootstrap Bundle (includes Popper) -->
-
 		<!-- HEADER CODE -->
 		<header>
-			
             <!-- Note: changed header from fixed top to sticky-top on this page.
             Ideally, header is only fixed on the homepage (to fit the carousel nicely with viewport sizing) -->
 			<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
@@ -73,30 +64,32 @@
 
 		<!-- Heading and Description of Forum Page -->
 		<div class="list-group"></div>
-            <a href="#" class="list-group-item list-group-item-action active">
-              <div class="d-flex w-100 justify-content-between">
-					<div class="forum-title">
-						<h1 class="text-white">CloudConvos ☁️</h1>
-						<p class="text-white">
-							This name is temporary don't worry.
-						  </p>
-					  </div>
-					</div>
-				  </div>
-			</a>
+		<a href="#" class="list-group-item list-group-item-action active">
+			<div class="d-flex w-100 justify-content-between">
+				<div class="forum-title">
+					<h1 class="text-white">CloudConvos ☁️</h1>
+					<p class="text-white">
+						This name is temporary don't worry.
+					</p>
+				</div>
+			</div>
+		</a>
 		
-	<br>
+		<br>
 		<script>
 			$(document).ready( function () {
-		$('#table_id').DataTable();
-	} );
+				$('#table_id').DataTable({
+					"pagingType": "full_numbers",
+					"stateSave": true,
+				});
+			} );
 		</script>
 		<div class="container">
 			<div class="col">
 			<table id="table_id" class="table">
 				<thead>
 					<tr>
-						<th>Recent Posts</th>
+						<th>Posts</th>
 					</tr>
 				</thead>
 				<tbody>
