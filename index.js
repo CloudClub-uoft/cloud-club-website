@@ -27,15 +27,6 @@ const database = mysql.createConnection({
   port: process.env.SQLPORT
 });
 
-// Create Table
-/* database.connect(function(err) {
-    if(err) throw err;
-    var sql = "Create TABLE forum (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), date VARCHAR(255))";
-    database.query(sql, function(err, result){
-        if (err) throw err;
-    });
-}); */
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -60,7 +51,8 @@ app.get('/register', (req, res) => {
 app.post('/newpost', (req, res)=> {
     // Making a new post, the request contains all the info we need
 
-    // Check auth token
+    // need to change based on session login
+
     jwt.verify(token, (err,verifiedJwt) => {
         if(err){
             res.status(404).json({
@@ -73,12 +65,10 @@ app.post('/newpost', (req, res)=> {
 
     // Check data + types
 
-    // waiting for table creation
-
     // SQL CREATE - return upon success or internal server error
 
-    var sql = "INSERT INTO forum (name, date) VALUES ?";
-    database.query(sql, function(err, result) {
+      // see register post method
+    database.query(`INSERT INTO forum (postid, userid, subject, body, timestamp) VALUES (${req.body.postid}, ${req.body.userid}, ${req.body.subject}, ${req.body.body}, ${req.body.timestamp})`, function(err, result) {
         if (err) {
             res.status(500).json({
                 'Error': "Internal Server Error 500"
@@ -94,6 +84,20 @@ app.post('/newpost', (req, res)=> {
 
 app.post('/getposts', (req, res)=> {
     // Getting the N lastest posts
+
+    const number = req.body;
+
+    // Check if Positive Number
+    if ((0 < number) && (number <= 100)) {
+      res.status(201).json({
+        Message: 'Post Number Valid'
+      });
+    } else {
+      res.status(401).json({
+        Error: "Enter a Valid Integer from 1 to 100"
+      });
+    }
+
 
     // SQL SELECT (select last N in table based on id)
 
