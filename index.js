@@ -80,42 +80,33 @@ app.post('/newpost', (req, res) => {
   // Making a new post, the request contains all the info we need
 
   // need to change based on session login
-
-  jwt.verify(token, (err, verifiedJwt) => {
-    if (err) {
-      res.status(404).json({
-        error: 'Not Valid',
-      });
-    } else {
-      res.send(verifiedJwt);
-    }
-  });
-
+  const sesh = req.session;
+  if (!sesh.email) {
+    res.status(401).json({ Message: 'Unauthorized 401' }).end();
+  }
   // Check data + types
 
   // SQL CREATE - return upon success or internal server error
 
   // see register post method
-  database.query(`INSERT INTO forum (postid, userid, subject, body, timestamp) VALUES (${req.body.postid}, ${req.body.userid}, ${req.body.subject}, ${req.body.body}, ${req.body.timestamp})`, (err, result) => {
-    if (err) {
-      res.status(500).json({
-        Error: 'Internal Server Error 500',
-      });
-    } else {
-      res.status(201).json({
-        Message: 'Post Created',
-      });
-    }
+  database.query(`INSERT INTO forum (postid, userid, subject, body, timestamp) VALUES (${req.body.postid}, ${req.body.userid}, ${req.body.subject}, ${req.body.body}, ${req.body.timestamp})`, (err) => {
+    if (err) res.status(500).json({ Error: 'Internal Server Error 500' }).end();
+
+    res.status(201).json({ Message: 'Post Created' });
   });
 });
 
 app.post('/getposts', (req, res) => {
   // Getting the N lastest posts
+  const sesh = req.session;
+  if (!sesh.email) {
+    res.status(401).json({ Message: 'Unauthorized 401' }).end();
+  }
 
   const number = req.body;
 
   // Check if Positive Number
-  if ((number > 0) && (number <= 100)) {
+  if (number > 0 && number <= 100) {
     res.status(201).json({
       Message: 'Post Number Valid',
     });
@@ -126,19 +117,10 @@ app.post('/getposts', (req, res) => {
   }
 
   // SQL SELECT (select last N in table based on id)
-
-  const response = {
-    message: 'Posts fetched successfully.',
-    posts: [
-      {
-        id: 0,
-        uid: 'jlefebvre55',
-        subject: 'Hello World',
-        body: "What's up forum. This is the first post ever! - JL",
-        timestamp: 1234567,
-      },
-    ],
-  };
+  database.query(`SELECT TOP ${number} * FROM (SELECT * FROM 'forum' ORDER BY date DESC)`, (err, result) => {
+    if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
+    res.status(200).json(result);
+  });
 });
 
 // Member list GET request
