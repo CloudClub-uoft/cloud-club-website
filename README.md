@@ -119,8 +119,8 @@ Consistent fonts, color scheme, etc.
     - [X] Check for all necessary data fields and types (see SQL table)
     - [X] Create new table entry, return 201 Created
   - [ ] Get N Latest Posts
-    - [ ] Check that N is a positive number less than 100 (if not do 40X)
-    - [ ] Get N latest based on Post ID (custom `SELECT ... WHERE` query)
+    - [X] Check that N is a positive number less than 100 (if not do 40X)
+    - [X] Get N latest based on Post ID (custom `SELECT ... WHERE` query)
     - [ ] Return with message
 - [X] Login Session Management - Matt
   - [X] Make sure it works -> pull request
