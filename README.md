@@ -46,21 +46,48 @@ Consistent fonts, color scheme, etc.
 
 ### V2
 - [ ] Landing Page - Lavanya & Adam
-  - [ ] Game screenshot graphics clarity
   - [ ] Center footer
   - [ ] Formatting the project snippets (centering image/title, padding textbox)
+  - [ ] (Shayshu) Add dungeon crawler snippet + image
 - [X] Team page - Jayden
-  - [ ] Mobile hamburger nav not working
+  - [X] Mobile hamburger nav not working
   - [X] Header ("Our Team")
   - [X] Profile images stretch/squish
-- [ ] Nav to login and register - Tamim
+  - [X] Proper nav tab highlight
 - [X] Login and Register - Jayden
   - [X] Register page layout broken
-- [ ] Project page - Ian
-  - [ ] Typos?
-  - [ ] Tiled images - centering? or other fix?
-- [ ] Transfer all pages to EJS
-  - [ ] Header and footer directives
+- [X] Project page - Ian
+  - [X] Typos?
+  - [X] Tiled images - centering? or other fix?
+- [ ] EJS - Matthew and Harsimrat
+  - [ ] EJS Tutorial(s)
+  - [ ] Move all pages to EJS, make all future pages in EJS
+  - [ ] Header, footer, nav directives
+  - [ ] Every page needs navbar item to login and register pages
+- [ ] Container Page for Dungeon Crawler
+  - [ ] Issues/request/feedback on the sidebars
+
+### Forum
+
+[Example](https://forums.technicpack.net/forum/7-off-topic-discussion/)
+
+- [ ] Thread
+  - [ ] Thread title and description - Tamim and Yunjia
+  - [ ] Post - Bootstrap Table - Ian, Jonathan, Leo
+    - [ ] Planning
+      - [ ] JS API fetch (for now just have a fake object)
+      - [ ] For each entry in the JSON object, create a row element in the table DOM
+    - [ ] Structure
+      - [ ] Post subject line/title
+      - [ ] View count
+      - [ ] Reply count
+      - [ ] User who posted
+      - [ ] Timestamp
+      - [ ] Posts per page
+      - [ ] Page selection
+      - [ ] Sorting
+- [ ] View Post
+- [ ] New Post
 
 ## Backend
 
