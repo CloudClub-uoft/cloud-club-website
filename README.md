@@ -108,24 +108,24 @@ Consistent fonts, color scheme, etc.
   - [x] Build response: 50X for SQL error, 201 for successful creation
 
 - [ ] Forum SQL API
-  - [ ] New Post
+  - [X] New Post
     - [X] Create table - Jayden
       - [X] Post ID (internally generated)
       - [X] User ID (token/metadata)
       - [X] Subject line (Plaintext)
       - [X] Body (Markdown text)
       - [X] Timestamp (internally generated)
-    - [ ] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
-    - [ ] Check for all necessary data fields and types (see SQL table)
-    - [ ] Create new table entry, return 201 Created
+    - [X] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
+    - [X] Check for all necessary data fields and types (see SQL table)
+    - [X] Create new table entry, return 201 Created
   - [ ] Get N Latest Posts
     - [ ] Check that N is a positive number less than 100 (if not do 40X)
-    - [ ] Get N latest based on Post ID
+    - [ ] Get N latest based on Post ID (custom `SELECT ... WHERE` query)
     - [ ] Return with message
-- [ ] Login Session Management - Matt
-  - [ ] Make sure it works -> pull request
-  - [ ] Migrate to a server-side session approach, see Harsimrat's resources
-  - [ ] Build redis cache DB
+- [X] Login Session Management - Matt
+  - [X] Make sure it works -> pull request
+  - [X] Migrate to a server-side session approach, see Harsimrat's resources
+  - [X] Build redis cache DB
 - [ ] Game High Score API - Jayden
   - [X] Build Table
     - [X] Username
