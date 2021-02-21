@@ -1,25 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-       <%- selected -%>
-    </title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
 
-<body>
+<%- include('../partials/head') %>
 
-    <div class="wrapper">
-        <%- include('../partials/header.ejs') %>
-            <main>
-                <%- body %>
-            </main>
-        <%- include('../partials/footer.ejs') %>
-    </div>
-
-</body>
+<%- include('../partials/header.ejs') %>
+<%- body %>
+<%- include('../partials/footer.ejs') %>
 
 </html>
