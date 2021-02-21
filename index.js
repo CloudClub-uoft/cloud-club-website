@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 
 // bcrypt settings
 const saltRounds = 10;
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5082;
 
 // jsonwebtoken settings
 const jwtKey = 'qTvwckE3Gs';
@@ -43,11 +43,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', {'title': 'CloudClub | Login'});
+  res.render('login', {'selected': 'login', 'title': 'CloudClub | Login'});
 });
 
 app.get('/register', (req, res) => {
-  res.render('register', {'title': 'CloudClub | Register'});
+  res.render('register', {'selected': 'register', 'title': 'CloudClub | Register'});
 });
 
 app.get('/teampage', (req, res) => {
