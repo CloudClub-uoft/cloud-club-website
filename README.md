@@ -118,10 +118,19 @@ Consistent fonts, color scheme, etc.
     - [X] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
     - [X] Check for all necessary data fields and types (see SQL table)
     - [X] Create new table entry, return 201 Created
-  - [ ] Get N Latest Posts
-    - [X] Check that N is a positive number less than 100 (if not do 40X)
-    - [X] Get N latest based on Post ID (custom `SELECT ... WHERE` query)
-    - [ ] Return with message
+  - [ ] Get All Posts Summary
+    - [ ] Request
+      - [ ] 
+    - [ ] Response
+      - [ ] Post Title
+      - [ ] Post ID
+      - [ ] Post Timestamp
+      - [ ] User ID
+  - [ ] Get Single Post by ID
+    - [ ] Request - query parameters
+    - [ ] Response
+      - [ ] Post Body
+      - [ ] etc.
 - [X] Login Session Management - Matt
   - [X] Make sure it works -> pull request
   - [X] Migrate to a server-side session approach, see Harsimrat's resources
