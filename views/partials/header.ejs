@@ -7,13 +7,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link <% if (selected == 'homepage') {%> <%- "active" -%> <%}%>" href="/">Homepage</a>
+            <a class="nav-link <% if (selected == 'homepage') {%> <%- 'active' -%> <%}%>" href="/" <% if (selected == 'homepage') {%> <%-'tabindex="-1" aria-disabled="true"'-%> <%}%> >Homepage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <% if (selected == 'teampage') {%> <%-'active'-%> <%}%>" href=""  >The Team</a>
+            <a class="nav-link <% if (selected == 'teampage') {%> <%-'active'-%> <%}%>" href="/teampage" <% if (selected == 'teampage') {%> <%-'tabindex="-1" aria-disabled="true"'-%> <%}%> >The Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="projects.html" tabindex="-1" aria-disabled="true">Projects</a>
+            <a class="nav-link <% if (selected == 'projects') {%> <%-'active'-%> <%}%>" href="/projects" <% if (selected == 'projects') {%> <%-'tabindex="-1" aria-disabled="true"'-%> <%}%> >Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <% if (selected == 'forumpage') {%> <%-'active'-%> <%}%>" href="/forum" <% if (selected == 'forumpage') {%> <%-'tabindex="-1" aria-disabled="true"'-%> <%}%> >Forum</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="" onclick='openInNewTab("https:\/\/github.com/CloudClub-uoft");'>GitHub</a>

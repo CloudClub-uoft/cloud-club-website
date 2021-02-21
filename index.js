@@ -39,15 +39,27 @@ app.set('layout', 'layouts/layout')
 
 // Dynamic Routes
 app.get('/', (req, res) => {
-  res.render('index', );
+  res.render('index', {'selected': 'homepage', 'title': 'CloudClub | Home'});
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {'title': 'CloudClub | Login'});
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {'title': 'CloudClub | Register'});
+});
+
+app.get('/teampage', (req, res) => {
+  res.render('teampage', {'selected': 'teampage', 'title': 'CloudClub | The Team'});
+});
+
+app.get('/projects', (req, res) => {
+  res.render('projects', {'selected': 'projects', 'title': 'CloudClub | Projects'});
+});
+
+app.get('/forum', (req, res) => {
+  res.render('forum', {'selected': 'forumpage', 'title': 'CloudClub | Forum'});
 });
 
 // Member list GET request // cloudclub.ca/members
