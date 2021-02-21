@@ -35,4 +35,35 @@
         win.focus();
         }
     </script>
+
+    <!-- Originally from index.ejs -->
+    <script type="text/javascript">
+        function refresh(){
+        $.ajax({
+            url: 'refresh',
+            type: 'POST'
+        })
+        }
+
+        $(document).ready(function() {
+        $.ajax({
+            url: '/auth',
+            type: 'GET',
+            statusCode: {
+            401: function(response) {
+                $('.loginout').text('Log In').attr('href','/login');
+            },
+            400: function(response) {
+                alert(response.responseJSON.Error);
+            },
+            200: function(response){
+                $('.loginout').text('Log Out').attr('href','/logout');
+                $('.email').text(response.Email);
+            }
+            }
+        })
+        });
+
+        window.setInterval(refresh(), 60*60*1000); // 1 hour refresh
+  </script>
 </head>
