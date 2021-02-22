@@ -46,9 +46,9 @@ Consistent fonts, color scheme, etc.
 
 ### V2
 - [ ] Landing Page - Lavanya & Adam
-  - [ ] Center footer
-  - [ ] Formatting the project snippets (centering image/title, padding textbox)
-  - [ ] (Shayshu) Add dungeon crawler snippet + image
+  - [X] Center footer
+  - [X] Formatting the project snippets (centering image/title, padding textbox)
+  - [X] (Shayshu) Add dungeon crawler snippet + image
 - [X] Team page - Jayden
   - [X] Mobile hamburger nav not working
   - [X] Header ("Our Team")
