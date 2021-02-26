@@ -74,60 +74,70 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
-// New Post - who? when? what?
-
+// New forum post POST request
 app.post('/newpost', (req, res) => {
-  // Making a new post, the request contains all the info we need
-
-  // need to change based on session login
   const sesh = req.session;
   if (!sesh.email) {
-    res.status(401).json({ Message: 'Unauthorized 401' }).end();
+    return res.status(401).json({ Error: 'Unauthorized 401' });
   }
-  // Check data + types
 
-  // SQL CREATE - return upon success or internal server error
-
-  // see register post method
-  database.query(`INSERT INTO forum (postid, userid, subject, body, timestamp) VALUES (${req.body.postid}, ${req.body.userid}, ${req.body.subject}, ${req.body.body}, ${req.body.timestamp})`, (err) => {
-    if (err) res.status(500).json({ Error: 'Internal Server Error 500' }).end();
-
-    res.status(201).json({ Message: 'Post Created' });
+  const { postid, userid, subject, body } = req.body;
+  database.query(`INSERT INTO cloudclub.forum (postid, userid, subject, body) VALUES (${postid}, ${userid}, '${subject}', '${body}')`, (err) => {
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
+    return res.status(201).json({ Message: 'Post Created' });
   });
 });
 
-app.post('/getposts', (req, res) => {
-  // Getting the N lastest posts
+// Gets N latest posts GET request
+app.get('/latest', (req, res) => {
   const sesh = req.session;
   if (!sesh.email) {
-    res.status(401).json({ Message: 'Unauthorized 401' }).end();
+     return res.status(401).json({ Error: 'Unauthorized 401' });
   }
 
-  const number = req.body;
-
-  // Check if Positive Number
-  if (number > 0 && number <= 100) {
-    res.status(201).json({
-      Message: 'Post Number Valid',
-    });
-  } else {
-    res.status(401).json({
-      Error: 'Enter a Valid Integer from 1 to 100',
-    });
+  const number = req.query.num;
+  if (number <= 0 && number > 100) {
+    return res.status(422).json({ Error: '422 Unprocessable Entity' });
   }
 
-  // SQL SELECT (select last N in table based on id)
-  database.query(`SELECT TOP ${number} * FROM (SELECT * FROM 'forum' ORDER BY date DESC)`, (err, result) => {
-    if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
-    res.status(200).json(result);
+  database.query(`SELECT * FROM (SELECT * FROM cloudclub.forum ORDER BY timestamp DESC) as alias LIMIT ${number}`, (err, result) => {
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
+    return res.status(200).json(result);
+  });
+});
+
+// Gets post list GET request
+app.get('/posts', (req, res) => {
+  const sesh = req.session;
+  if (!sesh.email) {
+     return res.status(401).json({ Error: 'Unauthorized 401' });
+  }
+
+  database.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
+    return res.status(200).json(result);
+  });
+});
+
+// Gets post body from post ID GET request
+app.get('/post', (req, res) => {
+  const sesh = req.session;
+  if (!sesh.email) {
+     return res.status(401).json({ Error: 'Unauthorized 401' });
+  }
+
+  const id = req.query.id;
+  database.query(`SELECT body FROM cloudclub.forum WHERE postid='${id}'`, (err, result) => {
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
+    return res.status(200).json(result);
   });
 });
 
 // Member list GET request
 app.get('/members', (req, res) => {
-  database.query('SELECT * FROM `clubmembers`', (err, result) => {
-    if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
-    res.status(200).json(result);
+  database.query('SELECT * FROM cloudclub.clubmembers', (err, result) => {
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
+    return res.status(200).json(result);
   });
 });
 
@@ -135,40 +145,38 @@ app.get('/members', (req, res) => {
 app.post('/register', (req, res) => {
   const first = req.body.firstName;
   const last = req.body.lastName;
-  const { email } = req.body;
-  const { password } = req.body;
-  database.query('SELECT * FROM `logins` WHERE `email`=?', [email], (err1, result) => {
-    if (err1) res.status(500).json({ Error: 'Internal Server Error 500' });
+  const { email, password } = req.body;
+  database.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result) => {
+    if (err1) return res.status(500).json({ Error: 'Internal Server Error 500' });
 
     if (result.length === 0) {
       if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
         bcrypt.hash(password, saltRounds, (err2, hash) => {
-          if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
+          if (err2) return res.status(500).json({ Error: 'Internal Server Error 500' });
 
           database.query('INSERT INTO `logins`(`first-name`, `last-name`, email, password) VALUES (?, ?, ?, ?)', [first, last, email, hash], (err3) => {
-            if (err3) res.status(500).json({ Error: 'Internal Server Error 500' });
+            if (err3) return res.status(500).json({ Error: 'Internal Server Error 500' });
 
-            res.status(201).json({ Message: 'Successfully registered, you may now login' });
+            return res.status(201).json({ Message: 'Successfully registered, you may now login' });
           });
         });
       } else {
-        res.status(400).json({ Message: 'Password does not meet the requirements' });
+        return res.status(400).json({ Message: 'Password does not meet the requirements' });
       }
     } else {
-      res.status(409).json({ Message: 'User already exists' });
+      return res.status(409).json({ Message: 'User already exists' });
     }
   });
 });
 
 // Login POST request
 app.post('/login', (req, res) => {
-  const { email } = req.body;
-  const { password } = req.body;
-  database.query('SELECT * FROM `logins` WHERE `email`= ?', [email], (err1, result1) => {
-    if (err1) res.status(401).json({ Message: 'Email not found or password incorrect' });
+  const { email, password } = req.body;
+  database.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result1) => {
+    if (err1) return res.status(401).json({ Message: 'Email not found or password incorrect' });
     if (result1.length === 1) {
       bcrypt.compare(password, result1[0].password, (err2, result2) => {
-        if (err2) res.status(500).json({ Error: 'Internal Server Error 500' });
+        if (err2) return res.status(500).json({ Error: 'Internal Server Error 500' });
 
         if (result2) {
           const sesh = req.session;
@@ -185,7 +193,7 @@ app.post('/login', (req, res) => {
 // logout GET request
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
-    if (err) res.status(500).json({ Error: 'Internal Server Error 500' });
+    if (err) return res.status(500).json({ Error: 'Internal Server Error 500' });
   });
   return res.redirect('back');
 });
