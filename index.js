@@ -83,11 +83,11 @@ app.post('/newpost', (req, res) => {
 
   // Fetch ID key from login table on login, use it here on post creation (make sure to check that it isn't undefined)
 
-  const { userid, subject, body } = req.body;
-  if(userid === undefined || subject === undefined || body === undefined) {
-    return res.status(400).json({ error: 'Missing data, request must include all of: userid, subject, body'})
+  const { subject, body } = req.body;
+  if(subject === undefined || body === undefined) {
+    return res.status(400).json({ error: 'Missing data, request must include all of: subject, body'})
   }
-  database.query(`INSERT INTO cloudclub.forum (userid, subject, body) VALUES (${userid}, '${subject}', '${body}')`, (err) => {
+  database.query(`INSERT INTO cloudclub.forum (userid, subject, body) VALUES (${sesh.userid}, '${subject}', '${body}')`, (err) => {
     if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
     return res.status(201).json({ message: 'Post Created Successfully!' });
   });
@@ -185,6 +185,7 @@ app.post('/login', (req, res) => {
 
         if (result2) {
           const sesh = req.session;
+          sesh.userid = result1[0].id;
           sesh.email = email;
           sesh.password = password;
           return res.status(200).json({ message: 'Login Sucessful!' });
