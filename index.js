@@ -105,7 +105,7 @@ app.get('/latest', (req, res) => {
     return res.status(422).json({ error: 'Request out of range, must be between 0 and 100.' });
   }
 
-  database.query(`SELECT * FROM (SELECT * FROM cloudclub.forum ORDER BY timestamp DESC) as alias LIMIT ${number}`, (err, result) => {
+  database.query(`SELECT * FROM cloudclub.forum ORDER BY timestamp DESC LIMIT ${number}`, (err, result) => {
     if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
     return res.status(200).json(result);
   });
