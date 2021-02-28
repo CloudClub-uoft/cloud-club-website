@@ -60,10 +60,14 @@
 
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link email" href=""></a>
+          <a class="nav-link email" href=""><% if (email) { %> <%= email %> <% } %></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link loginout" href=""></a>
+          <% if (email) { %>
+            <a class="nav-link loginout" href=<%= "/logout" %>><%= 'Logout' %></a>
+          <% } else { %>
+            <a class="nav-link loginout" href=<%= "/login" %>><%= 'Login' %></a>
+          <% } %>
         </li>
       </ul>
       <!-- <form class="form-inline mt-2 mt-md-0">
@@ -192,35 +196,5 @@
           </div>
         </div>
       </footer>
-      
-      <script type="text/javascript">
-        function refresh(){
-          $.ajax({
-            url: 'refresh',
-            type: 'POST'
-          })
-        }
-
-        $(document).ready(function() {
-          $.ajax({
-            url: '/auth',
-            type: 'GET',
-            statusCode: {
-              401: function(response) {
-                $('.loginout').text('Log In').attr('href','/login');
-              },
-              400: function(response) {
-                alert(response.responseJSON.Error);
-              },
-              200: function(response){
-                $('.loginout').text('Log Out').attr('href','/logout');
-                $('.email').text(response.Email);
-              }
-            }
-          })
-        });
-
-        window.setInterval(refresh(), 60*60*1000); // 1 hour refresh
-      </script>
     </body>
 </html>
