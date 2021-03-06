@@ -62,6 +62,11 @@ app.get('/forum', (req, res) => {
   res.render('forum', {'selected': 'forumpage', 'title': 'CloudClub | Forum'});
 });
 
+app.get('/post', (req, res) => {
+  res.render('post', {'selected': 'forumpage', 'title': 'CloudClub | Post Detail'});
+});
+
+
 // Member list GET request // cloudclub.ca/members
 app.get('/members', (req, res) => {
   database.query('SELECT * FROM `clubmembers`', (err, result) => {
