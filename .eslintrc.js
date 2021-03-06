@@ -14,7 +14,7 @@ module.exports = {
     'no-console': 'off',
     'consistent-return': 'off',
     'object-curly-newline': ['error', {
-      ObjectPattern: 'off',
+      ObjectPattern: { multiline: true, minProperties: 5 },
     }],
   },
 };

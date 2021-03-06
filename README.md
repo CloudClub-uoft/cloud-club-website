@@ -59,13 +59,21 @@ Consistent fonts, color scheme, etc.
 - [X] Project page - Ian
   - [X] Typos?
   - [X] Tiled images - centering? or other fix?
-- [ ] EJS - Matthew and Harsimrat
-  - [ ] EJS Tutorial(s)
-  - [ ] Move all pages to EJS, make all future pages in EJS
-  - [ ] Header, footer, nav directives
-  - [ ] Every page needs navbar item to login and register pages
 - [ ] Container Page for Dungeon Crawler
   - [ ] Issues/request/feedback on the sidebars
+
+
+### EJS Transition
+- [ ] EJS - Matthew and Harsimrat
+  - [X] EJS Tutorial(s)
+  - [ ] Every page needs navbar item to login and register pages
+  - [ ] Copy Harsimrat's example
+    - [ ] Header (w/ `active` selection), footer
+    - [ ] assets directories (CSS, JS)
+  - [ ] Build forum page in EJS
+    - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
+    - [ ] Pass to page via `render`
+    - [ ] Build divs from that
 
 ### Forum
 
@@ -78,14 +86,14 @@ Consistent fonts, color scheme, etc.
       - [ ] JS API fetch (for now just have a fake object)
       - [ ] For each entry in the JSON object, create a row element in the table DOM
     - [ ] Structure
-      - [ ] Post subject line/title
-      - [ ] View count
-      - [ ] Reply count
-      - [ ] User who posted
-      - [ ] Timestamp
-      - [ ] Posts per page
-      - [ ] Page selection
-      - [ ] Sorting
+      - [X] Post subject line/title
+      - [X] View count
+      - [X] Reply count
+      - [X] User who posted
+      - [X] Timestamp
+      - [X] Posts per page
+      - [X] Page selection
+      - [ ] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
 - [ ] View Post
 - [ ] New Post
 
@@ -144,3 +152,9 @@ Consistent fonts, color scheme, etc.
     - [ ] Check N is reasonable
     - [ ] Get
     - [ ] Return
+  - [x] Team Members - GET list of CloudClub team members, return
+  - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+    - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+    - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+    - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+    - [x] Build response: 50X for SQL error, 201 for successful creation
