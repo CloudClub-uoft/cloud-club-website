@@ -10,8 +10,8 @@ module.exports = (app) => {
 
     const { id } = req.query;
     db.query(`SELECT * FROM cloudclub.forum WHERE postid='s${id}'`, (err, result) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-      return res.status(200).json(result[0]);
+      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+      return res.status(200).json({ message: `Post ${id} fetched successfully.`, data: result[0] });
     });
   });
 };

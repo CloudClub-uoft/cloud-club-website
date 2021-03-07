@@ -14,8 +14,8 @@ module.exports = (app) => {
     }
 
     db.query(`SELECT * FROM cloudclub.forum ORDER BY timestamp DESC LIMIT ${number}`, (err, result) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-      return res.status(200).json(result);
+      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+      return res.status(200).json({ message: `Latest ${number} posts fetched successfully without body.`, data: result });
     });
   });
 };

@@ -22,5 +22,5 @@ app.set('view engine', 'ejs');
 require('./routes/routing').boot(app);
 
 http.listen(port, () => {
-  console.log(`CloudClub server now listening on port ${port}`);
+  console.log(`Web server now listening on port ${port}`);
 });

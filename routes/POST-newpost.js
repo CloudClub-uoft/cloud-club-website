@@ -14,8 +14,8 @@ module.exports = (app) => {
     }
 
     db.query(`INSERT INTO cloudclub.forum (userid, subject, body) VALUES (${sesh.userid}, '${subject}', '${body}')`, (err) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-      return res.status(201).json({ message: 'Post Created Successfully!' });
+      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+      return res.status(201).json({ message: 'Post created successfully.' });
     });
   });
 };

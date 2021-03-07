@@ -17,7 +17,7 @@ module.exports = (app) => {
     console.log(`Redis connection failed: ${err}`);
   });
   redisClient.on('connect', () => {
-    console.log('Connected to Redis database');
+    console.log(`Connected to Redis database at '${process.env.REDIS_HOST}:${process.env.REDIS_PORT}'`);
   });
 
   // Conncet to Redis database

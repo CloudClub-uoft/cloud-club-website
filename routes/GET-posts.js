@@ -9,8 +9,8 @@ module.exports = (app) => {
     }
 
     db.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-      return res.status(200).json(result);
+      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+      return res.status(200).json({ message: 'All posts fetched successfully without body.', data: result });
     });
   });
 };
