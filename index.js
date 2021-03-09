@@ -66,9 +66,9 @@ app.set('layout', 'layouts/layout')
 app.get('/', (req, res) => {
   const sesh = req.session;
   if (sesh.email) {
-    return res.render('index', { email: sesh.email });
+    return res.render('index', { email: sesh.email, 'selected': 'homepage', 'title': 'CloudClub | Home' });
   }
-  return res.render('index', { email: false });
+  return res.render('index', { email: false, 'selected': 'homepage', 'title': 'CloudClub | Home' });
 });
 
 app.get('/login', (req, res) => {
@@ -155,11 +155,21 @@ app.get('/post', (req, res) => {
   });
 });
 
-// Member list GET request
+app.get('/forum', (req, res) => {
+  res.render('forum', {'selected': 'forumpage', 'title': 'CloudClub | Forum'});
+});
+
+app.get('/post', (req, res) => {
+  res.render('post', {'selected': 'forumpage', 'title': 'CloudClub | Post Detail'});
+});
+
+
+// Member list GET request // cloudclub.ca/members
 app.get('/members', (req, res) => {
-  database.query('SELECT * FROM cloudclub.clubmembers', (err, result) => {
-    if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-    return res.status(200).json(result);
+  database.query('SELECT * FROM `cloudclub.clubmembers`', (err, result) => {
+    if (err) res.status(500).json({ error: 'Internal Server Error 500' });
+    //res.status(200).json(result);
+    res.render('members', {selected: 'teampage', res: result})
   });
 });
 
