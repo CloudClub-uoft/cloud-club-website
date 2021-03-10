@@ -1,8 +1,0 @@
-/* CSS to style a project box on the projects page */
-.project-box {
-    width: 80%; 
-    height: 350px; 
-    border-radius: 21px 21px 0 0; 
-    background-position: center; 
-    background-attachment: fixed;
-}
