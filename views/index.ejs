@@ -1,47 +1,4 @@
 <body>  
-  <!-- HEADER CODE -->
-  <!-- <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="">CloudClub</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="">Homepage <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="teampage.html">The Team</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="projects.html" tabindex="-1" aria-disabled="true">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="forum.html">Forum</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" onclick='openInNewTab("https:\/\/github.com/CloudClub-uoft");'>GitHub</a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link email" href=""><% if (email) { %> <%= email %> <% } %></a>
-        </li>
-        <li class="nav-item">
-          <% if (email) { %>
-            <a class="nav-link loginout" href=<%= "/logout" %>><%= 'Logout' %></a>
-          <% } else { %>
-            <a class="nav-link loginout" href=<%= "/login" %>><%= 'Login' %></a>
-          <% } %>
-        </li>
-      </ul>
-      </div>
-    </nav>
-  </header> -->
-
   <!-- Carousel -->
   <div id="mainCarousel" class="carousel slide overflow-hidden" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -51,23 +8,30 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <img class="d-block w-100" src="/assets/CloudClub.png" alt="Second slide"
+          style="height: 100vh; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
         <img class="d-block w-100" src="/assets/CloudclubGame.png" alt="First slide"
           style="height: 100vh; object-fit: cover;">
         <div class="container">
           <div class="carousel-caption text-center">
             <h3>CloudClub's First Game</h3>
-            <p><a href="https://fast-ocean-31681.herokuapp.com/Mario%20Game/index.html">Skule Adventure!</p>
-            <p><a class="btn btn-md btn-primary" href="/projects.html" role="button">Learn More!</a></p>
+            <p><a href="https://fast-ocean-31681.herokuapp.com/Mario%20Game/index.html" target="_blank">Skule Adventure!</p>
+            <p><a class="btn btn-md btn-primary" href="/projects#Skule_Adventures" role="button">Learn More!</a></p>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="/assets/CloudClub.png" alt="Second slide"
+        <img class="d-block w-100" src="/assets/skulengeon-1.png" alt="Third slide"
           style="height: 100vh; object-fit: cover;">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="/assets/CloudClub-Purple.png" alt="Third slide"
-          style="height: 100vh; object-fit: cover;">
+          <div class="container">
+            <div class="carousel-caption text-center">
+              <h3><i>Coming Soon</i> - Escape from the Skulengeon</h3>
+              <p>A new game from the creators of Skule Adventures!</p>
+              <p><a class="btn btn-md btn-primary" href="/projects#Skulengeon" role="button">Learn More!</a></p>
+            </div>
+          </div>
       </div>
     </div>
     <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
@@ -93,7 +57,7 @@
       <div class="col-md-4">
         <img alt="Skule Adventure" src="./assets/SF.PNG" width="140" height="140" class="img-thumbnail">
         <h2>
-          Game Project
+          Skule Adventures
         </h2>
         <p class = "text-left">
           The game team has been working on their awesome Skule themed game called Skule Adventure. Led by Shayshu
@@ -101,20 +65,20 @@
           the Yerba Mate and coffee!
         </p>
         <p class = "text-left">
-          <a href="/projects.html">View details »</a>
+          <a href="/projects#Skule_Adventures">View details »</a>
         </p>
       </div>
       <div class="col-md-4">
         <img alt="Bootstrap" src="./assets/boot.png" width="140" height="140" class="img-thumbnail">
         <h2>
-          Website Project
+          Club Website
         </h2>
         <p class = "text-left">
           Throughout the fall semester the website team has been working hard to build our website using Express and
           Bootstrap. The project is being led by our amazing project leader Jayden Lefebvre.
         </p>
         <p class = "text-left">
-          <a href="/projects.html">View details »</a>
+          <a href="/projects#Club_Website">View details »</a>
         </p>
       </div>
       <div class="col-md-4">
@@ -127,58 +91,26 @@
           off with beginner projects and then move onto image generation and game playing bots. Super exciting!
         </p>
         <p class = "text-left">
-          <a href="/projects.html">View details »</a>
+          <a href="/projects#AI_ML">View details »</a>
         </p>
       </div>
     </div>
-  <!-- </div> -->
-  <!-- <div class = "container-fluid" id = "project-tab"> -->
     <div class = "row text-center">
       <div class = "col-md-4">
-        <img alt = "Game picture" src = "./assets/SF.PNG" width = "140" height = "140" class = "img-thumbnail">
+        <img alt = "Game picture" src = "./assets/skulengeon-3.PNG" width = "140" height = "140" class = "img-thumbnail">
         <h2>
-          Escape from the Skule-ngeon
+          Escape from the Skulengeon
         </h2>
         <p class = "text-left">
-          Escape from the Skule-ngeon is a top-down dungeon crawler that takes inspiration from classic games like Diablo and The Legend of Zelda.
+          <strong>Escape from the Skulengeon</strong> is a top-down dungeon crawler that takes inspiration from classic games like Diablo and The Legend of Zelda.
           In this game a new engineer at UofT has to navigate their way around the city, from the CN tower all the way to the depths of Myhal.
           We are using frameworks like Phaser.js coupled with Tiled in order to develop an immersive and challenging experience.
         </p>
         <p class = "text-left">
-          <a href = "#"> View details »</a>
+          <a href = "/projects#Skulengeon"> View details »</a>
         </p>
-        </div>
       </div>
     </div>
+    </div>
   </div>
-      
-      <script type="text/javascript">
-        function refresh(){
-          $.ajax({
-            url: 'refresh',
-            type: 'POST'
-          })
-        }
-
-        $(document).ready(function() {
-          $.ajax({
-            url: '/auth',
-            type: 'GET',
-            statusCode: {
-              401: function(response) {
-                $('.loginout').text('Log In').attr('href','/login');
-              },
-              400: function(response) {
-                alert(response.responseJSON.Error);
-              },
-              200: function(response){
-                $('.loginout').text('Log Out').attr('href','/logout');
-                $('.email').text(response.Email);
-              }
-            }
-          })
-        });
-
-        window.setInterval(refresh(), 60*60*1000); // 1 hour refresh
-      </script>
-    </body>
+</body>
