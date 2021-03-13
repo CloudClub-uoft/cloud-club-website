@@ -1,7 +1,7 @@
 <!--
     2021.3.6 16:38 EST Front-end team Leo Li
     1. Design the single post page
-    2. Add temporary ejs statement in the form of < ref.data >... because if i write the normal form (with %), ejs will throw an error.
+    2. Add temporary ejs statement in the form of < post.data >... because if i write the normal form (with %), ejs will throw an error.
 
 -->
 <body>
@@ -49,10 +49,10 @@
                         <div class="spinner-grow text-info" role="status"></div>
                     </div>
 
-                   <div mane="userid"><!-- chenge the name to name="% ref.body %" --><h1>The annoucement from CloudClub <!-- % ref.subject % --></h1><br></div>
+                   <div mane="userid"><!-- chenge the name to name="% post.body %" --><h1>The annoucement from CloudClub <!-- % post.subject % --></h1><br></div>
                    
                     <h5><img class="img-thumbnail" width="10%" src="https://avatars.githubusercontent.com/u/36619969?s=460&u=d2940c988b1a69203c59e96e35aa6ac5306093d6&v=4"> CloudClub Official</h5><br>
-                    <h3>2021-03-06 21:10:59 posted <!-- % ref.timestamp % --></h3><br>
+                    <h3>2021-03-06 21:10:59 posted <!-- % post.timestamp % --></h3><br>
                     
                     <a id="a" name="a" style="text-decoration:none" class="a btn btn-block btn-lg btn-info" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
                         <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
@@ -82,7 +82,7 @@
                         And this is some test data to fill in the blank here.
                         And this is some test data to fill in the blank here.
 
-                        <!-- % ref.body % -->
+                        <!-- % post.body % -->
                     </h6>
                 </div>
 
