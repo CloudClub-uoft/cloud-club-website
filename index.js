@@ -13,7 +13,7 @@ const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
 
 // Configuration
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 
 // bcrypt settings
 const saltRounds = process.env.ENC_ROUNDS;
