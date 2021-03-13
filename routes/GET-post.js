@@ -1,18 +1,18 @@
 /**
- * @api {get} /post?id=postid Get a single post, indexed by post id.
- * @apiName GET-post
+ * @api {get} /post?=:postid Get a single post
+ * @apiName GETpost
+ * @apiGroup Forum
  *
- * @apiParam {Number} id: post ID
+ * @apiParam {Number} id post ID
  *
- * @apiSuccess {object[]} data
- * @apiSuccess {string} data.postid Post ID
- * @apiSuccess {number} data.userid User ID
- * @apiSuccess {string} data.subject Post Title
- * @apiSuccess {string} data.body Post Body
- * @apiSuccess {number} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
+ * @apiSuccess {Object[]} data
+ * @apiSuccess {String} data.postid Post ID
+ * @apiSuccess {Number} data.userid User ID
+ * @apiSuccess {String} data.subject Post Title
+ * @apiSuccess {String} data.body Post Body
+ * @apiSuccess {Date} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
  *
- * @apiError (401) You are not authorized to perform this action.
- * @apiError (500) Internal Server Error 500.
+ * @apiError 401 You are not authorized to perform this action
  */
 
 const db = require('../config/db-connection');
