@@ -46,9 +46,9 @@ Consistent fonts, color scheme, etc.
 
 ### V2
 - [ ] Landing Page - Lavanya & Adam
-  - [ ] Center footer
-  - [ ] Formatting the project snippets (centering image/title, padding textbox)
-  - [ ] (Shayshu) Add dungeon crawler snippet + image
+  - [X] Center footer
+  - [X] Formatting the project snippets (centering image/title, padding textbox)
+  - [X] (Shayshu) Add dungeon crawler snippet + image
 - [X] Team page - Jayden
   - [X] Mobile hamburger nav not working
   - [X] Header ("Our Team")
@@ -59,13 +59,21 @@ Consistent fonts, color scheme, etc.
 - [X] Project page - Ian
   - [X] Typos?
   - [X] Tiled images - centering? or other fix?
-- [ ] EJS - Matthew and Harsimrat
-  - [ ] EJS Tutorial(s)
-  - [ ] Move all pages to EJS, make all future pages in EJS
-  - [ ] Header, footer, nav directives
-  - [ ] Every page needs navbar item to login and register pages
 - [ ] Container Page for Dungeon Crawler
   - [ ] Issues/request/feedback on the sidebars
+
+
+### EJS Transition
+- [ ] EJS - Matthew and Harsimrat
+  - [X] EJS Tutorial(s)
+  - [ ] Every page needs navbar item to login and register pages
+  - [ ] Copy Harsimrat's example
+    - [ ] Header (w/ `active` selection), footer
+    - [ ] assets directories (CSS, JS)
+  - [ ] Build forum page in EJS
+    - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
+    - [ ] Pass to page via `render`
+    - [ ] Build divs from that
 
 ### Forum
 
@@ -78,14 +86,14 @@ Consistent fonts, color scheme, etc.
       - [ ] JS API fetch (for now just have a fake object)
       - [ ] For each entry in the JSON object, create a row element in the table DOM
     - [ ] Structure
-      - [ ] Post subject line/title
-      - [ ] View count
-      - [ ] Reply count
-      - [ ] User who posted
-      - [ ] Timestamp
-      - [ ] Posts per page
-      - [ ] Page selection
-      - [ ] Sorting
+      - [X] Post subject line/title
+      - [X] View count
+      - [X] Reply count
+      - [X] User who posted
+      - [X] Timestamp
+      - [X] Posts per page
+      - [X] Page selection
+      - [ ] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
 - [ ] View Post
 - [ ] New Post
 
@@ -99,6 +107,51 @@ Consistent fonts, color scheme, etc.
 
 - [X] Express.js SQL API
   - [X] Login - POST body has `username`, `password` -> fetch matching credentials from DB, compare, return
+  - [ ] Tokens and Persistence - Matt
+- [x] Team Members - GET list of CloudClub team members, return
+- [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
+  - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)
+  - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
+  - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
+  - [x] Build response: 50X for SQL error, 201 for successful creation
+
+- [ ] Forum SQL API
+  - [X] New Post
+    - [X] Create table - Jayden
+      - [X] Post ID (internally generated)
+      - [X] User ID (token/metadata)
+      - [X] Subject line (Plaintext)
+      - [X] Body (Markdown text)
+      - [X] Timestamp (internally generated)
+    - [X] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
+    - [X] Check for all necessary data fields and types (see SQL table)
+    - [X] Create new table entry, return 201 Created
+  - [ ] Get All Posts Summary
+    - [ ] Request
+      - [ ] 
+    - [ ] Response
+      - [ ] Post Title
+      - [ ] Post ID
+      - [ ] Post Timestamp
+      - [ ] User ID
+  - [ ] Get Single Post by ID
+    - [ ] Request - query parameters
+    - [ ] Response
+      - [ ] Post Body
+      - [ ] etc.
+- [X] Login Session Management - Matt
+  - [X] Make sure it works -> pull request
+  - [X] Migrate to a server-side session approach, see Harsimrat's resources
+  - [X] Build redis cache DB
+- [ ] Game High Score API - Jayden
+  - [X] Build Table
+    - [X] Username
+    - [X] Score
+    - [X] Date
+  - [ ] Get Top N Highest Scores
+    - [ ] Check N is reasonable
+    - [ ] Get
+    - [ ] Return
   - [x] Team Members - GET list of CloudClub team members, return
   - [x] Registration - POST body has `username`, `password`, `email`, and `fullname`
     - [x] Check DB for existing credentials with matching username or email (code 409 if conflict)

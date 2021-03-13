@@ -1,85 +1,89 @@
-<!-- <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">CloudClub</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Homepage <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="teampage.html">The Team</a>
-        </li>
-      </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        
-      </form>
-    </div>
-  </nav>
-</header> -->
-
 <body class="text-center">
-    <form class="form-signin" action="/register" method="POST">
-        <img class="mb-4" src="../assets/CloudClub.png" alt="" width=80% height="80%">
-        <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
-        <label for="inputFirstName" class="sr-only">First Name</label>
-        <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
-        <label for="inputLastName" class="sr-only">Last Name</label>
-        <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="Last Name" required>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <!-- Manually override button colour for now -->
-        <button class="btn btn-lg btn-primary btn-block" style="background-color: #50BDE4" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
-    </form>
-    <script type="text/javascript">
-      $('.form-signin').submit(function(event) {
-        event.preventDefault();
-        $.ajax({
-          url: '/register',
-          type: 'POST',
-          cache: false,
-          dataType: 'json',
-          data: {
-            firstName: $('#inputFirstName').val(),
-            lastName: $('#inputLastName').val(),
-            email: $('#inputEmail').val(),
-            password: $('#inputPassword').val()
+  <form class="form-signin">
+    <img class="mb-4" src="../assets/CloudClub.png" alt="" width=80% height="80%">
+    <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+    <!-- <label for="inputFirstName" class="sr-only">First Name</label> -->
+    <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
+    <!-- <label for="inputLastName" class="sr-only">Last Name</label> -->
+    <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="Last Name" required>
+    <!-- <label for="inputEmail" class="sr-only">Email address</label> -->
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
+    <!-- <label for="inputPassword" class="sr-only">Password</label> -->
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <!-- Manually override button colour for now -->
+    <button class="btn btn-lg btn-primary btn-block" style="background-color: #50BDE4" type="submit">Register</button>
+    <p class="mt-5 mb-3 text-muted">CloudClub UofT | 2020-2021</p>
+  </form>
+  <!-- Bad register notif -->
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000 style="position:absolute;">
+    <div class="toast-header">
+      <strong class="mr-auto" id="toasttitle"></strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body"></div>
+  </div>
+  <script type="text/javascript">
+    $('.form-signin').submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '/register',
+        type: 'POST',
+        cache: false,
+        dataType: 'json',
+        data: {
+          first: $('#inputFirstName').val(),
+          last: $('#inputLastName').val(),
+          email: $('#inputEmail').val(),
+          password: $('#inputPassword').val()
+        },
+        statusCode: {
+          201: function(response) {
+            console.log(response);
+            $('#toasttitle').text("Success!")
+            $('.toast-body').text(response.message);
+            $('.toast').toast('show');
+            setTimeout(()=>{window.location.href = "/"}, 1500);
+            // $.ajax({
+            //     url: '/login',
+            //     type: 'POST',
+            //     cache: false,
+            //     dataType: 'json',
+            //     data: {
+            //       email: $('#inputEmail').val(),
+            //       password: $('#inputPassword').val()
+            //     },
+            //     statusCode: {
+            //       200: function() {
+            //         window.location.href = "/";
+            //       },
+            //       401: function(response) {
+            //         alert(response.responseJSON.Message);
+            //       }
+            //     }
+            //   });
           },
-          statusCode: {
-            201: function(response) {
-              $.ajax({
-                  url: '/login',
-                  type: 'POST',
-                  cache: false,
-                  dataType: 'json',
-                  data: {
-                    email: $('#inputEmail').val(),
-                    password: $('#inputPassword').val()
-                  },
-                  statusCode: {
-                    200: function() {
-                      window.location.href = "/";
-                    },
-                    401: function(response) {
-                      alert(response.responseJSON.Message);
-                    }
-                  }
-                });
-            },
-            401: function(response) {
-              alert(response.responseJSON.Message);
-            },
-            409: function(response) {
-              alert(response.responseJSON.Message);
-            }
+          400: function(response) {
+            console.log(response);
+            $('#toasttitle').text("Failed to register!")
+            $('.toast-body').text(response.responseJSON.error);
+            $('.toast').toast('show');
+          },
+          409: function(response) {
+            console.log(response);
+            $('#toasttitle').text("Failed to register!")
+            $('.toast-body').text(response.responseJSON.error);
+            $('.toast').toast('show');
+          },
+          500: function(response) {
+            console.log(response);
+            $('#toasttitle').text("Error!")
+            $('.toast-body').text(response.responseJSON.error);
+            $('.toast').toast('show');
           }
-        })
-      });
-    </script>
+        }
+      })
+    });
+  </script>
 </body>
