@@ -93,53 +93,33 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<% for (var i = 0; i < res.length ; i++) { %>
+						<tr>
 
-						<!-- Test post format. Could use some padding. -->
-						<td> <a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-								<div class="d-flex w-80">
-									<div class="d-flex flex-column justify-content-between">
-										<h5 class="mb-1">1 - Post name</h5>
-										<p class="mb-1">Post description. Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-										<small class="text-muted">Posted by Username</small>
-									</div>
-								</div>
-								<div class="d-flex w-30 justify-content-end">
-									<div class="d-flex flex-column justify-content-between">
-										<small class="text-muted">3 days ago</small>
+							<!-- Test post format. Could use some padding. -->
+							<td> <a href="<%- res[i].postid -%>"> class="list-group-item list-group-item-action">
+								<div class="d-flex w-100 justify-content-between">
+									<div class="d-flex w-80">
 										<div class="d-flex flex-column justify-content-between">
-											<small class="text-muted">10 views</small>
-											<small class="text-muted">30 replies</small>
+											<h5 class="mb-1"> <%- res[i].subject -%> </h5>
+											<p class="mb-1">Post description. </p>
+											<small class="text-muted"> Posted by <%- res[i].userid -%> </small>
+										</div>
+									</div>
+									<div class="d-flex w-30 justify-content-end"></div>
+										<div class="d-flex flex-column justify-content-between">
+											<small class="text-muted"> <%- res[i].timestamp -%> days ago</small>
+											<div class="d-flex flex-column justify-content-between">
+												<small class="text-muted">10 views</small>
+												<small class="text-muted">30 replies</small>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</a></td>
-		
-					</tr>
-					<tr>
-						<td> <a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-							  <h5 class="mb-1">2-List group item heading</h5>
-							  <small class="text-muted">3 days ago</small>
-							</div>
-							<p class="mb-1">Post description. Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-							<small class="text-muted">Donec id elit non mi porta.</small>
-						  </a></td>
-				
-					</tr>
-					<tr>
-						<td> <a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-							  <h5 class="mb-1">2-List group item heading</h5>
-							  <small class="text-muted">3 days ago</small>
-							</div>
-							<p class="mb-1">Post description. Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-							<small class="text-muted">Donec id elit non mi porta.</small>
-						  </a></td>
-				
-					</tr>
+							</a></td>
+			
+						</tr>
+					<% } %>
 				</tbody>
 			</table>
 		</div>
