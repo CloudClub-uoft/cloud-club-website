@@ -1,6 +1,19 @@
+/**
+ * @api {get} /post Get a single post, indexed by post id.
+ * @apiName GET-post
+ * 
+ * @apiParam {Number} id: post ID
+ * 
+ * @apiSuccess {Object []} data: postid {Number}, userid {Number}, subject {String}, body {String}, timestamp {Number}.
+ * @apiSuccess [200] message: “Post id fetched successfully.”
+ * 
+ * @apiError [401] You are not authorized to perform this action.
+ * @apiError [500] Internal Server Error 500.
+ */
+
+
 const db = require('../config/db-connection');
 
-// Gets post body from post ID GET request
 module.exports = (app) => {
   app.get('/post', (req, res) => {
     const sesh = req.session;
