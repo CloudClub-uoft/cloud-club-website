@@ -27,10 +27,7 @@ const database = mysql.createConnection({
 });
 
 database.connect((err) => {
-  if (err){
-    console.error(String(err));
-    process.exit(1);
-  };
+  if (err) throw err;
   console.log('Connected to MySQL database');
 });
 
@@ -41,8 +38,7 @@ const redisClient = redis.createClient({
 });
 
 redisClient.on('error', (err) => {
-  console.error(String(err));
-  process.exit(1);
+  console.log(`Redis connection failed: ${err}`);
 });
 
 redisClient.on('connect', () => {
