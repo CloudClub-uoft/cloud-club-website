@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "description": "CloudClub website.",
   "main": "index.js",
+  "apidoc": {
+    "title": "CloudClub API Documentation",
+    "url": "http://localhost/api"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +22,6 @@
   "homepage": "https://github.com/CloudClub-uoft/cloud-club-website#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
     "connect-redis": "^5.0.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",

@@ -1,18 +1,17 @@
 /**
  * @api {post} /login Login to the CloudClub website. Initializes the user session, fetches and attaches the user ID.
  * @apiName POST-login
- * 
+ *
  * @apiParam {String} email: login email [JSON req]
  * @apiParam {String} password: login password [JSON req]
- * 
+ *
  * @apiSuccess [200] message: “Login successful!”
- * 
+ *
  * @apiError [400] Missing data, request must include all of: email, password.
  * @apiError [401] Password incorrect.
- * @apiError [401] Email not found. 
+ * @apiError [401] Email not found.
  * @apiError [500] Internal Server Error 500.
  */
-
 
 const bcrypt = require('bcrypt');
 const db = require('../config/db-connection');

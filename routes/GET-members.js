@@ -1,12 +1,10 @@
 /**
  * @api {get} /members  Get a list of all of CloudClub’s members.
  * @apiName GET-members
- * 
- * @apiParam {*} N/A
- * 
+ *
  * @apiSuccess {Object[]} data: array of name {String}, bio {String}.
  * @apiSuccess [200] message: “All members fetched successfully.”
- * 
+ *
  * @apiError [401] You are not authorized to perform this action.
  * @apiError [500] Internal Server Error 500.
  */

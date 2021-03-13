@@ -16,5 +16,8 @@ module.exports = {
     'object-curly-newline': ['error', {
       ObjectPattern: { multiline: true, minProperties: 5 },
     }],
+    'max-len': ['error', {
+      code: 160,
+    }],
   },
 };

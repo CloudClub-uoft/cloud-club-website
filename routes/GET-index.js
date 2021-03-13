@@ -1,9 +1,7 @@
 /**
- * @api {get} / Dynamic Route. 
+ * @api {get} / Dynamic Route.
  * @apiName GET-index
- * 
- * @apiParam {*} N/A
- * 
+ *
  * @apiSuccess {string} index
  */
 

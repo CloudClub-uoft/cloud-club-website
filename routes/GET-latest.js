@@ -1,12 +1,12 @@
 /**
  * @api {get} /latest Get the latest num forum posts (sorted by timestamp, descending).
  * @apiName GET-latest
- * 
+ *
  * @apiParam {Number} num: integer between 1 and 100, determines the number of posts to return
- * 
+ *
  * @apiSuccess {Object[]} data: array of postid {Number}, userid {Number}, subject {String}, body {String}, timestamp {Number}.
  * @apiSuccess [200] message: “Latest num posts fetched successfully.”
- * 
+ *
  * @apiError [401] You are not authorized to perform this action.
  * @apiError [422] Request out of range, must be between 0 and 100.
  * @apiError [500] Internal Server Error 500.

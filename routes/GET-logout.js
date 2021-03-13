@@ -1,11 +1,9 @@
 /**
  * @api {get} /logout Logout and destroy user session.
  * @apiName GET-logout
- * 
- * @apiParam {*} N/A
- * 
+ *
  * @apiSuccess [302] redirects to landing page (‘/’)
- * 
+ *
  * @apiError [500] Internal Server Error 500
  */
 

@@ -1,12 +1,10 @@
 /**
  * @api {get} /posts Get all posts without their bodies (sorted by timestamp, descending).
  * @apiName GET-posts
- * 
- * @apiParam {*} 
- * 
+ *
  * @apiSuccess {Object[]} data: array of postid {Number}, userid {Number}, subject {String}, timestamp {Number}.
  * @apiSuccess [200] message: “All posts fetched successfully without body.”
- * 
+ *
  * @apiError [401] You are not authorized to perform this action.
  * @apiError [500] Internal Server Error 500.
  */
