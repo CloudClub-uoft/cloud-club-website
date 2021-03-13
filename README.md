@@ -64,12 +64,12 @@ Consistent fonts, color scheme, etc.
 
 
 ### EJS Transition
-- [ ] EJS - Matthew and Harsimrat
+- [X] EJS - Matthew and Harsimrat
   - [X] EJS Tutorial(s)
-  - [ ] Every page needs navbar item to login and register pages
-  - [ ] Copy Harsimrat's example
-    - [ ] Header (w/ `active` selection), footer
-    - [ ] assets directories (CSS, JS)
+  - [X] Every page needs navbar item to login and register pages
+  - [X] Copy Harsimrat's example
+    - [X] Header (w/ `active` selection), footer
+    - [X] assets directories (CSS, JS)
   - [ ] Build forum page in EJS
     - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
     - [ ] Pass to page via `render`
@@ -80,9 +80,9 @@ Consistent fonts, color scheme, etc.
 [Example](https://forums.technicpack.net/forum/7-off-topic-discussion/)
 
 - [ ] Thread
-  - [ ] Thread title and description - Tamim and Yunjia
-  - [ ] Post - Bootstrap Table - Ian, Jonathan, Leo
-    - [ ] Planning
+  - [X] Thread title and description - Tamim and Yunjia
+  - [X] Post - Bootstrap Table - Ian, Jonathan, Leo
+    - [ ] Data
       - [ ] JS API fetch (for now just have a fake object)
       - [ ] For each entry in the JSON object, create a row element in the table DOM
     - [ ] Structure
@@ -93,8 +93,8 @@ Consistent fonts, color scheme, etc.
       - [X] Timestamp
       - [X] Posts per page
       - [X] Page selection
-      - [ ] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
-- [ ] View Post
+      - [X] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
+- [ ] View Single Post - Leo
 - [ ] New Post
 
 ## Backend
@@ -115,7 +115,7 @@ Consistent fonts, color scheme, etc.
   - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
   - [x] Build response: 50X for SQL error, 201 for successful creation
 
-- [ ] Forum SQL API
+- [X] Forum SQL API
   - [X] New Post
     - [X] Create table - Jayden
       - [X] Post ID (internally generated)
