@@ -1,13 +1,13 @@
 /**
- * @api {post} /newpost Create a new forum post
+ * @api {post} /newpost Create a new post
  * @apiName POST-newpost
  * @apiGroup Forum
  *
- * @apiSuccess message Post created successfully.
+ * @apiSuccess (201) {String} message "Post created successfully."
  *
- * @apiError (400) Missing data, request must include all of: subject, body.
- * @apiError (401) You are not authorized to perform this action.
- * @apiError (500) Internal Server Error 500.
+ * @apiError (400) {String} error "Missing data, request must include all of: subject, body."
+ * @apiError (401) {String} error "You are not authorized to perform this action."
+ * @apiError (500) {String} error "Internal Server Error 500"
  */
 
 module.exports = (app, db) => {

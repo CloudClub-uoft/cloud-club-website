@@ -1,14 +1,14 @@
 /**
- * @api {post} /login Login to the website
+ * @api {post} /login Website Login
  * @apiName POST-login
  * @apiGroup Authentication
  *
- * @apiSuccess message Login Successful.
+ * @apiSuccess {String} message "Login Successful!"
  *
- * @apiError (400) Missing data, request must include all of: email, password.
- * @apiError (401) Password incorrect.
- * @apiError (401) Email not found.
- * @apiError (500) Internal Server Error 500.
+ * @apiError (400) {String} error "Missing data, request must include all of: email, password."
+ * @apiError (401) {String} error "Password incorrect."
+ * @apiError (401) {String} error "Email not found."
+ * @apiError (500) {String} error "Internal Server Error 500.""
  */
 
 const bcrypt = require('bcrypt');

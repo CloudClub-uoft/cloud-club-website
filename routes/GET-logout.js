@@ -1,11 +1,11 @@
 /**
- * @api {get} /logout Logout and destroy user session.
+ * @api {get} /logout Log out from the website
  * @apiName GET-logout
  * @apiGroup Authentication
  *
- * @apiSuccess (302) redirects to landing page (‘/’)
+ * @apiSuccess (302) {Redirect} Redirect Redirects to landing page ('/').
  *
- * @apiError (500) Internal Server Error 500
+ * @apiError (500) {String} error "Internal Server Error 500"
  */
 
 module.exports = (app, db) => {

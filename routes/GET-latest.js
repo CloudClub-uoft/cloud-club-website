@@ -3,18 +3,19 @@
  * @apiName GET-latest
  * @apiGroup Forum
  *
- * @apiParam {Number} num integer between 1 and 100, determines the number of posts to return
+ * @apiParam {Number} num The number of posts to return (an integer between 1 and 100).
  *
- * @apiSuccess {Object[]} data Posts sorted by timestamp descending
+ * @apiSuccess {String} message "Latest `num` posts fetched successfully without body."
+ * @apiSuccess {Object[]} data Latest posts, sorted by timestamp (descending).
  * @apiSuccess {Number} data.postid Post ID
- * @apiSuccess {Number} data.userid User ID
+ * @apiSuccess {Number} data.userid ID of user who submitted the post
  * @apiSuccess {String} data.subject Post Title
- * @apiSuccess {String} data.body Post Body
- * @apiSuccess {Number} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
+ * @apiSuccess {String} data.body Post Body (Markdown)
+ * @apiSuccess {Number} data.timestamp Timestamp of post (YYYY-MM-DD HH-MM-SS)
  *
- * @apiError (401) You are not authorized to perform this action.
- * @apiError (422) Request out of range, must be between 0 and 100.
- * @apiError (500) Internal Server Error 500.
+ * @apiError (401) {String} error "You are not authorized to perform this action."
+ * @apiError (422) {String} error "Request out of range, must be between 0 and 100."
+ * @apiError (500) {String} error "Internal Server Error 500"
  */
 
 module.exports = (app, db) => {

@@ -3,16 +3,18 @@
  * @apiName GET-post
  * @apiGroup Forum
  *
- * @apiParam {Number} id post ID
+ * @apiParam {Number} id Post ID
  *
+ * @apiSuccess {String} message "Post `id` fetched successfully."
  * @apiSuccess {Object} data
  * @apiSuccess {String} data.postid Post ID
  * @apiSuccess {Number} data.userid User ID
  * @apiSuccess {String} data.subject Post Title
  * @apiSuccess {String} data.body Post Body
- * @apiSuccess {Date} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
+ * @apiSuccess {Date} data.timestamp Timestamp of post (YYYY-MM-DD HH-MM-SS)
  *
- * @apiError (401) You are not authorized to perform this action.
+ * @apiError (401) {String} error "You are not authorized to perform this action."
+ * @apiError (500) {String} error "Internal Server Error 500"
  */
 
 module.exports = (app, db) => {
