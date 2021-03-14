@@ -1,16 +1,14 @@
 /**
  * @api {post} /login Login to the CloudClub website. Initializes the user session, fetches and attaches the user ID.
  * @apiName POST-login
+ * @apiGroup Login/Logout
  *
- * @apiParam {String} email: login email [JSON req]
- * @apiParam {String} password: login password [JSON req]
- *
- * @apiSuccess [200] message: “Login successful!”
- *
- * @apiError [400] Missing data, request must include all of: email, password.
- * @apiError [401] Password incorrect.
- * @apiError [401] Email not found.
- * @apiError [500] Internal Server Error 500.
+ * @apiSuccess message Login Successful.
+ * 
+ * @apiError (400) Missing data, request must include all of: email, password.
+ * @apiError (401) Password incorrect.
+ * @apiError (401) Email not found.
+ * @apiError (500) Internal Server Error 500.
  */
 
 const bcrypt = require('bcrypt');
@@ -30,7 +28,7 @@ module.exports = (app, db) => {
             sesh.userid = result1[0].id;
             sesh.email = email;
             sesh.password = password;
-            return res.status(200).json({ message: 'Login Sucessful!' });
+            return res.status(200).json({ message: 'Login Successful!' });
           }
           return res.status(401).json({ error: 'Password incorrect.' });
         });

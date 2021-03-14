@@ -1,15 +1,13 @@
 /**
  * @api {post} /newpost Create a new forum post under your user ID (attached to session at login time).
  * @apiName POST-newpost
+ * @apiGroup Forum
  *
- * @apiParam {String} subject: title of post [JSON req]
- * @apiParam {String} body: body of post [JSON req]
+ * @apiSuccess message Post created successfully.
  *
- * @apiSuccess [200] message: “Post created successfully.”
- *
- * @apiError [400] Missing data, request must include all of: subject, body
- * @apiError [401] You are not authorized to perform this action.
- * @apiError [500] Internal Server Error 500.
+ * @apiError (400) Missing data, request must include all of: subject, body.
+ * @apiError (401) You are not authorized to perform this action.
+ * @apiError (500) Internal Server Error 500.
  */
 
 module.exports = (app, db) => {

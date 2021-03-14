@@ -1,12 +1,16 @@
 /**
  * @api {get} /posts Get all posts without their bodies (sorted by timestamp, descending).
  * @apiName GET-posts
+ * @apiGroup Forum
  *
- * @apiSuccess {Object[]} data: array of postid {Number}, userid {Number}, subject {String}, timestamp {Number}.
- * @apiSuccess [200] message: “All posts fetched successfully without body.”
+ * @apiSuccess {Object[]} data
+ * @apiSuccess {Number} data.postid Post ID
+ * @apiSuccess {Number} data.userid User ID
+ * @apiSuccess {String} data.subject Post Title
+ * @apiSuccess {Number} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
  *
- * @apiError [401] You are not authorized to perform this action.
- * @apiError [500] Internal Server Error 500.
+ * @apiError (401) You are not authorized to perform this action.
+ * @apiError (500) Internal Server Error 500.
  */
 
 module.exports = (app, db) => {

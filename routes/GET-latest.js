@@ -1,15 +1,20 @@
 /**
- * @api {get} /latest Get the latest num forum posts (sorted by timestamp, descending).
+ * @api {get} /latest?num=:num Get the latest num forum posts (sorted by timestamp, descending).
  * @apiName GET-latest
+ * @apiGroup Forum
  *
- * @apiParam {Number} num: integer between 1 and 100, determines the number of posts to return
+ * @apiParam {Number} num integer between 1 and 100, determines the number of posts to return
  *
- * @apiSuccess {Object[]} data: array of postid {Number}, userid {Number}, subject {String}, body {String}, timestamp {Number}.
- * @apiSuccess [200] message: “Latest num posts fetched successfully.”
+ * @apiSuccess {Object[]} data
+ * @apiSuccess {Number} data.postid Post ID
+ * @apiSuccess {Number} data.userid User ID
+ * @apiSuccess {String} data.subject Post Title
+ * @apiSuccess {String} data.body Post Body
+ * @apiSuccess {Number} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
  *
- * @apiError [401] You are not authorized to perform this action.
- * @apiError [422] Request out of range, must be between 0 and 100.
- * @apiError [500] Internal Server Error 500.
+ * @apiError (401) You are not authorized to perform this action.
+ * @apiError (422) Request out of range, must be between 0 and 100.
+ * @apiError (500) Internal Server Error 500.
  */
 
 module.exports = (app, db) => {

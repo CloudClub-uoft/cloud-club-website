@@ -12,7 +12,7 @@
  * @apiSuccess {String} data.body Post Body
  * @apiSuccess {Date} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
  *
- * @apiError 401 You are not authorized to perform this action
+ * @apiError (401) You are not authorized to perform this action.
  */
 
 module.exports = (app, db) => {

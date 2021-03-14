@@ -1,18 +1,14 @@
 /**
  * @api {post} /register Register an account with the CloudClub website.
  * @apiName POST-register
+ * @apiGroup Registration
  *
- * @apiParam {String} email : user email [JSON req]
- * @apiParam {String} password: user password [JSON req]
- * @apiParam {String} first: user first name [JSON req]
- * @apiParam {String} last: user last name [JSON req]
+ * @apiSuccess (201) message Successfully registered, you may now login.
  *
- * @apiSuccess [201] message: “Successfully registered, you may now login.”
- *
- * @apiError [400] Missing data, request must include all of: email, password, first, last.
- * @apiError [400] Password too weak! Must be at least 8 characters and have at least one of each: capital letter, lowercase letter, number.
- * @apiError [409] User already exists with that email!
- * @apiError [500] Internal Server Error 500.
+ * @apiError (400) Missing data, request must include all of: email, password, first, last.
+ * @apiError (400) Password too weak! Must be at least 8 characters and have at least one of each: capital letter, lowercase letter, number.
+ * @apiError (409) User already exists with that email!
+ * @apiError (500) Internal Server Error 500.
  */
 
 const path = require('path');

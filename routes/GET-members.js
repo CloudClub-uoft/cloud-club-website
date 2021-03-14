@@ -1,12 +1,14 @@
 /**
- * @api {get} /members  Get a list of all of CloudClub’s members.
+ * @api {get} /members Get a list of all of CloudClub’s members.
  * @apiName GET-members
+ * @apiGroup ClubMembers
  *
- * @apiSuccess {Object[]} data: array of name {String}, bio {String}.
- * @apiSuccess [200] message: “All members fetched successfully.”
+ * @apiSuccess {Object[]} data
+ * @apiSuccess {String} data.name Name of Members
+ * @apiSuccess {String} data.bio Members Biography
  *
- * @apiError [401] You are not authorized to perform this action.
- * @apiError [500] Internal Server Error 500.
+ * @apiError (401) You are not authorized to perform this action.
+ * @apiError (500) Internal Server Error 500.
  */
 
 // Member list GET request
