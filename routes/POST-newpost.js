@@ -12,9 +12,7 @@
  * @apiError [500] Internal Server Error 500.
  */
 
-const db = require('../config/db-connection');
-
-module.exports = (app) => {
+module.exports = (app, db) => {
   // New forum post POST request
   app.post('/newpost', (req, res) => {
     const sesh = req.session;

@@ -6,6 +6,9 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 
+// DB connection
+const db = require('./config/db-connection');
+
 // Redis connection
 require('./config/redis-connection')(app);
 
@@ -18,7 +21,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Dynamic routing
-require('./routes/routing').boot(app);
+require('./routes/routing').boot(app, db);
 
 // Static Documentation
 app.use('/api', express.static('docs'));

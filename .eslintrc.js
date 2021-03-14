@@ -17,7 +17,8 @@ module.exports = {
       ObjectPattern: { multiline: true, minProperties: 5 },
     }],
     'max-len': ['error', {
-      code: 160,
+      code: 200,
     }],
+    'no-unused-vars': 'off',
   },
 };

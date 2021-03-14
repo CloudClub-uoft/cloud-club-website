@@ -7,7 +7,7 @@
  * @apiError [500] Internal Server Error 500
  */
 
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
       if (err) return res.status(500).json({ error: 'Internal Server Error 500' });

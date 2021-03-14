@@ -9,9 +9,7 @@
  * @apiError [500] Internal Server Error 500.
  */
 
-const db = require('../config/db-connection');
-
-module.exports = (app) => {
+module.exports = (app, db) => {
   // Gets post list GET request
   app.get('/posts', (req, res) => {
     const sesh = req.session;

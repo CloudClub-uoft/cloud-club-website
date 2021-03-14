@@ -1,11 +1,4 @@
-/**
- * @api {get} /login  User login.
- * @apiName GET-login
- *
- * @apiSuccess {String} login
- */
-
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.get('/login', (req, res) => {
     res.render('login');
   });

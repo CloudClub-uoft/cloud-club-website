@@ -14,10 +14,9 @@
  */
 
 const bcrypt = require('bcrypt');
-const db = require('../config/db-connection');
 
 // Login POST request
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.post('/login', (req, res) => {
     const { email, password } = req.body;
     db.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result1) => {

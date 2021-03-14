@@ -1,11 +1,4 @@
-/**
- * @api {get} / Dynamic Route.
- * @apiName GET-index
- *
- * @apiSuccess {string} index
- */
-
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.get('/', (req, res) => {
     const sesh = req.session;
     if (sesh.email) {

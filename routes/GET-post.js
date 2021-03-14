@@ -1,11 +1,11 @@
 /**
- * @api {get} /post?=:postid Get a single post
- * @apiName GETpost
+ * @api {get} /post?id=:postid Get a single post
+ * @apiName GET-post
  * @apiGroup Forum
  *
  * @apiParam {Number} id post ID
  *
- * @apiSuccess {Object[]} data
+ * @apiSuccess {Object} data
  * @apiSuccess {String} data.postid Post ID
  * @apiSuccess {Number} data.userid User ID
  * @apiSuccess {String} data.subject Post Title
@@ -15,9 +15,7 @@
  * @apiError 401 You are not authorized to perform this action
  */
 
-const db = require('../config/db-connection');
-
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.get('/post', (req, res) => {
     const sesh = req.session;
     if (!sesh.email) {

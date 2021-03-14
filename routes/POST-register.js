@@ -17,12 +17,11 @@
 
 const path = require('path');
 const bcrypt = require('bcrypt');
-const db = require('../config/db-connection');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Registration POST request
-module.exports = (app) => {
+module.exports = (app, db) => {
   app.post('/register', (req, res) => {
     const { email, password, first, last } = req.body;
     db.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result) => {
