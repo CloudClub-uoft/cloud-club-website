@@ -158,3 +158,11 @@ Consistent fonts, color scheme, etc.
     - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
     - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
     - [x] Build response: 50X for SQL error, 201 for successful creation
+
+### API Documentation
+
+- API Name: `METHOD-name`, i.e. `GET-post`
+- Parameters in API tag: `/name?param=:PLACEHOLDER`, i.e. `/post?id=:POSTID`
+- Status codes in parentheses, (Success code defaults to 200)
+- Nested return data: organize via variable names on multiple lines, i.e. object `data` has `data.field`
+- Pass DB and Redis connection objects to each routing file: module export arrow functions should have ALL parameters. I.e. `module.exports = (app, db, redis) => { ... }` even if the function doesn't use DB or Redis connections. Do `require` in `routing.js` and pass to all imported route files.
