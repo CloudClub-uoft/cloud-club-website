@@ -1,64 +1,67 @@
+<!--data table-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js'></script> <script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js'></script> <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'> <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css'> -->
+
 <body>
-	<!-- Heading and Description of Forum Page -->
-	<div class="list-group"></div>
-	<a href="#" class="list-group-item list-group-item-action active">
-		<div class="d-flex w-100 justify-content-between">
-			<div class="forum-title">
-				<h1 class="text-white">CloudConvos ☁️</h1>
-				<p class="text-white">
-					This name is temporary don't worry.
-				</p>
-			</div>
-		</div>
-	</a>
-	
-	<br>
-	<script>
-		$(document).ready( function () {
-			$('#table_id').DataTable({
-				"pagingType": "full_numbers",
-				"stateSave": true,
-			});
-		} );
-	</script>
-	<div class="container">
-		<div class="col">
-			<table id="table_id" class="table">
-				<thead>
-					<tr>
-						<th>Posts</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% for (var i = 0; i < data.length ; i++) { %>
-						<tr>
-							
-							<!-- Test post format. Could use some padding. -->
-							<td> <a href="/post?id=<%- data[i].id %>"> class="list-group-item list-group-item-action">
-								<div class="d-flex w-100 justify-content-between">
-									<div class="d-flex w-80">
-										<div class="d-flex flex-column justify-content-between">
-											<h5 class="mb-1"> <%- data[i].subject -%> </h5>
-											<p class="mb-1">Post description. </p>
-											<small class="text-muted"> Posted by <%- data[i].userid -%> </small>
-										</div>
-									</div>
-									<div class="d-flex w-30 justify-content-end"></div>
-									<div class="d-flex flex-column justify-content-between">
-										<small class="text-muted"> <%- data[i].timestamp -%> days ago</small>
-										<div class="d-flex flex-column justify-content-between">
-											<small class="text-muted">10 views</small>
-											<small class="text-muted">30 replies</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a></td>
-						
-					</tr>
-					<% } %>
-				</tbody>
-			</table>
-		</div>
-	</div>
+    <!-- Heading and Description of Forum Page -->
+    <div class="list-group"></div>
+    <a href="#" class="list-group-item list-group-item-action active">
+        <div class="d-flex w-100 justify-content-between">
+            <div class="forum-title" style="padding-top: 1.8cm">
+                <h1 class="text-white">CloudConvos ☁️</h1>
+                <p class="text-white">This name is temporary don't worry.</p>
+            </div>
+        </div>
+    </a>
+
+    <br>
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable({
+                "pagingType": "full_numbers",
+                "stateSave": true,
+            });
+        });
+    </script>
+    <div class="container">
+        <div class="col">
+            <table id="table_id" class="table">
+            <thead>
+                <tr>
+                    <th>Posts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < data.length ; i++) { %>
+                    <tr>
+                        <!-- Test post format. Could use some padding. -->
+                        <td> 
+                            <a href="/post?id=<%- data[i].postid -%>" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div class="d-flex w-80">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <h5 class="mb-1"> <%- data[i].subject -%> </h5>
+                                        <p class="mb-1">Post description. </p>
+                                        <small class="text-muted"> Posted by <%- data[i].userid -%> </small>
+                                    </div>
+                                </div>
+                                <div class="d-flex w-30 justify-content-end"></div>
+                                <div class="d-flex flex-column justify-content-between">
+                                    <small class="text-muted"> <%- data[i].timestamp -%> days ago</small>
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <small class="text-muted">10 views</small>
+                                        <small class="text-muted">30 replies</small>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+            </table>
+        </div>
+    </div>
 </body>
+
+
+
