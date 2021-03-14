@@ -1,7 +1,7 @@
 /**
- * @api {post} /register Register an account with the CloudClub website.
+ * @api {post} /register Register an account
  * @apiName POST-register
- * @apiGroup Registration
+ * @apiGroup Authentication
  *
  * @apiSuccess (201) message Successfully registered, you may now login.
  *

@@ -1,5 +1,5 @@
 /**
- * @api {post} /newpost Create a new forum post under your user ID (attached to session at login time).
+ * @api {post} /newpost Create a new forum post
  * @apiName POST-newpost
  * @apiGroup Forum
  *

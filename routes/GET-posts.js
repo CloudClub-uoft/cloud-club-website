@@ -1,13 +1,13 @@
 /**
- * @api {get} /posts Get all posts without their bodies (sorted by timestamp, descending).
+ * @api {get} /posts Get all posts titles
  * @apiName GET-posts
  * @apiGroup Forum
  *
- * @apiSuccess {Object[]} data
+ * @apiSuccess {Object[]} data List of posts
  * @apiSuccess {Number} data.postid Post ID
  * @apiSuccess {Number} data.userid User ID
  * @apiSuccess {String} data.subject Post Title
- * @apiSuccess {Number} data.timestamp Timestamp of post YYYY-MM-DD HH-MM-SS
+ * @apiSuccess {Number} data.timestamp Timestamp of post YYYY-MM-DD HH:MM:SS
  *
  * @apiError (401) You are not authorized to perform this action.
  * @apiError (500) Internal Server Error 500.

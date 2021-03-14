@@ -1,10 +1,10 @@
 /**
- * @api {post} /login Login to the CloudClub website. Initializes the user session, fetches and attaches the user ID.
+ * @api {post} /login Login to the website
  * @apiName POST-login
- * @apiGroup Login/Logout
+ * @apiGroup Authentication
  *
  * @apiSuccess message Login Successful.
- * 
+ *
  * @apiError (400) Missing data, request must include all of: email, password.
  * @apiError (401) Password incorrect.
  * @apiError (401) Email not found.

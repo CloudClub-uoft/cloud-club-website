@@ -1,11 +1,11 @@
 /**
- * @api {get} /latest?num=:num Get the latest num forum posts (sorted by timestamp, descending).
+ * @api {get} /latest?num=:num Get the latest forum posts
  * @apiName GET-latest
  * @apiGroup Forum
  *
  * @apiParam {Number} num integer between 1 and 100, determines the number of posts to return
  *
- * @apiSuccess {Object[]} data
+ * @apiSuccess {Object[]} data Posts sorted by timestamp descending
  * @apiSuccess {Number} data.postid Post ID
  * @apiSuccess {Number} data.userid User ID
  * @apiSuccess {String} data.subject Post Title

@@ -1,9 +1,9 @@
 /**
- * @api {get} /members Get a list of all of CloudClub’s members.
+ * @api {get} /members Get list of all of CloudClub’s members.
  * @apiName GET-members
  * @apiGroup ClubMembers
  *
- * @apiSuccess {Object[]} data
+ * @apiSuccess {Object[]} data Member list
  * @apiSuccess {String} data.name Name of Members
  * @apiSuccess {String} data.bio Members Biography
  *
