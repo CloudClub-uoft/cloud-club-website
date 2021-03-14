@@ -3,17 +3,8 @@
 
 <body>
     <!-- Heading and Description of Forum Page -->
-    <div class="list-group"></div>
-    <a href="#" class="list-group-item list-group-item-action active">
-        <div class="d-flex w-100 justify-content-between">
-            <div class="forum-title" style="padding-top: 1.8cm">
-                <h1 class="text-white">CloudConvos ☁️</h1>
-                <p class="text-white">This name is temporary don't worry.</p>
-            </div>
-        </div>
-    </a>
+    <%- include('partials/forum-subheader') %>
 
-    <br>
     <script>
         $(document).ready( function () {
             $('#table_id').DataTable({
