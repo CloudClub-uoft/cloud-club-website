@@ -84,7 +84,10 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/forum', (req, res) => {
-  res.render('forum', { 'selected': 'forumpage', 'title': 'CloudClub | Forum'});
+  database.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
+    if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}
+    return res.render('forum', { 'selected': 'forumpage', 'title': 'CloudClub | Forum', 'data': result});
+  });
 });
 
 app.get('/post', (req, res) => {
