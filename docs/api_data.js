@@ -2,7 +2,8 @@ define({ "api": [
   {
     "type": "get",
     "url": "/logout",
-    "title": "Logout and destroy user session.",
+    "title": "Log Out",
+    "description": "<p>Log out from the website, destroying the session.</p>",
     "name": "GET-logout",
     "group": "Authentication",
     "success": {
@@ -10,9 +11,10 @@ define({ "api": [
         "302": [
           {
             "group": "302",
+            "type": "Redirect",
             "optional": false,
-            "field": "redirects",
-            "description": "<p>to landing page (‘/’)</p>"
+            "field": "Redirect",
+            "description": "<p>Redirects to landing page ('/').</p>"
           }
         ]
       }
@@ -22,9 +24,10 @@ define({ "api": [
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
@@ -36,17 +39,39 @@ define({ "api": [
   {
     "type": "post",
     "url": "/login",
-    "title": "Login to the website",
+    "title": "Log In",
+    "description": "<p>Log in to the website.</p>",
     "name": "POST-login",
     "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User's Email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User's Password</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Login Successful.</p>"
+            "description": "<p>&quot;Login Successful!&quot;</p>"
           }
         ]
       }
@@ -56,31 +81,28 @@ define({ "api": [
         "400": [
           {
             "group": "400",
+            "type": "String",
             "optional": false,
-            "field": "Missing",
-            "description": "<p>data, request must include all of: email, password.</p>"
+            "field": "error",
+            "description": "<p>&quot;Missing data, request must include all of: email, password.&quot;</p>"
           }
         ],
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "Password",
-            "description": "<p>incorrect.</p>"
-          },
-          {
-            "group": "401",
-            "optional": false,
-            "field": "Email",
-            "description": "<p>not found.</p>"
+            "field": "error",
+            "description": "<p>&quot;Password incorrect.&quot;</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500.&quot;&quot;</p>"
           }
         ]
       }
@@ -92,17 +114,53 @@ define({ "api": [
   {
     "type": "post",
     "url": "/register",
-    "title": "Register an account",
+    "title": "Register",
+    "description": "<p>Register an account.</p>",
     "name": "POST-register",
     "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User's Email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User's Password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "first",
+            "description": "<p>User's First Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "last",
+            "description": "<p>User's Last Name</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "201": [
           {
             "group": "201",
+            "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Successfully registered, you may now login.</p>"
+            "description": "<p>&quot;Successfully registered, you may now login.&quot;</p>"
           }
         ]
       }
@@ -112,31 +170,28 @@ define({ "api": [
         "400": [
           {
             "group": "400",
+            "type": "String",
             "optional": false,
-            "field": "Missing",
-            "description": "<p>data, request must include all of: email, password, first, last.</p>"
-          },
-          {
-            "group": "400",
-            "optional": false,
-            "field": "Password",
-            "description": "<p>too weak! Must be at least 8 characters and have at least one of each: capital letter, lowercase letter, number.</p>"
+            "field": "error",
+            "description": "<p>&quot;Missing data, request must include all of: email, password, first, last.&quot;</p>"
           }
         ],
         "409": [
           {
             "group": "409",
+            "type": "String",
             "optional": false,
-            "field": "User",
-            "description": "<p>already exists with that email!</p>"
+            "field": "error",
+            "description": "<p>&quot;User already exists with that email!&quot;</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
@@ -148,12 +203,20 @@ define({ "api": [
   {
     "type": "get",
     "url": "/members",
-    "title": "Get list of all of CloudClub’s members.",
+    "title": "Get Members",
+    "description": "<p>Get a list of all of CloudClub’s team members.</p>",
     "name": "GET-members",
-    "group": "ClubMembers",
+    "group": "Club_Members",
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;All members fetched successfully.&quot;</p>"
+          },
           {
             "group": "Success 200",
             "type": "Object[]",
@@ -166,14 +229,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data.name",
-            "description": "<p>Name of Members</p>"
+            "description": "<p>Member Name</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "data.bio",
-            "description": "<p>Members Biography</p>"
+            "description": "<p>Member Bio</p>"
           }
         ]
       }
@@ -183,29 +246,32 @@ define({ "api": [
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "You",
-            "description": "<p>are not authorized to perform this action.</p>"
+            "field": "error",
+            "description": "<p>&quot;You are not authorized to perform this action.&quot;&quot;</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "routes/GET-members.js",
-    "groupTitle": "ClubMembers"
+    "groupTitle": "Club_Members"
   },
   {
     "type": "get",
     "url": "/latest?num=:num",
-    "title": "Get the latest forum posts",
+    "title": "Get Latest Posts",
+    "description": "<p>Get the latest N forum posts, with content, sorted by timestamp (latest first).</p>",
     "name": "GET-latest",
     "group": "Forum",
     "parameter": {
@@ -216,7 +282,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "num",
-            "description": "<p>integer between 1 and 100, determines the number of posts to return</p>"
+            "description": "<p>The number of posts to return (an integer between 1 and 100).</p>"
           }
         ]
       }
@@ -226,10 +292,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;Latest <code>num</code> posts fetched successfully without body.&quot;</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Object[]",
             "optional": false,
             "field": "data",
-            "description": "<p>Posts sorted by timestamp descending</p>"
+            "description": "<p>Latest posts, sorted by timestamp (descending).</p>"
           },
           {
             "group": "Success 200",
@@ -243,7 +316,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "data.userid",
-            "description": "<p>User ID</p>"
+            "description": "<p>ID of user who submitted the post</p>"
           },
           {
             "group": "Success 200",
@@ -257,14 +330,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data.body",
-            "description": "<p>Post Body</p>"
+            "description": "<p>Post Content (Markdown/Plaintext)</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post YYYY-MM-DD HH-MM-SS</p>"
+            "description": "<p>Timestamp of post (YYYY-MM-DD HH-MM-SS)</p>"
           }
         ]
       }
@@ -274,25 +347,28 @@ define({ "api": [
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "You",
-            "description": "<p>are not authorized to perform this action.</p>"
+            "field": "error",
+            "description": "<p>&quot;You are not authorized to perform this action.&quot;</p>"
           }
         ],
         "422": [
           {
             "group": "422",
+            "type": "String",
             "optional": false,
-            "field": "Request",
-            "description": "<p>out of range, must be between 0 and 100.</p>"
+            "field": "error",
+            "description": "<p>&quot;Request out of range, must be between 0 and 100.&quot;</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
@@ -304,7 +380,8 @@ define({ "api": [
   {
     "type": "get",
     "url": "/post?id=:postid",
-    "title": "Get a single post",
+    "title": "Get Single Post",
+    "description": "<p>Fetch a single post by ID, with content.</p>",
     "name": "GET-post",
     "group": "Forum",
     "parameter": {
@@ -313,9 +390,10 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "Number",
+            "size": "1-100",
             "optional": false,
             "field": "id",
-            "description": "<p>post ID</p>"
+            "description": "<p>Post ID</p>"
           }
         ]
       }
@@ -323,6 +401,13 @@ define({ "api": [
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;Post <code>id</code> fetched successfully.&quot;</p>"
+          },
           {
             "group": "Success 200",
             "type": "Object",
@@ -356,14 +441,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data.body",
-            "description": "<p>Post Body</p>"
+            "description": "<p>Post Content (Markdown/Plaintext)</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post YYYY-MM-DD HH-MM-SS</p>"
+            "description": "<p>Timestamp of post (YYYY-MM-DD HH-MM-SS)</p>"
           }
         ]
       }
@@ -373,9 +458,19 @@ define({ "api": [
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "You",
-            "description": "<p>are not authorized to perform this action.</p>"
+            "field": "error",
+            "description": "<p>&quot;You are not authorized to perform this action.&quot;</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "type": "String",
+            "optional": false,
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
@@ -387,12 +482,20 @@ define({ "api": [
   {
     "type": "get",
     "url": "/posts",
-    "title": "Get all posts titles",
+    "title": "Get All Posts (Metadata)",
+    "description": "<p>Fetch ALL posts, without content, sorted by timestamp (latest first).</p>",
     "name": "GET-posts",
     "group": "Forum",
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;All posts fetched successfully without body.&quot;</p>"
+          },
           {
             "group": "Success 200",
             "type": "Object[]",
@@ -426,7 +529,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post YYYY-MM-DD HH:MM:SS</p>"
+            "description": "<p>Timestamp of post (YYYY-MM-DD HH:MM:SS)</p>"
           }
         ]
       }
@@ -436,17 +539,19 @@ define({ "api": [
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "You",
-            "description": "<p>are not authorized to perform this action.</p>"
+            "field": "error",
+            "description": "<p>You are not authorized to perform this action.</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }
@@ -458,17 +563,39 @@ define({ "api": [
   {
     "type": "post",
     "url": "/newpost",
-    "title": "Create a new forum post",
+    "title": "New Post",
+    "description": "<p>Create a new post.</p>",
     "name": "POST-newpost",
     "group": "Forum",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "subject",
+            "description": "<p>Post Title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "body",
+            "description": "<p>Post Content (Markdown/Plaintext)</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
-        "Success 200": [
+        "201": [
           {
-            "group": "Success 200",
+            "group": "201",
+            "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Post created successfully.</p>"
+            "description": "<p>&quot;Post created successfully.&quot;</p>"
           }
         ]
       }
@@ -478,25 +605,28 @@ define({ "api": [
         "400": [
           {
             "group": "400",
+            "type": "String",
             "optional": false,
-            "field": "Missing",
-            "description": "<p>data, request must include all of: subject, body.</p>"
+            "field": "error",
+            "description": "<p>&quot;Missing data, request must include all of: subject, body.&quot;</p>"
           }
         ],
         "401": [
           {
             "group": "401",
+            "type": "String",
             "optional": false,
-            "field": "You",
-            "description": "<p>are not authorized to perform this action.</p>"
+            "field": "error",
+            "description": "<p>&quot;You are not authorized to perform this action.&quot;</p>"
           }
         ],
         "500": [
           {
             "group": "500",
+            "type": "String",
             "optional": false,
-            "field": "Internal",
-            "description": "<p>Server Error 500.</p>"
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
           }
         ]
       }

@@ -1,7 +1,11 @@
 /**
- * @api {post} /newpost Create a new post
+ * @api {post} /newpost New Post
+ * @apiDescription Create a new post.
  * @apiName POST-newpost
  * @apiGroup Forum
+ * 
+ * @apiParam {String} subject Post Title
+ * @apiParam {String} body Post Content (Markdown/Plaintext)
  *
  * @apiSuccess (201) {String} message "Post created successfully."
  *

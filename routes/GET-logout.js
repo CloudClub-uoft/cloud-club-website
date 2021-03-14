@@ -1,5 +1,6 @@
 /**
- * @api {get} /logout Log out from the website
+ * @api {get} /logout Log Out
+ * @apiDescription Log out from the website, destroying the session.
  * @apiName GET-logout
  * @apiGroup Authentication
  *

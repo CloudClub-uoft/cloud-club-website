@@ -1,7 +1,11 @@
 /**
- * @api {post} /login Website Login
+ * @api {post} /login Log In
+ * @apiDescription Log in to the website.
  * @apiName POST-login
  * @apiGroup Authentication
+ * 
+ * @apiParam {String} email User's Email
+ * @apiParam {String} password User's Password
  *
  * @apiSuccess {String} message "Login Successful!"
  *

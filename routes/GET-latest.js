@@ -1,5 +1,6 @@
 /**
- * @api {get} /latest?num=:num Get the latest forum posts
+ * @api {get} /latest?num=:num Get Latest Posts
+ * @apiDescription Get the latest N forum posts, with content, sorted by timestamp (latest first).
  * @apiName GET-latest
  * @apiGroup Forum
  *
@@ -10,7 +11,7 @@
  * @apiSuccess {Number} data.postid Post ID
  * @apiSuccess {Number} data.userid ID of user who submitted the post
  * @apiSuccess {String} data.subject Post Title
- * @apiSuccess {String} data.body Post Body (Markdown)
+ * @apiSuccess {String} data.body Post Content (Markdown/Plaintext)
  * @apiSuccess {Number} data.timestamp Timestamp of post (YYYY-MM-DD HH-MM-SS)
  *
  * @apiError (401) {String} error "You are not authorized to perform this action."

@@ -1,5 +1,6 @@
 /**
- * @api {get} /members Get list of all of CloudClub’s members
+ * @api {get} /members Get Members
+ * @apiDescription Get a list of all of CloudClub’s team members.
  * @apiName GET-members
  * @apiGroup Club Members
  *

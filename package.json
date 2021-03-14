@@ -1,7 +1,7 @@
 {
-  "name": "cloud-club-website",
+  "name": "Cloud Club - Website",
   "version": "0.1.1",
-  "description": "CloudClub website.",
+  "description": "2020-2021. Affiliated with the Engineering Society at the University of Toronto.",
   "main": "index.js",
   "apidoc": {
     "title": "CloudClub API Documentation",

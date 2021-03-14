@@ -1,7 +1,13 @@
 /**
- * @api {post} /register Register an account
+ * @api {post} /register Register
+ * @apiDescription Register an account.
  * @apiName POST-register
  * @apiGroup Authentication
+ * 
+ * @apiParam {String} email User's Email
+ * @apiParam {String} password User's Password
+ * @apiParam {String} first User's First Name
+ * @apiParam {String} last User's Last Name
  *
  * @apiSuccess (201) {String} message "Successfully registered, you may now login."
  *

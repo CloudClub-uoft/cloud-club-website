@@ -1,5 +1,6 @@
 /**
- * @api {get} /posts Get title, timestamp, and IDs for ALL posts 
+ * @api {get} /posts Get All Posts (Metadata)
+ * @apiDescription Fetch ALL posts, without content, sorted by timestamp (latest first).
  * @apiName GET-posts
  * @apiGroup Forum
  *
