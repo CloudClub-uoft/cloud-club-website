@@ -10,9 +10,11 @@
     <!-- Heading and Description of Forum Page -->
     <%- include('partials/forum-subheader') %>
 
+    
 <!--The big container-->
         <div class="container">
             <!-- alert saying that the user does not have access to this page-->
+            <% if(post == undefined){ %>
             <div class="alert alert-danger" role="alert">
                 <!--logo svg filled cross circle-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -25,24 +27,20 @@
                    
                    <!--Internal Server Error-->
             </div>
-
+            <% } %>
+            <% if(post != undefined){ %>
               <!--Loading animations-->
             <div class="jumbotron" style="text-align:center">
                 <div class="container">
 
-                    <div name="all-spinners">
-                        <div class="spinner-grow text-primary" role="status"></div>
-                        <div class="spinner-grow text-secondary" role="status"></div>
-                        <div class="spinner-grow text-success" role="status"></div>
-                        <div class="spinner-grow text-danger" role="status"></div>
-                        <div class="spinner-grow text-warning" role="status"></div>
-                        <div class="spinner-grow text-info" role="status"></div>
-                    </div>
+                  
 
-                   <div mane="userid"><!-- chenge the name to name="% post.body %" --><h1>The annoucement from CloudClub <!-- % post.subject % --></h1><br></div>
+                   <div mane="userid"><!-- chenge the name to name="% post.body %" --><h1> <%- post.subject -%></h1><br></div>
                    
-                    <h5><img class="img-thumbnail" width="10%" src="https://avatars.githubusercontent.com/u/36619969?s=460&u=d2940c988b1a69203c59e96e35aa6ac5306093d6&v=4"> CloudClub Official</h5><br>
-                    <h3>2021-03-06 21:10:59 posted <!-- % post.timestamp % --></h3><br>
+                    <h5><img class="img-thumbnail" width="10%" src="https://avatars.githubusercontent.com/u/36619969?s=460&u=d2940c988b1a69203c59e96e35aa6ac5306093d6&v=4"> <%- post.userid -%></h5><br>
+                    <h3><%- post.timestamp.toLocaleString() -%></h3><br>
+                    <!--.toLocaleString() output--2021-2-26 7:22:44 ├F10: AM┤-->
+                    <!--toDateString() output--Fri Feb 26 2021-->
                     
                     <a id="a" name="a" style="text-decoration:none" class="a btn btn-block btn-lg btn-info" href="/forum"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
                         <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
@@ -56,39 +54,14 @@
             <!--Post content module-->
             <div class="panel panel-primary">   
                 <div class="jumbotron" >
-                    <h6>We are glad to annouce that cloudclub is the best club ever. And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
-                        And this is some test data to fill in the blank here.
+                    <h6>
 
-                        <!-- % post.body % -->
+                        <%- post.body -%>
                     </h6>
                 </div>
 
-                    <!--Comment area-->
-                    <div class="jumbotron" style="text-align:center">
-                        <h1>Comment Area if necessary</h1>
-                        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group me-2" role="group" aria-label="First group">
-                              <button type="button" class="btn btn-outline-secondary"><<</button>
-                              <button type="button" class="btn btn-outline-secondary">1</button>
-                              <button type="button" class="btn btn-outline-secondary">2</button>
-                              <button type="button" class="btn btn-outline-secondary">>></button>
-                            </div>
-                        </div>
-                    </div>
-
+                    
+<% } %>
         </div>
     <br>
 
