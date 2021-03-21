@@ -126,19 +126,17 @@ Consistent fonts, color scheme, etc.
     - [X] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
     - [X] Check for all necessary data fields and types (see SQL table)
     - [X] Create new table entry, return 201 Created
-  - [ ] Get All Posts Summary
-    - [ ] Request
-      - [ ] 
-    - [ ] Response
-      - [ ] Post Title
-      - [ ] Post ID
-      - [ ] Post Timestamp
-      - [ ] User ID
-  - [ ] Get Single Post by ID
-    - [ ] Request - query parameters
-    - [ ] Response
-      - [ ] Post Body
-      - [ ] etc.
+  - [X] Get All Posts Summary
+    - [X] Response
+      - [X] Post Title
+      - [X] Post ID
+      - [X] Post Timestamp
+      - [X] User ID
+  - [X] Get Single Post by ID
+    - [X] Request - query parameters
+    - [X] Response
+      - [X] Post Body
+      - [X] etc.
 - [X] Login Session Management - Matt
   - [X] Make sure it works -> pull request
   - [X] Migrate to a server-side session approach, see Harsimrat's resources
@@ -158,6 +156,7 @@ Consistent fonts, color scheme, etc.
     - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
     - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
     - [x] Build response: 50X for SQL error, 201 for successful creation
+- [X] API Documentation
 
 ### API Documentation
 

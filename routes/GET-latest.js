@@ -1,18 +1,18 @@
 /**
  * @api {get} /latest?num=:num Get Latest Posts
- * @apiDescription Get the latest N forum posts, with content, sorted by timestamp (latest first).
+ * @apiDescription Get the latest `num` forum posts, with content, sorted by timestamp (latest first).
  * @apiName GET-latest
  * @apiGroup Forum
  *
  * @apiParam {Number} num The number of posts to return (an integer between 1 and 100).
  *
  * @apiSuccess {String} message "Latest `num` posts fetched successfully without body."
- * @apiSuccess {Object[]} data Latest posts, sorted by timestamp (descending).
+ * @apiSuccess {Object[]} data Latest `num` posts, sorted by timestamp (descending).
  * @apiSuccess {Number} data.postid Post ID
  * @apiSuccess {Number} data.userid ID of user who submitted the post
  * @apiSuccess {String} data.subject Post Title
- * @apiSuccess {String} data.body Post Content (Markdown/Plaintext)
- * @apiSuccess {Number} data.timestamp Timestamp of post (YYYY-MM-DD HH-MM-SS)
+ * @apiSuccess {String} data.body Post Content (Markdown)
+ * @apiSuccess {Number} data.timestamp Post Timestamp
  *
  * @apiError (401) {String} error "You are not authorized to perform this action."
  * @apiError (422) {String} error "Request out of range, must be between 0 and 100."

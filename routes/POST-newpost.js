@@ -5,7 +5,7 @@
  * @apiGroup Forum
  * 
  * @apiParam {String} subject Post Title
- * @apiParam {String} body Post Content (Markdown/Plaintext)
+ * @apiParam {String} body Post Content (Markdown)
  *
  * @apiSuccess (201) {String} message "Post created successfully."
  *

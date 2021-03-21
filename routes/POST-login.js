@@ -12,7 +12,7 @@
  * @apiError (400) {String} error "Missing data, request must include all of: email, password."
  * @apiError (401) {String} error "Password incorrect."
  * @apiError (401) {String} error "Email not found."
- * @apiError (500) {String} error "Internal Server Error 500.""
+ * @apiError (500) {String} error "Internal Server Error 500."
  */
 
 const bcrypt = require('bcrypt');

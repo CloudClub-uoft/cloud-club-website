@@ -1,6 +1,6 @@
 /**
  * @api {get} /posts Get All Posts (Metadata)
- * @apiDescription Fetch ALL posts, without content, sorted by timestamp (latest first).
+ * @apiDescription Fetch **ALL** posts, without content, sorted by timestamp (latest first).
  * @apiName GET-posts
  * @apiGroup Forum
  *
@@ -9,7 +9,7 @@
  * @apiSuccess {Number} data.postid Post ID
  * @apiSuccess {Number} data.userid User ID
  * @apiSuccess {String} data.subject Post Title
- * @apiSuccess {Number} data.timestamp Timestamp of post (YYYY-MM-DD HH:MM:SS)
+ * @apiSuccess {Number} data.timestamp Post Timestamp
  *
  * @apiError (401) {String} error You are not authorized to perform this action.
  * @apiError (500) {String} error "Internal Server Error 500"

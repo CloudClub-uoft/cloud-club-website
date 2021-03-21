@@ -102,7 +102,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "error",
-            "description": "<p>&quot;Internal Server Error 500.&quot;&quot;</p>"
+            "description": "<p>&quot;Internal Server Error 500.&quot;</p>"
           }
         ]
       }
@@ -271,7 +271,7 @@ define({ "api": [
     "type": "get",
     "url": "/latest?num=:num",
     "title": "Get Latest Posts",
-    "description": "<p>Get the latest N forum posts, with content, sorted by timestamp (latest first).</p>",
+    "description": "<p>Get the latest <code>num</code> forum posts, with content, sorted by timestamp (latest first).</p>",
     "name": "GET-latest",
     "group": "Forum",
     "parameter": {
@@ -302,7 +302,7 @@ define({ "api": [
             "type": "Object[]",
             "optional": false,
             "field": "data",
-            "description": "<p>Latest posts, sorted by timestamp (descending).</p>"
+            "description": "<p>Latest <code>num</code> posts, sorted by timestamp (descending).</p>"
           },
           {
             "group": "Success 200",
@@ -330,14 +330,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data.body",
-            "description": "<p>Post Content (Markdown/Plaintext)</p>"
+            "description": "<p>Post Content (Markdown)</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post (YYYY-MM-DD HH-MM-SS)</p>"
+            "description": "<p>Post Timestamp</p>"
           }
         ]
       }
@@ -441,14 +441,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data.body",
-            "description": "<p>Post Content (Markdown/Plaintext)</p>"
+            "description": "<p>Post Content (Markdown)</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post (YYYY-MM-DD HH-MM-SS)</p>"
+            "description": "<p>Post Timestamp</p>"
           }
         ]
       }
@@ -483,7 +483,7 @@ define({ "api": [
     "type": "get",
     "url": "/posts",
     "title": "Get All Posts (Metadata)",
-    "description": "<p>Fetch ALL posts, without content, sorted by timestamp (latest first).</p>",
+    "description": "<p>Fetch <strong>ALL</strong> posts, without content, sorted by timestamp (latest first).</p>",
     "name": "GET-posts",
     "group": "Forum",
     "success": {
@@ -529,7 +529,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "data.timestamp",
-            "description": "<p>Timestamp of post (YYYY-MM-DD HH:MM:SS)</p>"
+            "description": "<p>Post Timestamp</p>"
           }
         ]
       }
@@ -582,7 +582,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "body",
-            "description": "<p>Post Content (Markdown/Plaintext)</p>"
+            "description": "<p>Post Content (Markdown)</p>"
           }
         ]
       }
