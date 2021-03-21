@@ -174,7 +174,7 @@ app.post('/register', (req, res) => {
       if (result.length === 0) {
         if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && password.match(/[^a-zA-Z\d]/g) && password.length >= 8) {
               bcrypt.hash(password, saltRounds, (err3, hash) => {
-              if (err3) {console.log(err2); return res.status(500).json({ error: 'Internal Server Error 500' });}
+              if (err3) {console.log(err3); return res.status(500).json({ error: 'Internal Server Error 500' });}
   
               database.query('INSERT INTO cloudclub.logins (`first-name`, `last-name`, email, password) VALUES (?, ?, ?, ?)', [first, last, email, hash], (err3) => {
                 if (err3) {console.log(err3);return res.status(500).json({ error: 'Internal Server Error 500' });}
