@@ -16,7 +16,7 @@ const RedisStore = require('connect-redis')(session);
 const port = process.env.PORT || 80;
 
 // bcrypt settings
-const saltRounds = process.env.ENC_ROUNDS;
+const saltRounds = Number(process.env.ENC_ROUNDS);
 
 // Connect to the SQL database
 const database = mysql.createConnection({
