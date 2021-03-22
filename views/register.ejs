@@ -40,7 +40,6 @@
         },
         statusCode: {
           201: function(response) {
-            console.log(response);
             $('#toasttitle').text("Success!")
             $('.toast-body').text(response.message);
             $('.toast').toast('show');
@@ -65,19 +64,16 @@
             //   });
           },
           400: function(response) {
-            console.log(response);
             $('#toasttitle').text("Failed to register!")
             $('.toast-body').text(response.responseJSON.error);
             $('.toast').toast('show');
           },
           409: function(response) {
-            console.log(response);
             $('#toasttitle').text("Failed to register!")
             $('.toast-body').text(response.responseJSON.error);
             $('.toast').toast('show');
           },
           500: function(response) {
-            console.log(response);
             $('#toasttitle').text("Error!")
             $('.toast-body').text(response.responseJSON.error);
             $('.toast').toast('show');
