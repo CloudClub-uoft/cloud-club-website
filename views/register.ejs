@@ -44,7 +44,7 @@
             $('#toasttitle').text("Success!")
             $('.toast-body').text(response.message);
             $('.toast').toast('show');
-            setTimeout(()=>{window.location.href = "/"}, 1500);
+            setTimeout(()=>{window.location.href = `<%-r-%>`}, 1500);
             // $.ajax({
             //     url: '/login',
             //     type: 'POST',
