@@ -64,15 +64,15 @@ app.set('layout', 'layouts/layout');
 
 // Dynamic Routes
 app.get('/', (req, res) => {
-  res.render('index', { 'selected': 'homepage', 'title': 'CloudClub | Home' });
+  res.render('index', { 'selected': '/', 'title': 'CloudClub | Home' });
 });
 
 app.get('/login', (req, res) => {
-  res.render('login', { 'selected': 'login', 'title': 'CloudClub | Login'});
+  res.render('login', { 'selected': 'login', 'title': 'CloudClub | Login', r: (req.query['r'] || '/')});
 });
 
 app.get('/register', (req, res) => {
-  res.render('register', { 'selected': 'register', 'title': 'CloudClub | Register'});
+  res.render('register', { 'selected': 'register', 'title': 'CloudClub | Register', r: (req.query['r'] || '/')});
 });
 
 app.get('/teampage', (req, res) => {
@@ -84,10 +84,9 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/forum', (req, res) => {
-  console.log(req.query)
   database.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
     if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}
-    return res.render('forum', { 'selected': 'forumpage', 'title': 'CloudClub | Forum', 'data': result, 'tm' : req.query.tm, 'ts' : req.query.tm});
+    return res.render('forum', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'data': result, 'tm' : req.query.tm, 'ts' : req.query.tm});
   });
 });
 
@@ -99,7 +98,7 @@ app.get('/post', (req, res) => {
   const id = req.query.id;
   database.query(`SELECT * FROM cloudclub.forum WHERE postid='${id}'`, (err, result) => {
     if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}
-    return res.render('post', { 'selected': 'forumpage', 'title': 'CloudClub | Post Detail', 'post': result[0]});
+    return res.render('post', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'post': result[0]});
   });
 });
 
