@@ -84,16 +84,17 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/forum', (req, res) => {
+  console.log(req.query)
   database.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
     if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}
-    return res.render('forum', { 'selected': 'forumpage', 'title': 'CloudClub | Forum', 'data': result});
+    return res.render('forum', { 'selected': 'forumpage', 'title': 'CloudClub | Forum', 'data': result, 'tm' : req.query.tm, 'ts' : req.query.tm});
   });
 });
 
 app.get('/post', (req, res) => {
   const sesh = req.session;
   if (!sesh.email) {
-    return res.status(401).json({ error: 'You are not authorized to perform this action.' });
+    return res.redirect('/forum?tm=You Aren\'t Logged In!&ts=false')
   }
   const id = req.query.id;
   database.query(`SELECT * FROM cloudclub.forum WHERE postid='${id}'`, (err, result) => {
