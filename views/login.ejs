@@ -36,20 +36,17 @@
         },
         statusCode: {
           200: function(response) {
-            console.log(response);
             $('#toasttitle').text("Success! Redirecting...")
             $('.toast-body').text(response.message);
             $('.toast').toast('show');
             setTimeout(()=>{window.location.href = `<%-r-%>`}, 1500);
           },
           401: function(response) {
-            console.log(response);
             $('#toasttitle').text("Failed! Try again.")
             $('.toast-body').text(response.responseJSON.error);
             $('.toast').toast('show');
           },
           500: function(response) {
-            console.log(response);
             $('#toasttitle').text("Error!")
             $('.toast-body').text(response.responseJSON.error);
             $('.toast').toast('show');
