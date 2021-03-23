@@ -6,11 +6,14 @@ const path = require('path');
 const routePath = path.resolve(__dirname);
 
 exports.boot = (app, db) => {
-  fs.readdirSync(routePath).forEach((file) => {
+  const routefiles = fs.readdirSync(routePath)
+  console.log(`Mounting ${routefiles.length-1} routes:`)
+  routefiles.forEach((file) => {
     if (file !== 'routing.js') {
     // routes/filename, slicing off '.js'
       const cleanPath = `${routePath}/${file.substr(0, file.indexOf('.'))}`;
       const route = path.resolve(cleanPath);
+      console.log(`- ${route}`);
       // load the route
       require(route)(app, db);
     }

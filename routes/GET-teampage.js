@@ -1,5 +1,5 @@
 module.exports = (app, db) => {
-    app.get('/members', (req, res) => {
+    app.get('/teampage', (req, res) => {
         res.render('teampage', { 'selected': 'teampage', 'title': 'CloudClub | The Team'});
     });
   };

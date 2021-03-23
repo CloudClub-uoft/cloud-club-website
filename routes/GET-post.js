@@ -27,7 +27,7 @@ module.exports = (app, db) => {
     if(!req.query.id){
       return res.redirect('/forum');
     }
-    database.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
+    db.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
       if(err){
         return res.redirect('/forum?tm=Internal Server Error 500&ts=false');
       }

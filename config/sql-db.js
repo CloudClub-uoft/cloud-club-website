@@ -1,7 +1,4 @@
-const path = require('path');
 const mysql = require('mysql');
-
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Connect to the SQL database
 const database = mysql.createConnection({

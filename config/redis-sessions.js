@@ -1,10 +1,6 @@
-const path = require('path');
-
 const session = require('express-session');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
-
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 module.exports = (app) => {
   // Configure Redis client
@@ -25,6 +21,6 @@ module.exports = (app) => {
     store: new RedisStore({ client: redisClient }),
     secret: process.env.REDIS_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   }));
 };

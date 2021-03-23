@@ -5,7 +5,7 @@
  * @apiGroup Authentication
  * 
  * @apiParam {String} email User's Email
- * @apiParam {String} password User's Password
+ * @apiParam {String} passwordœ User's Password
  *
  * @apiSuccess {String} message "Login Successful!"
  *
@@ -24,9 +24,6 @@ module.exports = (app, db) => {
     if(email === undefined || password === undefined){
       return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api'})
     }
-    req.session.destroy((err) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
-    });
     db.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result1) => {
       if (err1) {console.log(err1);return res.status(500).json({ error: 'Internal Server Error 500' });}
       if (result1.length === 1) {
