@@ -1,6 +1,51 @@
 [
   {
     "type": "get",
+    "url": "/auth",
+    "title": "Check Auth State",
+    "description": "<p>Get the authentication state associated with the current session.</p>",
+    "name": "GET-auth",
+    "group": "Authentication",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email associated with the current session</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "-",
+            "description": "<p>Indicates that there is no authentication state currently active (i.e. the user is not logged in)</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "type": "String",
+            "optional": false,
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/GET-auth.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "get",
     "url": "/logout",
     "title": "Log Out",
     "description": "<p>Log out from the website, destroying the session.</p>",
@@ -14,7 +59,7 @@
             "type": "Redirect",
             "optional": false,
             "field": "Redirect",
-            "description": "<p>Redirects to landing page ('/').</p>"
+            "description": "<p>Redirects to previous page (acts as a refresh).</p>"
           }
         ]
       }
@@ -40,7 +85,7 @@
     "type": "post",
     "url": "/login",
     "title": "Log In",
-    "description": "<p>Log in to the website.</p>",
+    "description": "<p>Log in to the website. Destroys any existing session.</p>",
     "name": "POST-login",
     "group": "Authentication",
     "parameter": {
@@ -84,7 +129,7 @@
             "type": "String",
             "optional": false,
             "field": "error",
-            "description": "<p>&quot;Missing data, request must include all of: email, password.&quot;</p>"
+            "description": "<p>&quot;Missing fields, check our API docs at cloudclub.ca/api&quot;</p>"
           }
         ],
         "401": [
@@ -173,7 +218,7 @@
             "type": "String",
             "optional": false,
             "field": "error",
-            "description": "<p>&quot;Missing data, request must include all of: email, password, first, last.&quot;</p>"
+            "description": "<p>&quot;Missing fields, check our API docs at cloudclub.ca/api&quot;</p>"
           }
         ],
         "409": [
@@ -359,7 +404,7 @@
             "type": "String",
             "optional": false,
             "field": "error",
-            "description": "<p>&quot;Request out of range, must be between 0 and 100.&quot;</p>"
+            "description": "<p>&quot;Request out of range, check our API docs at cloudclub.ca/api&quot;</p>"
           }
         ],
         "500": [
@@ -608,7 +653,7 @@
             "type": "String",
             "optional": false,
             "field": "error",
-            "description": "<p>&quot;Missing data, request must include all of: subject, body.&quot;</p>"
+            "description": "<p>&quot;Missing fields, check our API docs at cloudclub.ca/api&quot;</p>"
           }
         ],
         "401": [

@@ -15,7 +15,7 @@
  * @apiSuccess {Number} data.timestamp Post Timestamp
  *
  * @apiError (401) {String} error "You are not authorized to perform this action."
- * @apiError (422) {String} error "Request out of range, must be between 0 and 100."
+ * @apiError (422) {String} error "Request out of range, check our API docs at cloudclub.ca/api"
  * @apiError (500) {String} error "Internal Server Error 500"
  */
 
@@ -27,9 +27,12 @@ module.exports = (app, db) => {
       return res.status(401).json({ error: 'You are not authorized to perform this action.' });
     }
 
-    const number = req.query.num;
+    if(!req.query.num){
+      return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api'});
+    }
+    const number = Number.parseInt(req.query.num);
     if (number <= 0 && number > 100) {
-      return res.status(422).json({ error: 'Request out of range, must be between 0 and 100.' });
+      return res.status(422).json({ error: 'Request out of range, check our API docs at cloudclub.ca/api' });
     }
 
     db.query(`SELECT * FROM cloudclub.forum ORDER BY timestamp DESC LIMIT ${number}`, (err, result) => {

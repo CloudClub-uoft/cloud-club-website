@@ -4,7 +4,7 @@
  * @apiName GET-logout
  * @apiGroup Authentication
  *
- * @apiSuccess (302) {Redirect} Redirect Redirects to landing page ('/').
+ * @apiSuccess (302) {Redirect} Redirect Redirects to previous page (acts as a refresh).
  *
  * @apiError (500) {String} error "Internal Server Error 500"
  */

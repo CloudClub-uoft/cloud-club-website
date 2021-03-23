@@ -22,13 +22,16 @@ module.exports = (app, db) => {
   app.get('/post', (req, res) => {
     const sesh = req.session;
     if (!sesh.email) {
-      return res.status(401).json({ error: 'You are not authorized to perform this action.' });
+      return res.redirect('/forum?tm=You Aren\'t Logged In!&ts=false')
     }
-
-    const { id } = req.query;
-    db.query(`SELECT * FROM cloudclub.forum WHERE postid='s${id}'`, (err, result) => {
-      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
-      return res.status(200).json({ message: `Post ${id} fetched successfully.`, data: result[0] });
+    if(!req.query.id){
+      return res.redirect('/forum');
+    }
+    database.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
+      if(err){
+        return res.redirect('/forum?tm=Internal Server Error 500&ts=false');
+      }
+      return res.render('post', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'post': result[0]});
     });
   });
 };

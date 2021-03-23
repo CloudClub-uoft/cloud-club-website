@@ -9,7 +9,7 @@
  *
  * @apiSuccess (201) {String} message "Post created successfully."
  *
- * @apiError (400) {String} error "Missing data, request must include all of: subject, body."
+ * @apiError (400) {String} error "Missing fields, check our API docs at cloudclub.ca/api"
  * @apiError (401) {String} error "You are not authorized to perform this action."
  * @apiError (500) {String} error "Internal Server Error 500"
  */
@@ -24,7 +24,7 @@ module.exports = (app, db) => {
 
     const { subject, body } = req.body;
     if (subject === undefined || body === undefined) {
-      return res.status(400).json({ error: 'Missing data, request must include all of: subject, body' });
+      return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api' });
     }
 
     db.query(`INSERT INTO cloudclub.forum (userid, subject, body) VALUES (${sesh.userid}, '${subject}', '${body}')`, (err) => {

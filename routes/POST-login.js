@@ -1,6 +1,6 @@
 /**
  * @api {post} /login Log In
- * @apiDescription Log in to the website.
+ * @apiDescription Log in to the website. Destroys any existing session.
  * @apiName POST-login
  * @apiGroup Authentication
  * 
@@ -9,7 +9,7 @@
  *
  * @apiSuccess {String} message "Login Successful!"
  *
- * @apiError (400) {String} error "Missing data, request must include all of: email, password."
+ * @apiError (400) {String} error "Missing fields, check our API docs at cloudclub.ca/api"
  * @apiError (401) {String} error "Password incorrect."
  * @apiError (401) {String} error "Email not found."
  * @apiError (500) {String} error "Internal Server Error 500."
@@ -21,8 +21,14 @@ const bcrypt = require('bcrypt');
 module.exports = (app, db) => {
   app.post('/login', (req, res) => {
     const { email, password } = req.body;
+    if(email === undefined || password === undefined){
+      return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api'})
+    }
+    req.session.destroy((err) => {
+      if (err) return res.status(500).json({ error: 'Internal Server Error 500' });
+    });
     db.query(`SELECT * FROM cloudclub.logins WHERE email='${email}'`, (err1, result1) => {
-      if (err1) return res.status(401).json({ error: 'Email not found OR password incorrect.' });
+      if (err1) {console.log(err1);return res.status(500).json({ error: 'Internal Server Error 500' });}
       if (result1.length === 1) {
         bcrypt.compare(password, result1[0].password, (err2, result2) => {
           if (err2) return res.status(500).json({ error: 'Internal Server Error 500' });
@@ -36,8 +42,11 @@ module.exports = (app, db) => {
           }
           return res.status(401).json({ error: 'Password incorrect.' });
         });
-      } else {
+      } else if (result1.length === 0){
         return res.status(401).json({ error: 'Email not found.' });
+      } else {
+        console.log(`ERROR: Duplicate login entry under email '${email}'`);
+        return res.status(500).json({ error: 'Internal Server Error 500' });
       }
     });
   });
