@@ -64,12 +64,12 @@ Consistent fonts, color scheme, etc.
 
 
 ### EJS Transition
-- [ ] EJS - Matthew and Harsimrat
+- [X] EJS - Matthew and Harsimrat
   - [X] EJS Tutorial(s)
-  - [ ] Every page needs navbar item to login and register pages
-  - [ ] Copy Harsimrat's example
-    - [ ] Header (w/ `active` selection), footer
-    - [ ] assets directories (CSS, JS)
+  - [X] Every page needs navbar item to login and register pages
+  - [X] Copy Harsimrat's example
+    - [X] Header (w/ `active` selection), footer
+    - [X] assets directories (CSS, JS)
   - [ ] Build forum page in EJS
     - [ ] Fake data object (faker.js) - JSON array of posts: `[ {'subject' : 'POST 1' } ]) {`
     - [ ] Pass to page via `render`
@@ -80,9 +80,9 @@ Consistent fonts, color scheme, etc.
 [Example](https://forums.technicpack.net/forum/7-off-topic-discussion/)
 
 - [ ] Thread
-  - [ ] Thread title and description - Tamim and Yunjia
-  - [ ] Post - Bootstrap Table - Ian, Jonathan, Leo
-    - [ ] Planning
+  - [X] Thread title and description - Tamim and Yunjia
+  - [X] Post - Bootstrap Table - Ian, Jonathan, Leo
+    - [ ] Data
       - [ ] JS API fetch (for now just have a fake object)
       - [ ] For each entry in the JSON object, create a row element in the table DOM
     - [ ] Structure
@@ -93,8 +93,8 @@ Consistent fonts, color scheme, etc.
       - [X] Timestamp
       - [X] Posts per page
       - [X] Page selection
-      - [ ] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
-- [ ] View Post
+      - [X] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
+- [ ] View Single Post - Leo
 - [ ] New Post
 
 ## Backend
@@ -115,7 +115,7 @@ Consistent fonts, color scheme, etc.
   - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
   - [x] Build response: 50X for SQL error, 201 for successful creation
 
-- [ ] Forum SQL API
+- [X] Forum SQL API
   - [X] New Post
     - [X] Create table - Jayden
       - [X] Post ID (internally generated)
@@ -126,19 +126,17 @@ Consistent fonts, color scheme, etc.
     - [X] Check auth token (must be logged in to create a new post, if not return 401 forbidden)
     - [X] Check for all necessary data fields and types (see SQL table)
     - [X] Create new table entry, return 201 Created
-  - [ ] Get All Posts Summary
-    - [ ] Request
-      - [ ] 
-    - [ ] Response
-      - [ ] Post Title
-      - [ ] Post ID
-      - [ ] Post Timestamp
-      - [ ] User ID
-  - [ ] Get Single Post by ID
-    - [ ] Request - query parameters
-    - [ ] Response
-      - [ ] Post Body
-      - [ ] etc.
+  - [X] Get All Posts Summary
+    - [X] Response
+      - [X] Post Title
+      - [X] Post ID
+      - [X] Post Timestamp
+      - [X] User ID
+  - [X] Get Single Post by ID
+    - [X] Request - query parameters
+    - [X] Response
+      - [X] Post Body
+      - [X] etc.
 - [X] Login Session Management - Matt
   - [X] Make sure it works -> pull request
   - [X] Migrate to a server-side session approach, see Harsimrat's resources
@@ -158,3 +156,12 @@ Consistent fonts, color scheme, etc.
     - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
     - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
     - [x] Build response: 50X for SQL error, 201 for successful creation
+- [X] API Documentation
+
+### API Documentation
+
+- API Name: `METHOD-name`, i.e. `GET-post`
+- Parameters in API tag: `/name?param=:PLACEHOLDER`, i.e. `/post?id=:POSTID`
+- Status codes in parentheses, (Success code defaults to 200)
+- Nested return data: organize via variable names on multiple lines, i.e. object `data` has `data.field`
+- Pass DB and Redis connection objects to each routing file: module export arrow functions should have ALL parameters. I.e. `module.exports = (app, db, redis) => { ... }` even if the function doesn't use DB or Redis connections. Do `require` in `routing.js` and pass to all imported route files.
