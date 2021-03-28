@@ -39,9 +39,11 @@ if(process.env.PRODUCTION){
       ca: ca
     };
 
+    const httpsport = process.env.HTTPSPORT || 443;
+
     // HTTPS main server
     server = require('https').createServer(credentials, app);
-    server.listen(443, () => {
+    server.listen(process.env.HTTPSPORT, () => {
       console.log(`CloudClub server (secure) now listening on port ${port}->443`)
     });
 
