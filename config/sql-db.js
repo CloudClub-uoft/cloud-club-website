@@ -13,4 +13,15 @@ database.connect((err) => {
   console.log(`Connected to MySQL database at '${process.env.DB_HOST}:${process.env.DB_PORT}' as user '${process.env.DB_USER}'`);
 });
 
+connection.on('error', err => {
+  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      database.connect(err2=>{
+        if (err2) throw err2;
+        console.log(`Reconnected to MySQL database.`)
+      })
+  } else {
+      throw err;
+  }
+});
+
 module.exports = database;
