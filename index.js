@@ -44,7 +44,7 @@ if(process.env.PRODUCTION){
     // HTTPS main server
     server = require('https').createServer(credentials, app);
     server.listen(process.env.HTTPSPORT, () => {
-      console.log(`CloudClub server (secure) now listening on port ${port}->443`)
+      console.log(`CloudClub server (secure) now listening on ports: HTTP ${port} -> HTTPS ${httpsport}`)
     });
 
     //redirect all non-HTTPS incoming traffic to HTTPS on port 443
