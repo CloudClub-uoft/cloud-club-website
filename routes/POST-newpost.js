@@ -40,7 +40,9 @@ module.exports = (app, db) => {
                 return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api' });
         }
 
-        db.query(`INSERT INTO cloudclub.forum (userid, subject, body) VALUES (${sesh.userid}, '${subject}', '${body}')`, (err) => {
+        query = `INSERT INTO cloudclub.forum (userid, subject, body) VALUES (?,?,?)`;
+               
+        db.query(query, [sesh.userid, subject, body], (err) => {
             if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
             if (camefrom == "webpage") { return res.redirect('/forum') }
             return res.status(201).json({ message: 'Post created successfully.' });

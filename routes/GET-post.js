@@ -19,19 +19,19 @@
  */
 
 module.exports = (app, db) => {
-  app.get('/post', (req, res) => {
-    const sesh = req.session;
-    if (!sesh.email) {
-      return res.redirect('/forum?tm=You Aren\'t Logged In!&ts=false')
-    }
-    if(!req.query.id){
-      return res.redirect('/forum');
-    }
-    db.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
-      if(err){
-        return res.redirect('/forum?tm=Internal Server Error 500&ts=false');
-      }
-      return res.render('post', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'post': result[0]});
+    app.get('/post', (req, res) => {
+        const sesh = req.session;
+        if (!sesh.email) {
+            return res.redirect('/forum?tm=You Aren\'t Logged In!&ts=false')
+        }
+        if (!req.query.id) {
+            return res.redirect('/forum');
+        }
+        db.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
+            if (err) {
+                return res.redirect('/forum?tm=Internal Server Error 500&ts=false');
+            }
+            return res.render('post', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'post': result[0], 'email': req.session.email });
+        });
     });
-  });
 };

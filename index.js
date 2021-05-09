@@ -12,6 +12,10 @@ const port = process.env.PORT || 80;
 require('./config/redis-sessions')(app);
 const db = require('./config/sql-db');
 
+//override required becuase HTML forms do not support PUT/DELETE
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 // Express setup
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
