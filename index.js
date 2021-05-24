@@ -34,9 +34,9 @@ app.use('/api', express.static('docs'));
 if(process.env.PRODUCTION){
   try{
     // SSL Certificates
-    const key = fs.readFileSync('certs/privkey.pem', 'utf8');
-    const cert = fs.readFileSync('certs/cert.pem', 'utf8');
-    const ca = fs.readFileSync('certs/chain.pem', 'utf8');
+    const key = fs.readFileSync(process.env.PRIVKEY_PATH, 'utf8');
+    const cert = fs.readFileSync(process.env.CERTIFICATE_PATH, 'utf8');
+    const ca = fs.readFileSync(process.env.CHAIN_PATH, 'utf8');
     const credentials = {
       key: key,
       cert: cert,
