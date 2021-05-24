@@ -94,8 +94,8 @@ Consistent fonts, color scheme, etc.
       - [X] Posts per page
       - [X] Page selection
       - [X] Sorting (will have to discuss format further, and if doing server-side/client-side processing)
-- [ ] View Single Post - Leo
-- [ ] New Post
+- [X] View Single Post - Leo (Harsimrat)
+- [X] New Post - Harsimrat
 
 ## Backend
 
@@ -114,8 +114,9 @@ Consistent fonts, color scheme, etc.
   - [x] Check password validity: minimum length of 8, has lower and uppercase, numbers, and symbols (40X if failed)
   - [x] `INSERT * INTO users ({username}, ... )` [(Reference)](https://www.w3schools.com/sql/sql_insert.asp)
   - [x] Build response: 50X for SQL error, 201 for successful creation
-
 - [X] Forum SQL API
+  - [X] Delete Post - Harsimrat
+  - [X] Report Post - Harsimrat
   - [X] New Post
     - [X] Create table - Jayden
       - [X] Post ID (internally generated)
