@@ -11,5 +11,10 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-console': 'off',
+    'consistent-return': 'off',
+    'object-curly-newline': ['error', {
+      ObjectPattern: 'off',
+    }],
   },
 };

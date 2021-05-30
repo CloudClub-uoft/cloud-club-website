@@ -1,0 +1,122 @@
+<!--data table-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js'></script> <script type='text/javascript' src='https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js'></script> <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'> <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css'> -->
+
+<body>
+    <!-- Heading and Description of Forum Page -->
+    <%- include('partials/forum-subheader') %>
+
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000
+            stye="positon:absolute;">
+            <div class="toast-header">
+                <strong class="mr-auto" id="toasttitle"></strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+            <%if (locals.tm) {%>
+                <%if (ts == 'true') {%>
+                        $('#toasttitle').text("Success!");
+                <%} else {%>
+                        $('#toasttitle').text("Error!");
+                <%}%>
+                        $('.toast-body').text(`<%- tm -%>`);
+                    $('.toast').toast('show');
+            <%}%>
+                    $('#table_id').DataTable({
+                        "pagingType": "full_numbers",
+                        "stateSave": true,
+                    });
+            });
+        </script>
+        <div class="container">
+            <div class="col">
+                <table id="table_id" class="table">
+                    <thead>
+                        <tr>
+                            <th>Posts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i=0; i < data.length ; i++) { %>
+                            <tr>
+                                <!-- Test post format. Could use some padding. -->
+                                <td>
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div class="d-flex w-80">
+                                                <div class="d-flex flex-column justify-content-between">
+                                                    <a href="/post?id=<%- data[i].postid -%>">
+                                                        <h5 class="mb-1">
+                                                            <%- data[i].subject -%>
+                                                        </h5>
+                                                    </a>
+                                                    <!-- <p class="mb-1">Post description. </p> -->
+                                                    <small class="text-muted"> Posted by <%- data[i].userid -%> </small>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex w-30 justify-content-end"></div>
+                                            <div class="d-flex flex-column justify-content-between">
+                                                <small class="text-muted" style="padding: 0.5ch;">
+                                                    <%- data[i].timestamp.toDateString() -%>
+                                                </small>
+                                                <div class="d-flex flex-column justify-content-between">
+                                                    <% if (data[i].userid==user_id) { %>
+                                                        <input type="submit" class="btn btn-sm btn-danger" id="pop"
+                                                            value="Delete" data-toggle="modal" data-id="<%-data[i].postid%>"" onclick="id_to_delete=this.dataset.id;console.log(id_to_delete);" data-target="#myModal"/>
+                                                        <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <h4 class="modal-title">Delete Post</h4>
+                    </div>
+                    <form id="formgroup" action="/deletepost?_method=DELETE" method="POST">
+                        <div class="modal-body">
+                            <p>Are you sure?</p>                            
+                        </div>
+                        <div class="modal-footer">
+                            <input hidden id="btn-del" name="post_id"value="">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="report-btn" class="btn btn-danger" data-dismiss="modal" onclick="submit(this)">Yes</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+
+
+<script type="text/javascript">
+
+    var id_to_delete = null;
+
+    function submit(e) {
+       
+        document.getElementById("btn-del").value = id_to_delete;
+        document.getElementById("formgroup").submit();
+
+    }
+
+    document.getElementById("report-btn").addEventListener("click", submit);
+
+</script>

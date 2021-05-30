@@ -1,0 +1,18 @@
+.require {
+    color: #666;
+}
+
+label small {
+    color: #999;
+    font-weight: normal;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inlineflex {
+    display: inline-flex;
+}

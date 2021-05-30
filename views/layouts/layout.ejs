@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head') %>
+
+    <% if (selected != 'login' && selected != 'register') {%>
+        <%- include('../partials/header.ejs') %>
+            <%}%>
+
+                <%- body %>
+
+                    <!-- Footer include issues on the register and login ejs pages currently. -->
+                    <% if (selected != 'login' && selected != 'register') {%>
+                        <%- include('../partials/footer.ejs') %>
+                            <%}%>
+
+</html>
