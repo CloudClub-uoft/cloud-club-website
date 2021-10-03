@@ -81,6 +81,10 @@
                                 <div class=" col-md-4 ">
                                     <button type=" button " class=" a btn btn-block btn-lg btn-warning"
                                                 data-toggle="modal" data-target="#myModal">Report Post</button>
+                                    <% if (post.userid === user_id) { %>
+                                    <a type=" button " class=" a btn btn-block btn-lg btn-info"
+                                            href="/editpost">Edit Post</a>
+                                    <% } %>
                             </div>
                         </div>
                         <div class="modal fade" id="myModal" role="dialog">
@@ -109,7 +113,6 @@
                                         </div>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000
