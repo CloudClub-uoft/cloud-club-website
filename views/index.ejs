@@ -1,6 +1,28 @@
-<body>  
+<body>
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000 style="z-index:1; position:absolute; right:25px; top:75px;">
+    <div class="toast-header">
+        <strong class="mr-auto" id="toasttitle"></strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body"></div>
+  </div>
+  <script>
+      //use urlParams to get query parametres
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('tm').length != 0) {
+          if (urlParams.get('ts') == 'true') {
+              $('#toasttitle').text("Success!");
+          } else {
+              $('#toasttitle').text("Error!");
+              $('.toast-body').text(urlParams.get('tm'));
+              $('.toast').toast('show');
+          }
+      }
+  </script>
   <!-- Carousel -->
-  <div id="mainCarousel" class="carousel slide overflow-hidden" data-ride="carousel">
+  <div id="mainCarousel" class="carousel slide overflow-hidden" data-ride="carousel" style="z-index:0; position:relative;">
     <ol class="carousel-indicators">
       <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#mainCarousel" data-slide-to="1"></li>
@@ -43,7 +65,6 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
   <!-- Introduction -->
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
