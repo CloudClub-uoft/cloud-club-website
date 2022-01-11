@@ -1,0 +1,61 @@
+<div class="fixed-top" style = "z-index: 0;">
+    <div class="card" style="width: 18rem; margin-left: 400px; margin-top: 200px;">
+        <div class="card" style="margin: 10px;">
+            <div class="mx-auto" style="width: 300;">
+                <img class="card-img-top" src=<%- profile_path -%> width="225px" height="225px">
+            </div>
+        </div>
+        <div class="card-body;" style="text-align: center;">
+            <h4>About Me</h4>
+        </div>
+        <div class="card-body;" style="padding: 20px;">
+            <p class="card-text"><%- description -%></p>
+        </div>
+    </div>
+</div>
+<body>
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000 style="z-index:2; position:absolute; right:25px; top:75px;">
+        <div class="toast-header">
+            <strong class="mr-auto" id="toasttitle"></strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body"></div>
+      </div>
+      <script>
+          //use urlParams to get query parametres
+          var urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.get('tm').length != 0) {
+              if (urlParams.get('ts') == 'true') {
+                  $('#toasttitle').text("Success!");
+              } else {
+                  $('#toasttitle').text("Error!");
+                  $('.toast-body').text(urlParams.get('tm'));
+                  $('.toast').toast('show');
+              }
+          }
+      </script>
+    <div class="sticky-top" style="text-align: center; z-index: 1;">
+        <form action="/profile" method="POST" encType="multipart/form-data" style="text-align: center; padding-top: 200px;">
+            <h3>Upload Profile Photo </h3> 
+            <input type="file" name="image" accept="image/*">
+            <input type="submit" class="btn btn-primary">
+        </form>
+        <form action="/description" method="POST" encType="multipart/form-data" style="text-align: center; padding-top: 25px;">
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-8 col-md-offset-2" style="max-width: 20%; justify-content: center;">
+                    <div class="form-group" >
+                        <label for="description">Description <span class="require">*</span></label>
+                        <textarea rows="5" class="form-control" name="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+
+
+
+
