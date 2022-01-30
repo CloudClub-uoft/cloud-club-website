@@ -1,4 +1,4 @@
-<div class="fixed-top" style = "z-index: 0;">
+<!-- <div class="fixed-top" style = "z-index: 0;">
     <div class="card" style="width: 18rem; margin-left: 400px; margin-top: 200px;">
         <div class="card" style="margin: 10px;">
             <div class="mx-auto" style="width: 300;">
@@ -54,8 +54,164 @@
             <input type="submit" class="btn btn-primary">
         </form>
     </div>
+</body> -->
+
+<body>
+
+    <header class="jumbotron">
+
+        <div class="container marketing">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>Bob Singh</h1>
+                    <p>bob@bob.com</p>
+                </div>
+                <div class="col-12 col-sm">
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+
+                <div class="card">
+                    <form method="POST" action="https://preprlabs.org/pictureChange" accept-charset="UTF-8" id="form_image" enctype="multipart/form-data">
+                    <img class="card-img-top"
+                        src="https://prepr-media-live.s3.ca-central-1.amazonaws.com/uploads/users/0xMFeErTFIBXV9ZdJgBhrcY8TK1ADO5gQlGHw0wY.bmp"
+                        alt="Card image cap" onclick="document.getElementById('imgInp[1]').click();">
+                    <input type='file' id="imgInp[1]" name="files" accept="image/*"
+                        style="display: none;">
+                    <input name="_token" type="hidden" value="Pc4y5qwJrCMbj5998ldLkOKHyMiRzuDFQ76CcjVJ" />
+                    </form>
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Edit Description
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-8">
+
+                <div class="row profile-card">
+                    <div class="col-12">
+                        <h1>Profile Information</h1>
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        Date Joined
+                    </div>
+                    <div class="col-auto">
+                        October 1, 2029
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        Email
+                    </div>
+                    <div class="col-auto">
+                        bob@bob.com
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        Posts
+                    </div>
+                    <div class="col-auto">
+                        23
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        Latest Post
+                    </div>
+                    <div class="col-auto">
+                        How to eat a 🍕.
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
 </body>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        padding-top: 3.5rem;
+        padding-bottom: 3rem;
+        color: #007f96;
+    }
+
+    .card-img-top {
+        object-fit: cover;
+        padding: 10px 10px 10px 10px;
+        border-radius: 15px;
+    }
+
+    .profile-card {
+
+        padding: 10px 10px 10px 10px;
+
+    }
+
+    .row-header {
+
+        margin: 0px auto;
+        padding: 0px auto;
+
+    }
+
+    .row-content {
+
+        min-height: 30px;
+        margin: 5px;
+    }
+
+    .jumbotron {
+
+        padding: 70px 30px 70px 30px;
+        margin: 10px auto;
+
+    }
+</style>
 
 
 
