@@ -67,7 +67,7 @@
 
             <h1>Edit post</h1>
 
-            <form method="POST">
+            <form action="/editpost" method="POST">
 
                 <div class="has-error">
                     <label for="slug">User</label>
@@ -76,13 +76,13 @@
 
                 <div class="form-group">
                     <label for="title">Title <span class="require">*</span></label>
-                    <input type="text" class="form-control" name="subject" />
+                    <input type="text" class="form-control" value="<%- post.subject -%>" name="subject" />
                     <input type="text" class="form-control" name="camefrom" value="webpage" hidden />
-                </div>
+                </div>  
 
                 <div class="form-group">
                     <label for="description">Description <span class="require">*</span></label>
-                    <textarea id = "editor-container" rows="5" class="form-control" name="body"></textarea>
+                    <textarea id = "editor-container" rows="5" class="form-control" name="body"><%- post.body -%></textarea>
                 </div>
 
                 <div class="form-group">
@@ -120,11 +120,12 @@
 
         ['clean']                                         // remove formatting button
     ];
-    let quill = new Quill('#editor-container', {
-        modules: {
-            toolbar: toolbarOptions
-        },
-        theme: 'snow'
-    });
+    // let quill = new Quill('#editor-container', {
+    //     modules: {
+    //         toolbar: toolbarOptions
+    //     },
+    //     theme: 'snow',
+    // });
+    // quill.setText("abccccc"); //DOESN'T WORK???
     </script>
 </body>

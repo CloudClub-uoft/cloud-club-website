@@ -19,7 +19,7 @@ var Filter = require('bad-words'),
 
 module.exports = (app, db) => {
     // edit forum post PUT request
-    app.put('/post', (req, res) => {
+    app.post('/editpost', (req, res) => {
         const sesh = req.session;
         if (!sesh.email) {
             return res.status(401).json({ error: 'You are not authorized to perform this action.' });
@@ -30,7 +30,7 @@ module.exports = (app, db) => {
         //profanity check
         if (filter.isProfane(body) || filter.isProfane(subject)) {
             //if the post is created from a webpage, then return the forum page.
-            if (camefrom == "webpage") { return res.render('newpost', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'email': req.session.email, 'profane': true }) } else {
+            if (camefrom == "webpage") { return res.render('newpost', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'email': req.session.email, 'subject':post.subject, 'profane': true }) } else {
                 return res.status(201).json({ message: 'Post ratified. Please keep the content appropriate and courteous.' })
             }
         }
@@ -40,9 +40,9 @@ module.exports = (app, db) => {
                 return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api' });
         }
 
-        query = `INSERT INTO cloudclub.forum (userid, subject, body) VALUES (?,?,?)`;
+        query = `UPDATE cloudclub.forum SET body = (?)`;
 
-        db.query(query, [sesh.userid, subject, body], (err) => {
+        db.query(query, [body], (err) => {
             if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
             if (camefrom == "webpage") { return res.redirect('/forum') }
             return res.status(201).json({ message: 'Post edited successfully.' });
