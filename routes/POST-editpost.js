@@ -39,10 +39,9 @@ module.exports = (app, db) => {
             if (camefrom == "webpage") { return res.redirect('/newpost?tm=Please fill in all the required details&ts=false') } else
                 return res.status(400).json({ error: 'Missing fields, check our API docs at cloudclub.ca/api' });
         }
-
-        query = `UPDATE cloudclub.forum SET body = (?)`;
-
-        db.query(query, [body], (err) => {
+        
+        query = `UPDATE cloudclub.forum SET body = (?), subject = (?) WHERE postid = (?)`;
+        db.query(query, [body, subject, req.query.id], (err) => {
             if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
             if (camefrom == "webpage") { return res.redirect('/forum') }
             return res.status(201).json({ message: 'Post edited successfully.' });
