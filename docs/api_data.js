@@ -679,5 +679,80 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "routes/POST-newpost.js",
     "groupTitle": "Forum"
+  },
+  {
+    "type": "put",
+    "url": "/editpost",
+    "title": "Edit Post",
+    "description": "<p>Edit a post.</p>",
+    "name": "PUT-editpost",
+    "group": "Forum",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "subject",
+            "description": "<p>Post Title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "body",
+            "description": "<p>Post Content (Markdown)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;Post edited successfully.&quot;</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "type": "String",
+            "optional": false,
+            "field": "error",
+            "description": "<p>&quot;Missing fields, check our API docs at cloudclub.ca/api&quot;</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "type": "String",
+            "optional": false,
+            "field": "error",
+            "description": "<p>&quot;You are not authorized to perform this action.&quot;</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "type": "String",
+            "optional": false,
+            "field": "error",
+            "description": "<p>&quot;Internal Server Error 500&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/PUT-editpost.js",
+    "groupTitle": "Forum"
   }
 ] });

@@ -121,3 +121,6 @@ dist
 *.rdb
 
 certs/
+
+#JetBrains IDEs
+.idea
