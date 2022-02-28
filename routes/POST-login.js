@@ -32,9 +32,14 @@ module.exports = (app, db) => {
 
           if (result2) {
             const sesh = req.session;
+            const options = {year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(result1[0].date);
+            sesh.date = date.toLocaleDateString("en-US", options);
             sesh.userid = result1[0].id;
             sesh.email = email;
             sesh.password = password;
+            sesh.first = result1[0]['first-name'];
+            sesh.last = result1[0]['last-name'];
             return res.status(200).json({ message: 'Login Successful!' });
           }
           return res.status(401).json({ error: 'Password incorrect.' });
@@ -48,3 +53,5 @@ module.exports = (app, db) => {
     });
   });
 };
+
+
