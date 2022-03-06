@@ -1,4 +1,3 @@
-const defaultImage = `https://cloudclub-iot-blob-dev.s3.ca-central-1.amazonaws.com/5e2bccd5-21e5-4836-bddf-230b2a59f598.jpg`
 module.exports = (app, db) => {
   app.get('/profile', (req, res) => {
     const sesh = req.session;
@@ -23,7 +22,7 @@ module.exports = (app, db) => {
           }
           else {
             if (result1.length === 0){
-              db.query('INSERT INTO cloudclub.profiles (`profile_path`, `description`, userid) VALUES (?, ?, ?)', [defaultImage, '', sesh.userid], (err2) => {
+              db.query('INSERT INTO cloudclub.profiles (`profile_path`, `description`, userid) VALUES (?, ?, ?)', ['', '', sesh.userid], (err2) => {
                 if (err2) { console.log(err2); return res.redirect('/?tm=Internal Server Error 500&ts=false'); }
                 db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${sesh.userid}'`, (err3, result2) => {
                   if (err3) { console.log(err2); return res.redirect('/?tm=Internal Server Error 500&ts=false'); }

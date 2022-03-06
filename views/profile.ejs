@@ -21,14 +21,11 @@
             <div class="col-sm-4">
 
                 <div class="card">
-                    <form method="POST" action="https://preprlabs.org/pictureChange" accept-charset="UTF-8" id="form_image" enctype="multipart/form-data">
                     <img class="card-img-top"
                         src=<%- profile_path -%>
+                        onerror="this.onerror=null;this.src='/assets/CloudClub.png';"
                         alt="Card image cap" onclick="document.getElementById('imgInp[1]').click();">
-                    <input type='file' id="imgInp[1]" name="files" accept="image/*"
-                        style="display: none;">
-                    <input name="_token" type="hidden" value="Pc4y5qwJrCMbj5998ldLkOKHyMiRzuDFQ76CcjVJ" />
-                    </form>
+                    </img>
                 </div>
             </div>
 
@@ -135,11 +132,16 @@
         padding-bottom: 3rem;
         color: #007f96;
     }
-
+    .card{
+        height: 350px;
+        box-shadow: 0 0 5px black;
+    }
     .card-img-top {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        background-position:center;
-        padding: 10px 10px 10px 10px;
+        object-position: center
+
     }
     .profile-card {
 
