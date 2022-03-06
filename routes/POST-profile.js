@@ -22,9 +22,7 @@ module.exports = (app, db) => {
       Body: file.data
     };
     s3Client.upload(params, function(err, data) {
-      if (err) {
-          throw err;
-      }
+      if (err) { console.log(err); return res.status(500).json({ error: 'Internal Server Error 500' }); }
       //Update Database
       db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${sesh.userid}'`, (err1, result1) => {
         if (err1) {console.log(err1); return res.status(500).json({ error: 'Internal Server Error 500' });}
@@ -35,9 +33,14 @@ module.exports = (app, db) => {
           });
         } 
         else {
-          db.query(`UPDATE cloudclub.profiles SET profile_path = '${data.Location}' WHERE userid='${sesh.userid}'`, (err2) => {
-            if (err2) { console.log(err2); return res.status(500).json({ error: 'Internal Server Error 500' }); }
-            else return res.status(201).redirect('/profile');
+          oldProfile = result1[0]['profile_path'];
+          oldProfile = oldProfile.substring(oldProfile.lastIndexOf("/") + 1);
+          s3Client.deleteObject({Bucket: process.env.BUCKET_NAME, Key: oldProfile}, function(err) {
+            if (err) { console.log(err.stack); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+            db.query(`UPDATE cloudclub.profiles SET profile_path = '${data.Location}' WHERE userid='${sesh.userid}'`, (err2) => {
+              if (err2) { console.log(err2); return res.status(500).json({ error: 'Internal Server Error 500' }); }
+              else return res.status(201).redirect('/profile');
+            });
           });
         }
       });
