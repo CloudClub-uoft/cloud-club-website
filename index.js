@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const fs = require('fs');
-const fileUpload = require('express-fileUpload');
+const fileUpload = require('express-fileupload');
 
 // Config
 require('dotenv').config();
