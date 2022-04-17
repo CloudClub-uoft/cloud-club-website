@@ -27,22 +27,65 @@
                         $('.toast-body').text(`<%- tm -%>`);
                     $('.toast').toast('show');
             <%}%>
-                    $('#table_id').DataTable({
-                        "pagingType": "full_numbers",
-                        "stateSave": true,
-                    });
+
             });
         </script>
         <div class="container">
+            <div class="sorting">
+                    <form id="sort" class="form-inline " action="/forum" method="GET">    
+                        <select class="custom-select my-1 mr-sm-2" name="sortby" id="sortby">
+                            <% if (sortby === 'newest') { %>
+                                <option value="newest" selected>Newest First</option>
+                            <% } else { %>
+                                <option value="newest">Newest First</option>
+                            <% } if (sortby === 'oldest') { %>
+                                <option value="oldest" selected>Oldest First</option>
+                            <% } else { %>
+                                <option value="oldest">Oldest First</option>
+                            <% } if (sortby === 'firstname') { %>
+                                <option value="firstname" selected>Name</option>
+                            <% } else { %>
+                                <option value="firstname">Name</option>
+                            <% } if (sortby === 'title') { %>
+                                <option value="title" selected>Post Title</option>
+                            <% } else { %>
+                                <option value="title">Post Title</option>
+                            <% } %>                            
+                        </select>
+                        
+                        <label for="limit">
+                            Show&nbsp
+                            <select class="custom-select my-1 mr-sm-2" name="limit" id="limit">
+                                <% if (limit == 10) { %>
+                                    <option value="10" selected>10</option>
+                                <% } else { %>
+                                    <option value="10">10</option>
+                                <% } if (limit == 25) { %>
+                                    <option value="25" selected>25</option>
+                                <% } else { %>
+                                    <option value="25">25</option>
+                                <% } if (limit == 50) { %>
+                                    <option value="50" selected>50</option>
+                                <% } else { %>
+                                    <option value="50">50</option>
+                                <% } %>                            
+                            </select>
+                            Entries
+                        </label>
+
+                        <input type="submit" id="submit-sort" class="sort-btn btn btn-success" value="Sort">
+                    </form>
+            </div>
             <div class="col">
-                <table id="table_id" class="table">
+                <table id="table_id" class="table reverse-false">
                     <thead>
                         <tr>
                             <th>Posts</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         <% for (var i=0; i < data.length ; i++) { %>
+                            
                             <tr>
                                 <!-- Test post format. Could use some padding. -->
                                 <td>
@@ -56,7 +99,7 @@
                                                         </h5>
                                                     </a>
                                                     <!-- <p class="mb-1">Post description. </p> -->
-                                                    <small class="text-muted"> Posted by <%- data[i].userid -%> </small>
+                                                    <small class="text-muted"> Posted by <%- data[i].first -%> <%- data[i].last -%></small>
                                                 </div>
                                             </div>
                                             <div class="d-flex w-30 justify-content-end"></div>
@@ -75,10 +118,30 @@
                                     </div>
                                 </td>
                             </tr>
-                            <% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
+
+            <div id="post-statistics-container">
+                Showing posts <strong><%- offset + 1 -%></strong> to <strong><%- offset + data.length -%></strong> out of <strong><%- data[0].full_count -%></strong> total posts
+            </div>
+            <div class="pagination-container">
+                <% if (firstPage) { %>
+                    <a class="pagination-button pagination-button-1 disabled" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
+                    <a class="pagination-button pagination-button-2 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
+                <% } else { %>
+                    <a class="pagination-button pagination-button-1" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
+                    <a class="pagination-button pagination-button-2" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
+                <% } if (lastPage) { %>
+                    <a class="pagination-button pagination-button-3 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
+                    <a class="pagination-button pagination-button-4 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
+                <% } else { %>
+                    <a class="pagination-button pagination-button-3" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
+                    <a class="pagination-button pagination-button-4" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
+                <% } %>
+            </div>
+
         </div>
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -102,6 +165,8 @@
 
             </div>
         </div>
+
+        
 </body>
 
 
@@ -119,4 +184,50 @@
 
     document.getElementById("report-btn").addEventListener("click", submit);
 
+
+    document.onload() //get dropdown list
+    //set selected index from query parameter -> then display correct sortby
+
 </script>
+
+<style>
+    .form-inline {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+    }
+    .sorting {
+        margin-left:1%;
+    }
+    .sort-btn {
+        font-size:85%;
+    }
+    .submit-sort {
+        padding: 2%;
+    }
+    .pagination-container, #post-statistics-container {
+        margin-left:3%;
+    }
+    .pagination-container {
+        display:inline-block;
+        height:30px;
+    }
+    .pagination-button{
+        padding:3px;
+        margin:0;
+        text-decoration: None;
+    }
+
+    .pagination-button:hover {
+        text-decoration: None;
+    }
+    label {
+        margin-right:5px;
+    }
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+        color:grey;
+    }
+
+</style>
