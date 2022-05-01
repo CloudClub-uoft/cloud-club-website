@@ -1,0 +1,174 @@
+<body>
+    <header class="jumbotron">
+        <div class="container marketing">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1><%- first -%> <%- last -%></h1>
+                    <p><%- email -%></p>
+                </div>
+                <div class="col-12 col-sm">
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    </div>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+
+                <div class="card">
+                    <img class="card-img-top"
+                        src="<%- profile_path -%>"
+                        onerror="this.onerror=null;this.src='/assets/CloudClub.png';"
+                        alt="Card image cap" onclick="document.getElementById('imgInp[1]').click();">
+                    </img>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+
+                <div class="row profile-card">
+                    <div class="col-12">
+                        <h1>Profile Information</h1>
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        <b>Date Joined</b>
+                    </div>
+                    <div class="col-auto">
+                        <%- date -%>
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        <b>Email</b>
+                    </div>
+                    <div class="col-auto">
+                        <%- email -%>
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        <b>Posts</b>
+                    </div>
+                    <div class="col-auto">
+                        <%- numPosts -%>
+                    </div>
+                </div>
+
+                <div class="row row-content">
+                    <div class="col-3">
+                        <b>Latest Post</b>
+                    </div>
+                    <div class="col-auto">
+                        <a href="/post?id=<%- latestPostId -%>"><%- latestPostSubject -%></a>
+                    </div>
+                </div>
+                <div class="row row-content">
+                    <div class="col-3">
+                        <b>Description:</b>
+                    </div>
+                </div>
+                <div class="row row-content">
+                    <div class="col-auto">
+                        <p> <%- description -%> </p>
+                    </div>
+                </div>
+                <div class="row row-content">
+                    <div class="col-md-6 text-right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/profile" method="POST" encType="multipart/form-data">
+                    <h3>Upload Profile Photo </h3> 
+                    <input type="file" name="image" accept="image/*">
+                    <div class="col-md-12 text-right">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
+                <form action="/description" method="POST" encType="multipart/form-data">
+                    <h3>Description </h3>
+                    <textarea rows="5" class="form-control" name="description"></textarea> </br>
+                    <div class="col-md-12 text-right">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        padding-top: 3.5rem;
+        padding-bottom: 3rem;
+        color: #007f96;
+    }
+    .card{
+        height: 350px;
+        box-shadow: 0 0 5px black;
+    }
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center
+
+    }
+    .profile-card {
+
+        padding: 10px 10px 10px 10px;
+
+    }
+
+    .row-header {
+
+        margin: 0px auto;
+        padding: 0px auto;
+
+    }
+
+    .row-content {
+
+        min-height: 30px;
+        margin: 5px;
+    }
+
+    .jumbotron {
+
+        padding: 70px 30px 70px 30px;
+        margin: 10px auto;
+
+    }
+</style>
+
+
+

@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const fs = require('fs');
+const fileUpload = require('express-fileupload');
 
 // Config
 require('dotenv').config();
@@ -12,11 +13,13 @@ const port = process.env.PORT || 80;
 require('./config/redis-sessions')(app);
 const db = require('./config/sql-db');
 
+
 //override required becuase HTML forms do not support PUT/DELETE
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
 // Express setup
+app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));

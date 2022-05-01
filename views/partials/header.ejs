@@ -38,7 +38,9 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link email"></a>
+                    <a role="button" aria-pressed="true" class="nav-link <% if (selected == 'api') {%> <%-'active'-%> <%}%>" href="/profile" <% if (selected=='profile' ) {%>
+                        <%-'tabindex="-1" aria-disabled="true"'-%>
+                            <%}%> >My Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link loginout" href=""></a>
