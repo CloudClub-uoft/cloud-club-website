@@ -124,3 +124,6 @@ certs/
 
 #JetBrains IDEs
 .idea
+
+# pycache
+*/__pycache__
