@@ -23,16 +23,55 @@ module.exports = (app, db) => {
         q += `LIMIT ${LIMIT} OFFSET ${OFFSET} `;
         sortby = req.query.sortby ? req.query.sortby : 'newest';
         db.query(q, (err, result) => {
-            if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}
+
             let firstPage = false;
             let lastPage = false;
+
+            // Check if there are no posts
+            if (! result.length ){
+
+                return res.render('forum', { 
+                    'selected': 'forum', 
+                    'title': 'CloudClub | Forum', 
+                    'data': result, 
+                    'firstPage':firstPage, 
+                    'lastPage':lastPage, 
+                    'limit': LIMIT, 
+                    'offset': OFFSET, 
+                    'sortby': sortby, 
+                    'tm': req.query.tm, 
+                    'ts': req.query.ts, 
+                    'user_id': req.session.userid}
+                );
+            }
+
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ 
+                    error: 'Internal Server Error 500' 
+                });
+            }
+            
             if (!OFFSET) {
                 firstPage = true;
             }
             if (result[0].full_count - OFFSET <= LIMIT) {
                 lastPage = true;
             }
-            return res.render('forum', { 'selected': 'forum', 'title': 'CloudClub | Forum', 'data': result, 'firstPage':firstPage, 'lastPage':lastPage, 'limit': LIMIT, 'offset': OFFSET, 'sortby': sortby, 'tm': req.query.tm, 'ts': req.query.ts, 'user_id': req.session.userid});
+            
+            return res.render('forum', { 
+                'selected': 'forum', 
+                'title': 'CloudClub | Forum', 
+                'data': result, 
+                'firstPage':firstPage, 
+                'lastPage':lastPage, 
+                'limit': LIMIT, 
+                'offset': OFFSET, 
+                'sortby': sortby, 
+                'tm': req.query.tm, 
+                'ts': req.query.ts, 
+                'user_id': req.session.userid}
+            );
         });
     });
 };
