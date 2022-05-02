@@ -123,24 +123,37 @@
                 </table>
             </div>
 
-            <div id="post-statistics-container">
-                Showing posts <strong><%- offset + 1 -%></strong> to <strong><%- offset + data.length -%></strong> out of <strong><%- data[0].full_count -%></strong> total posts
-            </div>
-            <div class="pagination-container">
-                <% if (firstPage) { %>
-                    <a class="pagination-button pagination-button-1 disabled" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
-                    <a class="pagination-button pagination-button-2 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
-                <% } else { %>
-                    <a class="pagination-button pagination-button-1" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
-                    <a class="pagination-button pagination-button-2" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
-                <% } if (lastPage) { %>
-                    <a class="pagination-button pagination-button-3 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
-                    <a class="pagination-button pagination-button-4 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
-                <% } else { %>
-                    <a class="pagination-button pagination-button-3" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
-                    <a class="pagination-button pagination-button-4" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
-                <% } %>
-            </div>
+            <% if (!data.length) { %>
+
+                <div id="post-statistics-container">
+                    No posts found.
+                </div>
+                <div class="pagination-container">
+                   
+                </div>
+
+            <% } else { %>            
+
+                <div id="post-statistics-container">
+                    Showing posts <strong><%- offset + 1 -%></strong> to <strong><%- offset + data.length -%></strong> out of <strong><%- data[0].full_count -%></strong> total posts
+                </div>
+                <div class="pagination-container">
+                    <% if (firstPage) { %>
+                        <a class="pagination-button pagination-button-1 disabled" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
+                        <a class="pagination-button pagination-button-2 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
+                    <% } else { %>
+                        <a class="pagination-button pagination-button-1" href="/forum?sortby=<%- sortby -%>&offset=0&limit=<%- limit -%>">First</a>
+                        <a class="pagination-button pagination-button-2" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(offset-limit,0) -%>&limit=<%- limit -%>">Previous</a>
+                    <% } if (lastPage) { %>
+                        <a class="pagination-button pagination-button-3 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
+                        <a class="pagination-button pagination-button-4 disabled" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
+                    <% } else { %>
+                        <a class="pagination-button pagination-button-3" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(Math.min(offset+limit,data[0].full_count),0) -%>&limit=<%- limit -%>">Next</a>
+                        <a class="pagination-button pagination-button-4" href="/forum?sortby=<%- sortby -%>&offset=<%- Math.max(data[0].full_count-limit,0) -%>&limit=<%- limit -%>">Last</a>
+                    <% } %>
+                </div>
+            
+            <% } %>
 
         </div>
         <div class="modal fade" id="myModal" role="dialog">
