@@ -12,7 +12,7 @@ const url = process.env.SLACK_WEBHOOK_URL;
 // Initialize
 const webhook = new IncomingWebhook(url);
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
 
 	app.post('/report', (req, res) => {
 

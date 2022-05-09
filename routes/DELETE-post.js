@@ -5,7 +5,7 @@
  * This is not meant to be a publicy accesible API.
  */
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
 	// New forum post POST request
 	app.delete('/deletepost', (req, res) => {
 		

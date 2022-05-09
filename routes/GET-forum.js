@@ -1,4 +1,4 @@
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.get('/forum', (req, res) => {
         db.query('SELECT postid, userid, subject, timestamp FROM cloudclub.forum', (err, result) => {
             if (err) {console.log(err);return res.status(500).json({ error: 'Internal Server Error 500' });}

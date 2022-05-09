@@ -21,7 +21,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 
 // Registration POST request
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
   app.post('/register', (req, res) => {
     const { email, password, first, last } = req.body;
     if(email === undefined || password === undefined || first === undefined || last === undefined){

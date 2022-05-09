@@ -1,7 +1,6 @@
-const s3Client = require('../config/s3');
 const { v4: uuid } = require('uuid');
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
   app.post('/profile', (req, res) => {
     var file;
     var fileExtension;

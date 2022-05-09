@@ -15,7 +15,7 @@
  * @apiError (500) {String} error "Internal Server Error 500"
  */
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
   // Gets post list GET request
   app.get('/posts', (req, res) => {
     const sesh = req.session;

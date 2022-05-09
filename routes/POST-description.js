@@ -1,4 +1,4 @@
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.post('/description', (req, res) => {
         const sesh = req.session;
         db.query(`UPDATE cloudclub.profiles SET description = '${req.body.description}' WHERE userid='${sesh.userid}'`, (err) => {
