@@ -11,6 +11,7 @@ const port = process.env.PORT || 80;
 
 // Submodules
 require('./config/redis-sessions')(app);
+const s3Client = require('./config/s3');
 const db = require('./config/sql-db');
 
 
@@ -28,10 +29,15 @@ app.set('view engine', 'ejs');
 // Dynamic routing
 app.use(expressLayouts);
 app.set('layout', 'layouts/layout');
-require('./routes/routing').boot(app, db);
+require('./routes/routing').boot(app, db, s3Client);
 
 // Static Documentation
 app.use('/api', express.static('docs'));
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+  res.status(404).render('notfound', { 'selected': 'notfound', 'title': 'CloudClub | Error 404'});
+});
 
 // Start server
 if(process.env.PRODUCTION){
