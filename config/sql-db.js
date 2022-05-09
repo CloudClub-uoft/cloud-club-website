@@ -32,7 +32,7 @@ var dbConfig = {
   port: process.env.DB_PORT,
   connectionLimit: 50,
   queueLimit: 0,
-  waitForConnection: true,
+  waitForConnections: true,
   charset : 'utf8mb4'
 };
 var database = mysql.createPool(dbConfig);
