@@ -2,12 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-def login(driver):
+def login():
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+    PORT = os.getenv("PORT")
+
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(3)
 
     email = "test.account@gmail.com"
     password = "TestAccount1@"
 
-    driver.get("http://localhost:4000/login?r=/")
+    driver.get(f"http://localhost:{PORT}/login?r=/")
 
     email_entry = driver.find_element(By.NAME, "email")
     password_entry = driver.find_element(By.NAME, "password")
@@ -16,3 +23,5 @@ def login(driver):
 
     submit_button = driver.find_element(By.CLASS_NAME, "btn")
     submit_button.click()
+
+    return driver
