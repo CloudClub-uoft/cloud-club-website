@@ -7,11 +7,13 @@ def set_forum_pagination_to_sort_by(sort_by: str, number_of_entries: int):
     sort_by must be one of newest, oldest, firstname, title
     number_of_entries must be one of 10, 25, 50
     '''
+    import os
+    from dotenv import load_dotenv
+    import time
+
     driver = webdriver.Chrome()
     driver.implicitly_wait(3)
 
-    import os
-    from dotenv import load_dotenv
     load_dotenv()
     PORT = os.getenv("PORT")
 
@@ -35,12 +37,22 @@ def make_posts(driver, n, start):
 
         driver.find_element(By.XPATH, "//button[contains(text(), 'Create')]").click()
 
+def convert_post_date_to_yyyymmdd(date: str):
+    '''
+    date must be a string in the format '<Month as a Word> <dd> <yyyy>'
+    for example, a valid input date could be 'May 15 2022'
+    returns yyyy-mm-dd as a string, such as '2022-05-15'
+    '''
+    month_to_number = {'January': '01', 'February': '02', 'March': '03', 'April': '04', 'May': '05', 'June': '06', 'July': '07', 'August': '08', 'September': '09', 'October': '10', 'November': '11', 'December': '12'}
+    date_to_list = date.split()
+    month, day, year = month_to_number[date_to_list[0]], date_to_list[1], date_to_list[2]
+    return '-'.join([year, month, day])
+
 def navigate_to_forum(driver):
     forum = driver.find_element(By.XPATH, "//a[contains(text(), 'Forum')]")
     forum.click()
 
 def get_total_posts(driver):
-    navigate_to_forum(driver)
     post_stats = driver.find_element(By.ID, "post-statistics-container").text
     if "No posts found" in post_stats:
         return 0
