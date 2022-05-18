@@ -111,7 +111,7 @@ def test_sort_by_oldest_post_first():
 
 if __name__ == '__main__':
     test_create_post()
-    test_delete_post()
+    test_delete_post() 
 
     test_sort_by_posts_titles()
     test_sort_by_posters_names()
