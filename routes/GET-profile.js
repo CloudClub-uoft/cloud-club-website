@@ -1,4 +1,4 @@
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
   app.get('/profile', (req, res) => {
     const sesh = req.session;
     var numPosts;

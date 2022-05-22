@@ -18,7 +18,7 @@
 const bcrypt = require('bcrypt');
 
 // Login POST request
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
   app.post('/login', (req, res) => {
     const { email, password } = req.body;
     if(email === undefined || password === undefined){

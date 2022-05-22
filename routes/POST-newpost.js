@@ -17,7 +17,7 @@
 var Filter = require('bad-words'),
     filter = new Filter();
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     // New forum post POST request
     app.post('/newpost', (req, res) => {
         const sesh = req.session;
