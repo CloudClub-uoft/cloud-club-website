@@ -30,7 +30,11 @@ def test_delete_post():
     
 
 def test_create_post():
-    driver = login()
+    email = "test.account@gmail.com"
+    password = "TestAccount1@"
+    
+    driver = login(email, password)
+    
     navigate_to_forum(driver)
     total_posts_before = get_total_posts(driver)
     new_post = driver.find_element(By.XPATH, "//a[contains(text(), 'New Post')]")

@@ -1,9 +1,8 @@
 from xml.dom import NotFoundErr
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
 
-def login():
+def login(email, password):
     import os
     from dotenv import load_dotenv
     load_dotenv()
@@ -13,9 +12,6 @@ def login():
 
     driver = webdriver.Chrome()
     driver.implicitly_wait(3)
-
-    email = "test.account@gmail.com"
-    password = "TestAccount1@"
 
     driver.get(f"http://localhost:{PORT}/login?r=/")
 
