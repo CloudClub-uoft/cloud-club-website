@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 import time
-
-import os
 import sys
 
 sys.path.append('../testlib')
@@ -33,6 +31,9 @@ def make_posts(driver, n, start):
 def get_total_posts(driver):
     # ensure you are navigated to the forum page when calling this function.
     post_stats = driver.find_element(By.ID, "post-statistics-container").text
+    if "No posts found" in post_stats:
+        return 0
+
     split_post_stats = post_stats.split()
     return int(split_post_stats[-3]) # total posts
 
