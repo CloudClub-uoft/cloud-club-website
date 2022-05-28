@@ -2,7 +2,7 @@
  This is an intermediate view for editing an existing post.
  */
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.get('/editpost', (req, res) => {
         const sesh = req.session;
         if (!sesh.email) {

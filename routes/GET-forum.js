@@ -1,4 +1,4 @@
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.get('/forum', (req, res) => {
         const LIMIT = (req.query.limit) ? Math.min(req.query.limit, 50) : 10;
         const OFFSET = (req.query.offset) ? Math.max(req.query.offset, 0) : 0;

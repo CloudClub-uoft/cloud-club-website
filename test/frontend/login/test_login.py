@@ -7,6 +7,7 @@ import sys
 sys.path.append('../testlib')
 from register import *
 from teardown import *
+from login import *
 
 def test_login():
     email = "test.account@gmail.com"

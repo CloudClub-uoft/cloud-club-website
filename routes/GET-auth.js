@@ -9,7 +9,7 @@
  * @apiError (401) - Indicates that there is no authentication state currently active (i.e. the user is not logged in)
  * @apiError (500) {String} error "Internal Server Error 500"
  */
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.get('/auth', (req, res) => {
         try{
           if(req.session.email){

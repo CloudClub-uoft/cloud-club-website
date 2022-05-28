@@ -2,7 +2,7 @@
     This is an intermediate view for writing a new post. 
 */
 
-module.exports = (app, db) => {
+module.exports = (app, db, s3Client) => {
     app.get('/newpost', (req, res) => {
         const sesh = req.session;
         if (!sesh.email) {
