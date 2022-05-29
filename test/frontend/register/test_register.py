@@ -1,23 +1,43 @@
-from xml.dom import NotFoundErr
 from selenium import webdriver
-import selenium
 from selenium.webdriver.common.by import By
 
+import time
+import os
 import sys
+import unittest
+import subprocess
+from os.path import join, dirname
+from dotenv import load_dotenv
+
 sys.path.append('../testlib')
 from register import *
+from forum import *
 from teardown import *
 
-def test_register():
-    driver = register()
-    try:
-        driver.find_element(By.XPATH, "//div[contains(text(), 'you may now login.')]")
-        print("test register passed.")
-        teardown(driver)
-    except selenium.common.exceptions.NoSuchElementException as e:
-        print(e)
-        teardown(driver)
-        raise Exception("Did not obtain success message 'you may now login.' upon registration")
+class TestForum(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # Load environment variables
+        dotenv_path = join(dirname(__file__), '../../../.env')
+        load_dotenv(dotenv_path)        
+        # Create sub-process 
+        cls.proc = subprocess.Popen("node index.js", cwd="../../../")
+    
+    @classmethod
+    def tearDownClass(cls):  
+        # Terminate sub-process
+        cls.proc.terminate()
+
+    def test_register(cls):
+        driver = register()
+        try:
+            driver.find_element(By.XPATH, "//div[contains(text(), 'you may now login.')]")
+            print("test register passed.")
+            teardown(driver)
+        except selenium.common.exceptions.NoSuchElementException as e:
+            print(e)
+            teardown(driver)
+            raise Exception("Did not obtain success message 'you may now login.' upon registration")
 
 if __name__ == '__main__':
-    test_register()
+    unittest.main()
