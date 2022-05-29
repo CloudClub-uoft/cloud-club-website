@@ -48,7 +48,6 @@ class TestForum(unittest.TestCase):
         print("test delete post passed")
         teardown(driver)
         
-
     def test_create_post(self):
         email = "test.account@gmail.com"
         password = "TestAccount1@"
