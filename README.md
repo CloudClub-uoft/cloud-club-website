@@ -7,18 +7,39 @@ Website for the UofT CloudClub.
 
 - git [(Download)](https://git-scm.com/downloads) or GitHub Desktop [(Download)](https://desktop.github.com/)
 - Node.JS + npm [(Download)](https://nodejs.org/en/download/)
+- Environment variables and MySQL configuration scripts.
 
-## Installation
+## Installation and Startup
 
 1. Either clone this repository using GitHub Desktop (or related software), download as a ZIP and extract, or run `git clone https://github.com/CloudClub-uoft/cloud-club-website` using the terminal and enter your credentials.
 2. Install Node.JS dependencies by navigating to the folder using a terminal and executing `npm install`.
+3. Launch MySQL instance.
+4. Start the server by executing `node .` in the terminal.
+5. View the webpage by navigating to `localhost` in your browser.
 
-## Testing
+## Frontend Testing
 
-3. Start the server by executing `node .` in the terminal.
-4. View the webpage by navigating to `localhost` in your browser.
+The Selenium framework for Python is required for frontend testing. During tests a properly configured MySQL instance should be accessible by the website server.
+
+```
+python -m pip install selenium
+```
+
+__NOTE__: A Selenium webdriver must be accessible via the PATH variable. [Documentation.](https://selenium-python.readthedocs.io/installation.html#drivers)
+
+All frontend tests are stored under the test/frontend directory. A test can be invoked by executing the test script inside one of the test directories.
+
+```
+python test_forum.py
+```
 
 # Development
+
+## Linting and Coding Standards
+
+Review Code Formatting and Standards Document. [Link](https://docs.google.com/document/d/1XDSY4zko2UkI1lpOo0oyULxdoP_LIxU53pjhIaK3F0g/edit?usp=sharing)
+
+Setup VSCode workspace for linting and formatting. [Link (Slide 12)](https://docs.google.com/presentation/d/1toRJaFMjc6QkshXTYEmDK2pbZYMErbap/edit?usp=sharing&ouid=105420304599598918292&rtpof=true&sd=true)
 
 ## Frontend
 
