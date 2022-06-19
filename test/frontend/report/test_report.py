@@ -9,24 +9,25 @@ import subprocess
 from os.path import join, dirname
 from dotenv import load_dotenv
 
-sys.path.append('../testlib')
+sys.path.append("../testlib")
 from register import *
 from login import *
 from forum import *
 from teardown import *
 from report import *
 
+
 class TestForum(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Load environment variables
-        dotenv_path = join(dirname(__file__), '../../../.env')
-        load_dotenv(dotenv_path)        
-        # Create sub-process 
+        dotenv_path = join(dirname(__file__), "../../../.env")
+        load_dotenv(dotenv_path)
+        # Create sub-process
         cls.proc = subprocess.Popen("node index.js", cwd="../../../")
-    
+
     @classmethod
-    def tearDownClass(cls):  
+    def tearDownClass(cls):
         # Terminate sub-process
         cls.proc.terminate()
 
@@ -58,5 +59,6 @@ class TestForum(unittest.TestCase):
             teardown(driver)
             raise Exception("Did not obtain success message 'Reported!'")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
