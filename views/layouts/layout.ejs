@@ -3,14 +3,14 @@
 
 <%- include('../partials/head') %>
 
-    <% if (selected != 'login' && selected != 'register') {%>
+    <% if (selected != 'login' && selected != 'register' && selected != 'reset') {%>
         <%- include('../partials/header.ejs') %>
             <%}%>
 
                 <%- body %>
 
                     <!-- Footer include issues on the register and login ejs pages currently. -->
-                    <% if (selected != 'login' && selected != 'register') {%>
+                    <% if (selected != 'login' && selected != 'register' && selected != 'reset') {%>
                         <%- include('../partials/footer.ejs') %>
                             <%}%>
 

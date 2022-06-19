@@ -5,7 +5,13 @@
     <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required autofocus>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <i>No account? </i><a href="/register?r=<%-r-%>">Register!</a>
+    <div class="text-center">
+      <i>No account? </i><a href="/register?r=<%-r-%>">Register! <br></a>
+    </div>
+    <div class="text-center">
+      <i>Forgot Password? </i><a href="/reset?r=<%-r-%>">Reset Password</a>
+    </div>
+    
 
     <!-- Manually override button colour for now -->
     <button class="btn btn-lg btn-primary btn-block" style="background-color: #50BDE4" type="submit">Sign In</button>
@@ -20,6 +26,7 @@
         </button>
       </div>
       <div class="toast-body"></div>
+      <div class="password-reset-ref"></div>
     </div>
   </form>
   <script type="text/javascript">
@@ -42,8 +49,10 @@
             setTimeout(()=>{window.location.href = `<%-r-%>`}, 1500);
           },
           401: function(response) {
+            const resetPasswordRef = "<a href=\"/reset\">Reset Password</a>"
             $('#toasttitle').text("Failed! Try again.")
             $('.toast-body').text(response.responseJSON.error);
+            $('.password-reset-ref').html(resetPasswordRef);
             $('.toast').toast('show');
           },
           500: function(response) {
