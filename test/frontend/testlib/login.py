@@ -2,13 +2,17 @@ from xml.dom import NotFoundErr
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 def login(email, password):
     import os
     from dotenv import load_dotenv
+
     load_dotenv()
     PORT = os.getenv("PORT")
     if not PORT:
-        raise NotFoundErr("Port not found. Please specify localhost port in your .env file!")
+        raise NotFoundErr(
+            "Port not found. Please specify localhost port in your .env file!"
+        )
 
     driver = webdriver.Chrome()
     driver.implicitly_wait(3)
