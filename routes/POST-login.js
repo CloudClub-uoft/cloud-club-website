@@ -40,6 +40,7 @@ module.exports = (app, db) => {
 						sesh.password = password;
 						sesh.first = result1[0]["first-name"];
 						sesh.last = result1[0]["last-name"];
+						sesh.verified = result1[0]["verified"];
 						return res.status(200).json({ message: "Login Successful!" });
 					}
 					return res.status(401).json({ error: "Password incorrect." });

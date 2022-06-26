@@ -7,6 +7,9 @@ module.exports = (app, db) => {
 		if (!sesh.email) {
 			return res.redirect("/?tm=You Aren't Logged In!&ts=false");
 		}
+		if (!sesh.verified) {
+			return res.redirect("/verifypage");
+		}
 		db.query(`SELECT COUNT(*) FROM cloudclub.forum WHERE userid='${sesh.userid}'`,(err, forumPosts) => {
 			if (err) {console.log(err); return res.redirect("/?tm=Internal Server Error 500&ts=false");}
 			numPosts = forumPosts[0]["COUNT(*)"];
