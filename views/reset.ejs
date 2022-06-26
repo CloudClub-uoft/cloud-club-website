@@ -7,14 +7,14 @@
         <!-- <label for="inputLastName" class="sr-only">Last Name</label> -->
         <button class="btn btn-lg btn-primary btn-block" style="background-color: #50BDE4" type="submit">Send Link to Reset Password</button>
         <p class="mt-5 mb-3 text-muted">CloudClub UofT | 2020-2021</p>
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000 style="position:absolute;  z-index: 2;">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=15000 style="position:absolute; z-index: 2;">
             <div class="toast-header">
-                <strong class="mr-auto" id="toasttitle"></strong>
+                <strong class="mr-auto" id="toasttitle" style="text-align: center; width: 100%;"></strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="toast-body"></div>
+            <div class="toast-body" style="text-align: left; width: 100%;"></div>
         </div>
     </form>
     <!-- Bad register notif -->
@@ -32,10 +32,9 @@
             },
             statusCode: {
               201: function(response) {
-                $('#toasttitle').text("Email Sent, Please check your email")
-                $('.toast-body').text(response.message);
+                $('#toasttitle').text("Successful");
+                $('.toast-body').text(response.success);
                 $('.toast').toast('show');
-                setTimeout(()=>{window.location.href = `<%-r-%>`}, 1500);
               },
               400: function(response) {
                 $('#toasttitle').text("Failed!")
