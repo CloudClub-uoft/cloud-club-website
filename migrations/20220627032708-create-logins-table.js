@@ -27,6 +27,7 @@ exports.up = function (db, callback) {
 		"last-name": { type: "string",  notNull: true },
 		"email": { type: "string",  notNull: true },
 		"password": { type: "string",  notNull: true },
+		/* eslint-disable */
 		"date": {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
 	}, callback)
 	

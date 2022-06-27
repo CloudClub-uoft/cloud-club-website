@@ -16,23 +16,23 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db, callback) {
 	// Create the forum table
-	db.createTable("forum", {
-		postid: {
-			type: "int",
+	db.createTable("reports", {
+		"id": {
+			type: "bigint",
 			notNull: true,
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		userid: { type: "int", notNull: true },
-		subject: { type: "string", defaultValue: "NULL" },
-		body: { type: "string", defaultValue: "NULL" },
+		"subject": { type: "string", notNull: true },
 		/* eslint-disable */
-		timestamp: {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
+		"report_verified": { type: "smallint" },
+		"subject": { type: "string",  notNull: true },
 	}, callback)
+	
 }
 
 exports.down = function (db, callback) {
-	db.dropTable("forum", callback)
+	db.dropTable("reports", callback)
 }
 
 exports._meta = {

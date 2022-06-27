@@ -16,23 +16,22 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db, callback) {
 	// Create the forum table
-	db.createTable("forum", {
-		postid: {
+	db.createTable("profiles", {
+		"profileid": {
 			type: "int",
 			notNull: true,
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		userid: { type: "int", notNull: true },
-		subject: { type: "string", defaultValue: "NULL" },
-		body: { type: "string", defaultValue: "NULL" },
-		/* eslint-disable */
-		timestamp: {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
+		"userid": { type: "string", notNull: true },
+		"profile_path": { type: "string",  notNull: true },
+		"description": { type: "string",  notNull: true },
 	}, callback)
+	
 }
 
 exports.down = function (db, callback) {
-	db.dropTable("forum", callback)
+	db.dropTable("profiles", callback)
 }
 
 exports._meta = {
