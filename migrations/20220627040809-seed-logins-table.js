@@ -29,8 +29,7 @@ exports.up = function (db, callback) {
 			if (err2) {				
 				return
 			}
-			var query = `INSERT INTO cloudclub.logins (\`first-name\`, \`last-name\`, email, password) VALUES ("Test", "Account", "${username}", "${hash}")`
-			console.log(query)
+			var query = `INSERT INTO cloudclub.logins (\`first-name\`, \`last-name\`, email, password) VALUES ("Test", "Account", "${username}", "${hash}")`			
 			db.runSql(query, callback)
 		}
 	)
