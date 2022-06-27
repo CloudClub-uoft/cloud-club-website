@@ -14,7 +14,7 @@ exports.setup = function (options, seedLink) {
 	seed = seedLink
 }
 
-exports.up = function (db) {
+exports.up = function (db, callback) {
 	// Create the forum table
 	db.createTable("logins", {
 		"id": {
@@ -28,12 +28,12 @@ exports.up = function (db) {
 		"email": { type: "string",  notNull: true },
 		"password": { type: "string",  notNull: true },
 		"date": {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
-	})
+	}, callback)
 	
 }
 
-exports.down = function (db) {
-	db.dropTable("logins")
+exports.down = function (db, callback) {
+	db.dropTable("logins", callback)
 }
 
 exports._meta = {

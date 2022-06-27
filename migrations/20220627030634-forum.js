@@ -14,7 +14,7 @@ exports.setup = function (options, seedLink) {
 	seed = seedLink
 }
 
-exports.up = function (db) {
+exports.up = function (db, callback) {
 	// Create the forum table
 	db.createTable("forum", {
 		postid: {
@@ -27,11 +27,11 @@ exports.up = function (db) {
 		subject: { type: "string", defaultValue: "NULL" },
 		body: { type: "string", defaultValue: "NULL" },
 		timestamp: {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
-	})
+	}, callback)
 }
 
-exports.down = function (db) {
-	db.dropTable("forum")
+exports.down = function (db, callback) {
+	db.dropTable("forum", callback)
 }
 
 exports._meta = {
