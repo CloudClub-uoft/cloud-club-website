@@ -5,8 +5,7 @@
         "user": { "ENV" : "DB_USER" },
         "password" : { "ENV" : "DB_PASS" },
         "database": "cloudclub",
-        "driver": "mysql",
-        "flags": "-CONNECT_WITH_DB",
+        "driver": "mysql",        
         "multipleStatements": true
     },
     "prod": {
@@ -14,8 +13,7 @@
         "user": { "ENV" : "DB_USER" },
         "password" : { "ENV" : "DB_PASS" },
         "database": "cloudclub",
-        "driver": "mysql",
-        "flags": "-CONNECT_WITH_DB",
+        "driver": "mysql",        
         "multipleStatements": true
     }
 }
