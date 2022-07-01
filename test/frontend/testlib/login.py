@@ -1,12 +1,11 @@
 from xml.dom import NotFoundErr
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import os
+from dotenv import load_dotenv
 
 
-def login(email, password):
-    import os
-    from dotenv import load_dotenv
-
+def login(email: str, password: str) -> webdriver:
     load_dotenv()
     PORT = os.getenv("PORT")
     if not PORT:
