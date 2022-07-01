@@ -2,14 +2,18 @@
     <p>You need to verify your email to post on CloudConvos and to edit your profile. A verification email was sent when you first registered</p>
     <p>Check your spam folder for the email</p>
     <form action="/sendmail" method="POST">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"><br><br>
         <input type="submit" value="Send Another Email">
     </form>
+    <% if (message) { %>
+        <div id="message"><%- message -%></div>
+    <% } %>
 
     <style>
         p {
             margin-top:100px;
+        }
+        #message {
+            color: green;
         }
     </style>
 </body>

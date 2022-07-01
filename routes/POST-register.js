@@ -36,8 +36,8 @@ module.exports = (app, db) => {
  
 					bcrypt.hash(password, Number.parseInt(process.env.ENC_ROUNDS), (err2, hash) => {
 						if (err2) { console.log(err2); return res.status(500).json({ error: "Internal Server Error 500" }); }
-						const randomId = uuid.v4(); 
-						db.query("INSERT INTO cloudclub.email_verification (`first-name`, `last-name`, email, uuid) VALUES (?, ?, ?, ?)", [first, last, email, randomId], (err3) => {
+						const token = uuid.v4(); 
+						db.query("INSERT INTO cloudclub.email_verification (`first-name`, `last-name`, email, uuid) VALUES (?, ?, ?, ?)", [first, last, email, token], (err3) => {
 							if (err3) { console.log(err3); return res.status(500).json({ error: "Internal Server Error 500" }); }
 							
 							// insert into cloudclub.logins, set verified to 0
@@ -65,7 +65,7 @@ module.exports = (app, db) => {
 										<div>Thank you for registering! Please verify your CloudClub account by clicking the link below.</div>
 										<div>If you didn't register to become a CloudClub member, please ignore this email.</div>
 										<br>
-										<a href="http://${req.get("host")}/verify?id=${randomId}&name=${first}-${last}">Verify Now</a>
+										<a href="http://${req.get("host")}/verify?id=${token}&name=${first}-${last}">Verify Now</a>
 										<br><br>
 										<div>The CloudClub Team</div>
 									</div>
