@@ -65,7 +65,7 @@ module.exports = (app, db) => {
 										<div>Thank you for registering! Please verify your CloudClub account by clicking the link below.</div>
 										<div>If you didn't register to become a CloudClub member, please ignore this email.</div>
 										<br>
-										<a href="http://${req.get("host")}/verify?id=${token}&name=${first}-${last}">Verify Now</a>
+										<a href="http://${req.get("host")}/verify?name=${first}-${last}&id=${token}">Verify Now</a>
 										<br><br>
 										<div>The CloudClub Team</div>
 									</div>

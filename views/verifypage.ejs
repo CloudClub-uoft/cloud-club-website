@@ -1,19 +1,35 @@
-<body class="text-center">
-    <p>You need to verify your email to post on CloudConvos and to edit your profile. A verification email was sent when you first registered</p>
-    <p>Check your spam folder for the email</p>
-    <form action="/sendmail" method="POST">
-        <input type="submit" value="Send Another Email">
-    </form>
-    <% if (message) { %>
-        <div id="message"><%- message -%></div>
-    <% } %>
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="title">
+                    <h1>Verify Email</h1>
+                    <img class="card-img-top"
+                        src='/assets/favicon.png'>
+                    </img>
+                    <p>You need to verify your email to post on CloudConvos or to edit your profile. A verification email was sent when you first registered. </p>
+                    <p><strong>Please click on the latest email to verify your account. The email might be in your spam!</strong></p>
+                    <a href="/sendmail" class="btn btn-primary btn-round">Send Another Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <style>
-        p {
-            margin-top:100px;
-        }
-        #message {
-            color: green;
-        }
-    </style>
-</body>
+<style>
+    .page-content {
+        padding: 70px;
+        width: 700px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .card-img-top {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center
+    }
+    .title {
+        text-align: center;
+    }
+</style>

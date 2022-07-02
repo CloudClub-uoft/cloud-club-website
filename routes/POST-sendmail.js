@@ -10,6 +10,7 @@ module.exports = (app, db) => {
 				const firstname = res1[0]["first-name"];
 				const lastname = res1[0]["last-name"];
 				const token = uuid.v4();
+
 				db.query("UPDATE cloudclub.email_verification SET uuid=(?) WHERE email=(?)", [token, email], (e2) => {
 					if (e2) { console.log(e2); return res.status(500).json({ message: "Internal server error 500" }); }
 				});
@@ -34,7 +35,7 @@ module.exports = (app, db) => {
                             <div>Thank you for registering! Please verify your CloudClub account by clicking the link below.</div>
                             <div>If you didn't register to become a CloudClub member, please ignore this email.</div>
                             <br>
-                            <a href="http://${req.get("host")}/verify?id=${token}&name=${firstname}-${lastname}">Verify Now</a>
+                            <a href="http://${req.get("host")}/?name=${firstname}-${lastname}verify&id=${token}">Verify Now</a>
                             <br><br>
                             <div>The CloudClub Team</div>
                         </div>
