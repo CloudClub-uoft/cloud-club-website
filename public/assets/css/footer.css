@@ -1,0 +1,27 @@
+.footer-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+.footer-container>ul{
+    list-style-type: none; 
+    display: flex; 
+    gap: 16px; 
+    margin-bottom: 12px;
+}
+
+i{
+    color: grey;
+}
+
+.fb-icon:hover{
+    color: #4267B2;
+}
+
+.linkedin-icon:hover{
+    color: #0072b1;
+}
+
+
