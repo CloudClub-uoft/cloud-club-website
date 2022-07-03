@@ -1,12 +1,11 @@
 const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
-	host: process.env.EMAIL_HOST,
-	port: process.env.EMAIL_PORT,
-	secure: true,
+	service:"Yandex",
+	host: "smtp.yandex.ru",
 	auth: {
-		user: process.env.EMAIL_USER,
-		pass: process.env.EMAIL_PASS,
+		user: process.env.AUTH_EMAIL,
+		pass: process.env.AUTH_EMAIL_PASSWORD
 	},
 });
 

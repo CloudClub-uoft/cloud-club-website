@@ -1,7 +1,6 @@
-const nodemailer = require("nodemailer");
 const uuid = require("uuid");
 
-module.exports = (app, db) => {
+module.exports = (app, db, _, transporter) => {
 	app.post("/sendmail", (req, res) => {
 		const email = req.session.email;
 		db.query("SELECT * FROM cloudclub.logins WHERE email=(?) AND verified=0", [email], (e1, res1) => {
@@ -22,16 +21,7 @@ module.exports = (app, db) => {
 					if (e2) { console.log(e2); return res.status(500).json({ message: "Internal server error 500" }); }
 				});
 
-				var Transport = nodemailer.createTransport({
-					service:"Yandex",
-					host: "smtp.yandex.ru",
-					auth: {
-						user: process.env.AUTH_EMAIL,
-						pass: process.env.AUTH_EMAIL_PASSWORD
-					},
-				});
-
-				var mailOptions = {
+				const mailOptions = {
 					from: process.env.AUTH_EMAIL,
 					to: email,
 					subject: "CloudClub Email Confirmation",
@@ -48,7 +38,7 @@ module.exports = (app, db) => {
                         </div>
                         `
 				};
-				Transport.sendMail(mailOptions, (e3, res) => {
+				transporter.sendMail(mailOptions, (e3, res) => {
 					if (e3) { console.log(e3); return res.status(500).json({ error: "Internal Server Error 500" }) }
 				});
 			}

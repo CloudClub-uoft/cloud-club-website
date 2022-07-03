@@ -18,11 +18,10 @@
  */
 
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
 const uuid = require("uuid");
  
 // Registration POST request
-module.exports = (app, db) => {
+module.exports = (app, db, _, transporter) => {
 	app.post("/register", (req, res) => {
 		const { email, password, first, last } = req.body;
 		if(email === undefined || password === undefined || first === undefined || last === undefined) {
@@ -44,17 +43,8 @@ module.exports = (app, db) => {
 							db.query("INSERT INTO cloudclub.logins (`first-name`, `last-name`, email, password, verified) VALUES (?, ?, ?, ?, 0)", [first, last, email, hash], (err3) => {
 								if (err3) { console.log(err3); return res.status(500).json({ error: "Internal Server Error 500" }); }
 							});
-                       
-							var Transport = nodemailer.createTransport({
-								service:"Yandex",
-								host: "smtp.yandex.ru",
-								auth: {
-									user: process.env.AUTH_EMAIL,
-									pass: process.env.AUTH_EMAIL_PASSWORD
-								},
-							});
         
-							var mailOptions = {
+							const mailOptions = {
 								from: process.env.AUTH_EMAIL,
 								to: email,
 								subject: "CloudClub Email Confirmation",
@@ -71,7 +61,7 @@ module.exports = (app, db) => {
 									</div>
 									`
 							};
-							Transport.sendMail(mailOptions, (err4, res) => {
+							transporter.sendMail(mailOptions, (err4, res) => {
 								if (err4) { console.log(err4); return res.status(500).json({ error: "Internal Server Error 500" }) }
 							});
  
