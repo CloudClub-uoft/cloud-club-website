@@ -7,6 +7,13 @@ module.exports = (app, db) => {
 		db.query("SELECT * FROM cloudclub.logins WHERE email=(?) AND verified=0", [email], (e1, res1) => {
 			if (e1) { console.log(e1); return res.status(500).json({ message: "Internal server error 500" }); }
 			if (res1.length == 1) {
+				// Check timestamp difference
+				const timeDifference = Math.abs(new Date() - new Date(res1[0]["timestamp"]));
+				const minutesDifference = Math.floor((timeDifference/1000)/60);
+				if (minutesDifference < 15) {
+					return res.status(429).redirect(`/verifypage?status=tooFrequent&wait=${15-minutesDifference}`);
+				}
+
 				const firstname = res1[0]["first-name"];
 				const lastname = res1[0]["last-name"];
 				const token = uuid.v4();

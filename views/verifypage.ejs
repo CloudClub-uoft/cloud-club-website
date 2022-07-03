@@ -12,7 +12,10 @@
                     <a href="/sendmail" class="btn btn-primary btn-round">Send Another Email</a>
                     <div id="message-container">
                         <% if (message) { %>
-                            <div id="message"><%- message -%></div>
+                            <% if (success) { %>
+                            <div id="message" class="successful"><%- message -%></div>
+                        <% } else { %>
+                            <div id="message" class="not-successful"><%- message -%></div>
                         <% } %>
                     </div>
                 </div>
@@ -36,5 +39,11 @@
     }
     .title {
         text-align: center;
+    }
+    .successful {
+        color: rgb(66, 190, 66);
+    }
+    .not-successful {
+        color: red;
     }
 </style>
