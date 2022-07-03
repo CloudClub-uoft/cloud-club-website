@@ -10,6 +10,11 @@
                     <p>You need to verify your email to post on CloudConvos or to edit your profile. A verification email was sent when you first registered. </p>
                     <p><strong>Please click on the latest email to verify your account. The email might be in your spam!</strong></p>
                     <a href="/sendmail" class="btn btn-primary btn-round">Send Another Email</a>
+                    <div id="message-container">
+                        <% if (message) { %>
+                            <div id="message"><%- message -%></div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </div>
