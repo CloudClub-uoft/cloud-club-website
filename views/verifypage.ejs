@@ -9,14 +9,16 @@
                     </img>
                     <p>You need to verify your email to post on CloudConvos or to edit your profile. A verification email was sent when you first registered. </p>
                     <p><strong>Please click on the latest email to verify your account. The email might be in your spam!</strong></p>
-                    <a href="/sendmail" class="btn btn-primary btn-round">Send Another Email</a>
+                    <form action="/sendmail" method="POST">
+                        <input type="submit" class="btn btn-primary" value="Send Another Email">
+                    </form>
                     <div id="message-container">
                         <% if (message) { %>
                             <% if (success) { %>
                             <div id="message" class="successful"><%- message -%></div>
                         <% } else { %>
                             <div id="message" class="not-successful"><%- message -%></div>
-                        <% } %>
+                        <% } } %>
                     </div>
                 </div>
             </div>
@@ -36,6 +38,9 @@
         height: 200px;
         object-fit: cover;
         object-position: center
+    }
+    #message-container {
+        margin-top:20px;
     }
     .title {
         text-align: center;
