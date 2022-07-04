@@ -17,14 +17,14 @@ exports.setup = function (options, seedLink) {
 exports.up = function (db, callback) {
 	db.addColumn(
 		"reports",
-		"postd_id",
+		"post_id",
 		{ type: "bigint", notNull: true },
 		callback
 	)
 }
 
 exports.down = function (db, callback) {
-	db.removeColumn("reports", "postd_id", callback)
+	db.removeColumn("reports", "post_id", callback)
 }
 
 exports._meta = {
