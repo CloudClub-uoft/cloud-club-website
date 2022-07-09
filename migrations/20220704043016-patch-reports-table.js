@@ -15,24 +15,16 @@ exports.setup = function (options, seedLink) {
 }
 
 exports.up = function (db, callback) {
-	// Create the reports table
-	db.createTable("reports", {
-		"id": {
-			type: "bigint",
-			notNull: true,
-			primaryKey: true,
-			autoIncrement: true,
-		},
-		"subject": { type: "string", notNull: true },
-		/* eslint-disable */
-		"report_verified": { type: "smallint" },
-		"subject": { type: "string",  notNull: true },
-	}, callback)
-	
+	db.addColumn(
+		"reports",
+		"post_id",
+		{ type: "bigint", notNull: true },
+		callback
+	)
 }
 
 exports.down = function (db, callback) {
-	db.dropTable("reports", callback)
+	db.removeColumn("reports", "post_id", callback)
 }
 
 exports._meta = {
