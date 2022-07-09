@@ -28,7 +28,8 @@ exports.up = function (db, callback) {
 		"email": { type: "string",  notNull: true },
 		"password": { type: "string",  notNull: true },
 		/* eslint-disable */
-		"date": {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
+		"date": {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")},
+		"verified": {type: "boolean", notNull: true, defaultValue: true}
 	}, callback)
 	
 }
