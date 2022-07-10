@@ -4,6 +4,7 @@ import unittest
 import subprocess
 
 from selenium import webdriver
+import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
 
 from os.path import join, dirname
@@ -18,6 +19,8 @@ from teardown import *
 class TestForum(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # auto-upgrade chromedriver
+        chromedriver_autoinstaller.install()
         # Load environment variables
         dotenv_path = join(dirname(__file__), "../../../.env")
         load_dotenv(dotenv_path)
