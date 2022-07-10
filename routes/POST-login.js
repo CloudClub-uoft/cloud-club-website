@@ -32,7 +32,7 @@ module.exports = (app, db) => {
 
 					if (result2) {
 						const sesh = req.session;
-						const options = {year: "numeric", month: "long", day: "numeric" };
+						const options = { year: "numeric", month: "long", day: "numeric" };
 						const date = new Date(result1[0].date);
 						sesh.date = date.toLocaleDateString("en-US", options);
 						sesh.userid = result1[0].id;
