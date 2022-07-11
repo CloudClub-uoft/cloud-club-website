@@ -142,7 +142,7 @@ class TestForum(unittest.TestCase):
         self.assertEqual(
             all_poster_dates_text,
             all_poster_dates_text_sorted,
-            f"Failed to sort by newest post!",
+            "Failed to sort by newest post!",
         )
         print("test sort by newest post passed")
         teardown(driver)

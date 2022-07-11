@@ -48,7 +48,7 @@ module.exports = (app, db) => {
 
 					}
 
-					return res.redirect("/forum?tm=Post Reported!&ts=false");
+					return res.redirect("/forum?tm=Post Reported!&ts=true");
 
 				}
 
