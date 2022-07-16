@@ -31,7 +31,7 @@ class TestForum(unittest.TestCase):
         cls.proc.terminate()
 
     def test_reset(cls):
-        email = "test.account@gmail.com"
+        email = os.environ.get("TEST_ACCOUNT_USERNAME")
         driver = password_reset(email)
         try:
             driver.find_element(

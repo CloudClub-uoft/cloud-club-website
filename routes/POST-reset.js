@@ -28,13 +28,13 @@ module.exports = (app, db, _, transporter) => {
 					// Create a new reset request
 					var token;
 					var tokenLink;
-					crypto.randomBytes(128, function(ex, buf) {
+					crypto.randomBytes(64, function(ex, buf) {
 						token = buf.toString("hex");
 						if(process.env.PRODUCTION) {
 							tokenLink = "https://cloudclub.ca/resetpassword?token=" + token;
 						}
 						else {
-							tokenLink = "http://localhost:4000/resetpassword?token=" + token;
+							tokenLink = `http://localhost:${process.env.PORT}/resetpassword?token=` + token;
 						}
 						db.query("INSERT INTO cloudclub.password_reset (user_id, token) VALUES (?,?)", [result[0].id, token], async (err3) => {
 							if (err3) { console.log(err3); return res.status(500).json({ error: "Internal Server Error 500" }); }
@@ -47,8 +47,8 @@ module.exports = (app, db, _, transporter) => {
 							};
 							let htmlToSend = template(data);
 							transporter.sendMail({
-								from: "\"CloudClub\" <cloudclubtest@yandex.com>",
-								to: email, // list of receivers
+								from: `"CloudClub" <${process.env.EMAIL_USER}>`,
+								to: email,
 								subject: "Requested Password Reset",
 								html: htmlToSend
 							},(err4) => {
