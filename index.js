@@ -12,6 +12,7 @@ const port = process.env.PORT || 80
 // Submodules
 require("./config/redis-sessions")(app)
 const s3Client = require("./config/s3")
+const transporter = require("./config/mail-transporter")
 const db = require("./config/sql-db")
 
 // override required because HTML forms do not support PUT/DELETE
@@ -28,7 +29,7 @@ app.set("view engine", "ejs")
 // Dynamic routing
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")
-require("./routes/routing").boot(app, db, s3Client)
+require("./routes/routing").boot(app, db, s3Client, transporter)
 
 // Static Documentation
 app.use("/api", express.static("docs"))
@@ -38,7 +39,10 @@ app.get("*", function (req, res) {
 	res.status(404).render("notfound", {
 		selected: "notfound",
 		title: "CloudClub | Error 404",
-	})
+		code: "Error 404",
+		error: "Oops! This page Could Not Be Found!",
+		message: "Sorry but the page you are looking for does not exist."
+	});
 })
 
 // Start server
@@ -86,3 +90,4 @@ if (process.env.PRODUCTION) {
 		)
 	})
 }
+module.exports = app;
