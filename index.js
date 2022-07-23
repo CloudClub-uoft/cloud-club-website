@@ -39,7 +39,10 @@ app.get("*", function (req, res) {
 	res.status(404).render("notfound", {
 		selected: "notfound",
 		title: "CloudClub | Error 404",
-	})
+		code: "Error 404",
+		error: "Oops! This page Could Not Be Found!",
+		message: "Sorry but the page you are looking for does not exist."
+	});
 })
 
 // Start server
@@ -87,3 +90,4 @@ if (process.env.PRODUCTION) {
 		)
 	})
 }
+module.exports = app;
