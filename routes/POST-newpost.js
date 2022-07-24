@@ -24,9 +24,6 @@ module.exports = (app, db) => {
 		if (!sesh.email) {
 			return res.status(401).json({ error: "You are not authorized to perform this action." });
 		}
-		if (!sesh.verified) {
-			return res.status(401).json({ error: "Please verify your email" });
-		}
 
 		const { subject, body, camefrom } = req.body;
 

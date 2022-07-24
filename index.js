@@ -26,6 +26,11 @@ app.use(express.json())
 app.use(express.static("public"))
 app.set("view engine", "ejs")
 
+// Middleware
+const verify = require("./middleware/verify");
+app.use("/newpost", verify);
+app.use("/profile", verify);
+
 // Dynamic routing
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")

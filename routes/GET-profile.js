@@ -7,9 +7,6 @@ module.exports = (app, db) => {
 		if (!sesh.email) {
 			return res.redirect("/?tm=You Aren't Logged In!&ts=false");
 		}
-		if (!sesh.verified) {
-			return res.redirect("/verifypage");
-		}
 		db.query(`SELECT COUNT(*) FROM cloudclub.forum WHERE userid='${sesh.userid}'`,(err, forumPosts) => {
 			if (err) {console.log(err); return res.redirect("/?tm=Internal Server Error 500&ts=false");}
 			numPosts = forumPosts[0]["COUNT(*)"];
@@ -29,11 +26,11 @@ module.exports = (app, db) => {
 								if (err2) { console.log(err2); return res.redirect("/?tm=Internal Server Error 500&ts=false"); }
 								db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${sesh.userid}'`, (err3, result2) => {
 									if (err3) { console.log(err2); return res.redirect("/?tm=Internal Server Error 500&ts=false"); }
-									return res.render("profile", { "selected": "profile", "title": "CloudClub | My Profile", "latestPostSubject": latestPostSubject, "latestPostId":latestPostId, "numPosts": numPosts, "date": sesh.date, "email":sesh.email,"first":sesh.first, "last":sesh.last, "description": result2[0].description,"profile_path": result2[0].profile_path, "tm" : req.query.tm, "ts" : req.query.ts});
+									return res.render("profile", { "selected": "profile", "title": "CloudClub | My Profile", "latestPostSubject": latestPostSubject, "latestPostId":latestPostId, "numPosts": numPosts, "date": sesh.date, "email":sesh.email, "verified":sesh.verified,"first":sesh.first, "last":sesh.last, "description": result2[0].description,"profile_path": result2[0].profile_path, "tm" : req.query.tm, "ts" : req.query.ts});
 								})
 							});
 						}
-						else return res.render("profile", { "selected": "profile", "title": "CloudClub | My Profile", "latestPostSubject": latestPostSubject, "latestPostId":latestPostId, "numPosts": numPosts, "date": sesh.date, "email":sesh.email,"first":sesh.first, "last":sesh.last, "description": result1[0].description,"profile_path": result1[0].profile_path, "tm" : req.query.tm, "ts" : req.query.ts}); 
+						else return res.render("profile", { "selected": "profile", "title": "CloudClub | My Profile", "latestPostSubject": latestPostSubject, "latestPostId":latestPostId, "numPosts": numPosts, "date": sesh.date, "email":sesh.email, "verified":sesh.verified, "first":sesh.first, "last":sesh.last, "description": result1[0].description,"profile_path": result1[0].profile_path, "tm" : req.query.tm, "ts" : req.query.ts}); 
 					}
 				});
 			});
