@@ -29,6 +29,8 @@ app.set("view engine", "ejs")
 // Middleware
 const verify = require("./middleware/verify");
 app.use("/newpost", verify);
+app.use("/deletepost", verify);
+app.use("/editpost", verify);
 app.use("/profile", verify);
 
 // Dynamic routing
