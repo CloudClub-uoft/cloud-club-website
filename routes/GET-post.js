@@ -27,10 +27,14 @@ module.exports = (app, db) => {
 			if (err) {
 				return res.redirect("/forum?tm=Internal Server Error 500&ts=false");
 			}
-
-			db.query(`SELECT email FROM cloudclub.logins WHERE id='${result[0].userid}'`, (err2, result2) => {
+			console.log("here")
+			db.query(`SELECT profile_path FROM cloudclub.profiles WHERE userid='${result[0].userid}' `, (err2, result2) => {
 				if (err2) { console.log(err2); return res.status(500).json({ error: "Internal Server Error 500" }); }
-				return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "email": result2[0].email, "user_id":req.session.userid, "profile_path": result2[0].profile_path });
+				console.log("here")
+				db.query(`SELECT email FROM cloudclub.logins WHERE id='${result[0].userid}'	`, (err3, result3) => {
+					if (err3) { console.log(err3); return res.status(500).json({ error: "Internal Server Error 500" }); }
+					return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "email": result3[0].email, "user_id":req.session.userid, "profile_path":  result2[0].profile_path});
+				});
 			});
 		});
 	});
