@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 import os
 from dotenv import load_dotenv
 
+import os
+from dotenv import load_dotenv
 
 def login(email: str, password: str) -> webdriver:
     load_dotenv()

@@ -84,9 +84,15 @@
                 </div>
                 <div class="row row-content">
                     <div class="col-md-6 text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
-                            Edit Profile
-                        </button>
+                        <% if (verified) { %>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
+                                Edit Profile
+                            </button>
+                        <% } else { %>
+                            <a type="button" class="btn btn-primary" href="/verifypage">
+                                Verify Profile
+                            </a>
+                        <% } %>
                     </div>
                 </div>
             </div>
