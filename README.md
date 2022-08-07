@@ -7,7 +7,12 @@ Website for the UofT CloudClub.
 
 - git [(Download)](https://git-scm.com/downloads) or GitHub Desktop [(Download)](https://desktop.github.com/)
 - Node.JS + npm [(Download)](https://nodejs.org/en/download/)
+- XAMPP [(Download Here)](https://www.apachefriends.org/)
 - Environment variables and MySQL configuration scripts.
+
+## Database setup
+
+1. 
 
 ## Installation and Startup
 
