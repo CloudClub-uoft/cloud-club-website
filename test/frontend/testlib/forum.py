@@ -49,18 +49,18 @@ def convert_post_date_to_yyyymmdd(date: str):
     returns yyyy-mm-dd as a string, such as '2022-05-15'
     """
     month_to_number = {
-        "January": "01",
-        "February": "02",
-        "March": "03",
-        "April": "04",
+        "Jan": "01",
+        "Feb": "02",
+        "Mar": "03",
+        "Apr": "04",
         "May": "05",
-        "June": "06",
-        "July": "07",
-        "August": "08",
-        "September": "09",
-        "October": "10",
-        "November": "11",
-        "December": "12",
+        "Jun": "06",
+        "Jul": "07",
+        "Aug": "08",
+        "Sept": "09",
+        "Oct": "10",
+        "Nov": "11",
+        "Dec": "12",
     }
     date_to_list = date.split()
     month, day, year = (

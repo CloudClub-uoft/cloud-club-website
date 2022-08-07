@@ -13,7 +13,7 @@
 
     </header>
 
-    </div>
+    
     <div class="container">
 
         <div class="row">
@@ -84,57 +84,31 @@
                 </div>
                 <div class="row row-content">
                     <div class="col-md-6 text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
-                            Edit Profile
-                        </button>
+                        <% if (verified) { %>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
+                                Edit Profile
+                            </button>
+                        <% } else { %>
+                            <a type="button" class="btn btn-primary" href="/verifypage">
+                                Verify Profile
+                            </a>
+                        <% } %>
                     </div>
                 </div>
             </div>
 
         </div>
+    </div>
 
 </body>
 
-<!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/profile" method="POST" encType="multipart/form-data">
-                    <h3>Upload Profile Photo </h3> 
-                    <input type="file" name="image" accept="image/*">
-                    <div class="col-md-12 text-right">
-                        <input type="submit" class="btn btn-primary">
-                    </div>
-                </form>
-                <form action="/description" method="POST" encType="multipart/form-data">
-                    <h3>Description </h3>
-                    <textarea rows="5" class="form-control" name="description"></textarea> </br>
-                    <div class="col-md-12 text-right">
-                        <input type="submit" class="btn btn-primary">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style>
-    body {
-        padding-top: 3.5rem;
-        padding-bottom: 3rem;
-        color: #007f96;
-    }
+    
     .card{
         height: 350px;
         box-shadow: 0 0 5px black;
+        margin-bottom: 90px;
     }
     .card-img-top {
         width: 100%;

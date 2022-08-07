@@ -1,0 +1,59 @@
+<body class="text-center">
+    <form class="form-reset">
+        <img class="mb-4" src="../assets/CloudClub.png" alt="" width=80% height="80%">
+        <h1 class="h6 mb-3 font-weight-small">Please Provide the Email of your Account</h1>
+        <!-- <label for="inputFirstName" class="sr-only">First Name</label> -->
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required autofocus>
+        <!-- <label for="inputLastName" class="sr-only">Last Name</label> -->
+        <button class="btn btn-lg btn-primary btn-block" style="background-color: #50BDE4" type="submit">Send Link to Reset Password</button>
+        <p class="mt-5 mb-3 text-muted">CloudClub UofT | 2020-2021</p>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=15000 style="position:absolute; z-index: 2;">
+            <div class="toast-header">
+                <strong class="mr-auto" id="toasttitle" style="text-align: center; width: 100%;"></strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" style="text-align: left; width: 100%;"></div>
+        </div>
+    </form>
+    <!-- Bad register notif -->
+    
+    <script type="text/javascript">
+        $('.form-reset').submit(function(event) {
+          event.preventDefault();
+          $.ajax({
+            url: '/reset',
+            type: 'POST',
+            cache: false,
+            dataType: 'json',
+            data: {
+              email: $('#inputEmail').val()
+            },
+            statusCode: {
+              201: function(response) {
+                $('#toasttitle').text("Successful");
+                $('.toast-body').text(response.success);
+                $('.toast').toast('show');
+              },
+              400: function(response) {
+                $('#toasttitle').text("Failed!")
+                $('.toast-body').text(response.responseJSON.error);
+                $('.toast').toast('show');
+              },
+              409: function(response) {
+                $('#toasttitle').text("Failed!")
+                $('.toast-body').text(response.responseJSON.error);
+                $('.toast').toast('show');
+              },
+              500: function(response) {
+                $('#toasttitle').text("Error!")
+                $('.toast-body').text(response.responseJSON.error);
+                $('.toast').toast('show');
+              }
+            }
+          })
+        });
+      </script>
+</body>
+  

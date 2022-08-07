@@ -1,13 +1,12 @@
 from xml.dom import NotFoundErr
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import os
-from dotenv import load_dotenv
 
-import os
-from dotenv import load_dotenv
 
-def login(email: str, password: str) -> webdriver:
+def password_reset(email):
+    import os
+    from dotenv import load_dotenv
+
     load_dotenv()
     PORT = os.getenv("PORT")
     if not PORT:
@@ -18,12 +17,10 @@ def login(email: str, password: str) -> webdriver:
     driver = webdriver.Chrome()
     driver.implicitly_wait(3)
 
-    driver.get(f"http://localhost:{PORT}/login?r=/")
+    driver.get(f"http://localhost:{PORT}/reset?r=/")
 
     email_entry = driver.find_element(By.NAME, "email")
-    password_entry = driver.find_element(By.NAME, "password")
     email_entry.send_keys(email)
-    password_entry.send_keys(password)
 
     submit_button = driver.find_element(By.CLASS_NAME, "btn")
     submit_button.click()

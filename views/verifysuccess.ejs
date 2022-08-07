@@ -1,15 +1,15 @@
-<div class="error-content">
+<div class="page-content">
     <div class="container">
         <div class="row">
             <div class="col-md-12 ">
-                <div class="error-text">
-                    <h1><%- code -%></h1>
+                <div class="title">
+                    <h1>Success!</h1>
                     <img class="card-img-top"
                         src='/assets/favicon.png'>
                     </img>
-                    <h4><%- error -%></h4>
-                    <p><%- message -%></p>
-                    <a href="/" class="btn btn-primary btn-round">Go to homepage</a>
+                    <p>Congrats! You have verified your email. Now you can access CloudClub's forum and profile page features.</p>
+
+                    <a class="btn btn-primary" href="/">Go Home</a>
                 </div>
             </div>
         </div>
@@ -17,8 +17,11 @@
 </div>
 
 <style>
-    .error-content {
+    .page-content {
         padding: 70px;
+        width: 700px;
+        margin-left:auto;
+        margin-right:auto;
     }
     .card-img-top {
         width: 200px;
@@ -26,11 +29,7 @@
         object-fit: cover;
         object-position: center
     }
-    .error-text{
+    .title {
         text-align: center;
-    }
-    .error {
-        font-size: 180px;
-        font-weight: 100;
     }
 </style>
