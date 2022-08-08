@@ -15,9 +15,9 @@ The cloud-club-website database relies on the db-migrate NPM module for revision
 
 5. In the left sidebar, click on New. (Fig. 2)
 
-6. Enter `cloudclub` in the textbox and click on Create.
+6. Enter `cloudclub` in the textbox and click on Create (Fig. 3).
 
-7. In a terminal navigate to the root of the clone repository.
+7. In a terminal navigate to where you have clones this repository.
 
 8. Run `npm i` in the command line to install all packages.
 
