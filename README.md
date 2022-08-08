@@ -12,13 +12,13 @@ Website for the UofT CloudClub.
 
 ## Database setup
 
-1. 
+[Click Here](./docs/DATABASE.md)
 
 ## Installation and Startup
 
 1. Either clone this repository using GitHub Desktop (or related software), download as a ZIP and extract, or run `git clone https://github.com/CloudClub-uoft/cloud-club-website` using the terminal and enter your credentials.
 2. Install Node.JS dependencies by navigating to the folder using a terminal and executing `npm install`.
-3. Launch MySQL instance.
+3. Launch MySQL instance. (Jump to the database setup section for help with this section.)
 4. Start the server by executing `node .` in the terminal.
 5. View the webpage by navigating to `localhost` in your browser.
 
