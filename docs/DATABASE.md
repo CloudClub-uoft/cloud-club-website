@@ -23,7 +23,7 @@ The cloud-club-website database relies on the db-migrate NPM module for revision
 
 9. Run at the root of the repository: `npx db-migrate up --config .\database\database.json`
 
-10. Refresh the phpmyadmin page to ensure that there are 6 new tables inside it. (Fig 4.)
+10. Refresh the phpmyadmin page to ensure that there are new tables inside it. (Fig 4.)
 
 
 
