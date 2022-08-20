@@ -1,27 +1,11 @@
-.footer-container{
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-    margin-bottom: 0px;
+footer{
+    
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
-.footer-container>ul{
-    list-style-type: none; 
-    display: flex; 
-    gap: 16px; 
-    margin-bottom: 12px;
-}
 
-i{
-    color: grey;
+a{
+    margin: 5px;
 }
-
-.fb-icon:hover{
-    color: #4267B2;
-}
-
-.linkedin-icon:hover{
-    color: #0072b1;
-}
-
 
