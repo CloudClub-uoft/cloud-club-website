@@ -27,9 +27,20 @@ exports.up = function(db, callback) {
 			type: "int",
 			notNull: true,
 		},
-		content: { type: "string", defaultValue: "NULL" },
+		user_id: {
+			type: "int",
+			notNull: true
+		},
+		content: {
+			type: "string",
+			notNull: true
+		},
 		/* eslint-disable */
-    timestamp: {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")}
+    	timestamp: {
+			type: "timestamp",
+			notNull: true,
+			defaultValue: new String("current_timestamp()")
+		}
   }, callback);
 };
 
