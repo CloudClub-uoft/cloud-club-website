@@ -26,15 +26,6 @@ exports.up = function(db, callback) {
 		comment_id: {
 			type: "int",
 			notNull: true,
-			foreignKey: {
-				name: "comment_id",
-				table: "comments",
-				rules: {
-					onDelete: "CASCADE",
-					onUpdate: "CASCADE"
-				},
-        mapping: "reply_id"
-			}
 		},
 		content: { type: "string", defaultValue: "NULL" },
 		/* eslint-disable */
