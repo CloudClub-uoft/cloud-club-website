@@ -1,0 +1,19 @@
+{
+    "defaultEnv": "dev",
+    "dev": {
+        "host": { "ENV" : "DB_HOST" },
+        "user": { "ENV" : "DB_USER" },
+        "password" : { "ENV" : "DB_PASS" },
+        "database": "cloudclub",
+        "driver": "mysql",        
+        "multipleStatements": true
+    },
+    "prod": {
+        "host": { "ENV" : "DB_HOST" },
+        "user": { "ENV" : "DB_USER" },
+        "password" : { "ENV" : "DB_PASS" },
+        "database": "cloudclub",
+        "driver": "mysql",        
+        "multipleStatements": true
+    }
+}

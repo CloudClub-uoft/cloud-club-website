@@ -127,3 +127,9 @@ certs/
 
 # pycache
 __pycache__
+
+# zip files
+*.zip
+
+# tests
+chromedriver.exe

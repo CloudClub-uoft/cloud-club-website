@@ -4,6 +4,7 @@ import unittest
 import subprocess
 
 from selenium import webdriver
+import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
 
 from os.path import join, dirname
@@ -18,6 +19,8 @@ from teardown import *
 class TestForum(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # auto-upgrade chromedriver
+        chromedriver_autoinstaller.install()
         # Load environment variables
         dotenv_path = join(dirname(__file__), "../../../.env")
         load_dotenv(dotenv_path)
@@ -139,7 +142,7 @@ class TestForum(unittest.TestCase):
         self.assertEqual(
             all_poster_dates_text,
             all_poster_dates_text_sorted,
-            f"Failed to sort by newest post!",
+            "Failed to sort by newest post!",
         )
         print("test sort by newest post passed")
         teardown(driver)
