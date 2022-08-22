@@ -13,13 +13,10 @@
 
     </header>
 
-    </div>
+    
     <div class="container">
-
         <div class="row">
-
             <div class="col-sm-4">
-
                 <div class="card">
                     <img class="card-img-top"
                         src="<%- profile_path -%>"
@@ -30,7 +27,6 @@
             </div>
 
             <div class="col-sm-8">
-
                 <div class="row profile-card">
                     <div class="col-12">
                         <h1>Profile Information</h1>
@@ -72,6 +68,7 @@
                         <a href="/post?id=<%- latestPostId -%>"><%- latestPostSubject -%></a>
                     </div>
                 </div>
+                
                 <div class="row row-content">
                     <div class="col-3">
                         <b>Description:</b>
@@ -96,14 +93,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
+    </div>
 </body>
 
 <!-- Modal -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -132,15 +128,18 @@
     </div>
 </div>
 
+
 <style>
     body {
         padding-top: 3.5rem;
-        padding-bottom: 3rem;
+        padding-bottom: 0px;
         color: #007f96;
     }
+
     .card{
         height: 350px;
         box-shadow: 0 0 5px black;
+        margin-bottom: auto;
     }
     .card-img-top {
         width: 100%;
@@ -174,6 +173,8 @@
         margin: 10px auto;
 
     }
+
+
 </style>
 
 
