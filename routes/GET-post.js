@@ -24,15 +24,16 @@ module.exports = (app, db) => {
 			return res.redirect("/forum");
 		}
 		db.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err, result) => {
-			if (err) {
-				return res.redirect("/forum?tm=Internal Server Error 500&ts=false");
-			}
-			db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${result[0].userid}' `, (err2, profilePathResult) => {
-				if (err2) { return res.status(500).json({ error: "Internal Server Error 500" }); }
-				db.query(`SELECT email FROM cloudclub.logins WHERE id='${result[0].userid}'	`, (err3, emailResult) => {
+			if (err) { return res.redirect("/forum?tm=Internal Server Error 500&ts=false"); }
+			db.query(`SELECT * FROM cloudclub.comments WHERE post_id='${req.query.id}'`, (err2, res2) => {
+				if (err2) { return res.redirect("/forum?tm=Internal Server Error 500&ts=false"); }
+				db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${result[0].userid}' `, (err3, profilePathResult) => {
 					if (err3) { return res.status(500).json({ error: "Internal Server Error 500" }); }
-					if (profilePathResult[0] === undefined) { return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  "" });}
-					return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  profilePathResult[0].profile_path});
+					db.query(`SELECT email FROM cloudclub.logins WHERE id='${result[0].userid}'	`, (err4, emailResult) => {
+						if (err4) { return res.status(500).json({ error: "Internal Server Error 500" }); }
+						if (profilePathResult[0] === undefined) { return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "comments": res2, "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  "" });}
+						return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "comments": res2, "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  profilePathResult[0].profile_path}); 
+					});
 				});
 			});
 		});
