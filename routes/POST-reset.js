@@ -52,7 +52,7 @@ module.exports = (app, db, _, transporter) => {
 								subject: "Requested Password Reset",
 								html: htmlToSend
 							},(err4) => {
-								if (err4) { console.log(err4); return res.status(500).json({ error: "Internal Server Error 500" }); }
+								if (err4) { console.log(err4); return res.status(500).json({ error: "Internal Server Error 500, unable to send email" }); }
 								return res.status(201).json({ success: "An email has been sent if the email address is associated with an account." });
 							});
 						});
