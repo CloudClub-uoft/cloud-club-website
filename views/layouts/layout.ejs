@@ -5,10 +5,13 @@
 
     <% if (selected != 'login' && selected != 'register' && selected != 'reset' && selected != 'resetpassword' && selected != 'notfound') {%>
         <%- include('../partials/header.ejs') %>
-            <%}%>
+    <%}%>
 
-                <%- body %>
+    <%- body %>
 
-                <%- include('../partials/footer.ejs') %>
+    <% if (selected != 'login' && selected != 'register' && selected != 'reset' && selected != 'resetpassword' && selected != 'notfound') {%>
+        <%- include('../partials/footer.ejs') %>
+    <%}%>
+    
 
 </html>

@@ -45,19 +45,69 @@
                                             <%- post.timestamp.toDateString() -%>
                                         </h3><br>
                             </div>
+
+                            <!--Post content module-->
+                            <div class=" panel panel-primary " style = "text-align: left;">
+                                <div class=" jumbotron bg-white">
+                                    <h6 style="word-wrap:break-word;white-space:normal">
+                                        <%- post.body -%>
+                                    </h6>
+                                </div>
+                                <% } %>
+                            </div>
+                            <br>
+
+
+
+
                         </div>
 
-                        <!--Post content module-->
-                        <div class=" panel panel-primary ">
-                            <div class=" jumbotron ">
-                                <h6 style="word-wrap:break-word;white-space:normal">
-                                    <%- post.body -%>
-                                </h6>
+                         <!--Comment Section-->
+                        <div class = "container">
+                            <!--Number of comments-->
+                            <div class = "row row-content" style = "padding: 15px 0px 10px 0px; border-bottom: 1px ridge;">
+                                <h5 class = "col-12">(#) Comments</h5>
+                            </div>
+
+                            <!--div for user to post a comment-->
+                            <div class = "row row-content">
+                                <div class = "col-12">
+                                    <div class = "media">
+                                        <img class="d-flex mr-3 align-self-center mb-4" width="40" height="40" src="<%- url %>" style = "border-radius: 50%;">
+                                        <div class = "media-body mt-5">
+                                            <form id = "user-comment">
+                                                <div class = "form-group row">
+                                                    <div class = "col-12">
+                                                        <input type = "text" id = 'comment-input' class = "form-control" placeholder="Add a comment..."/ name = "comment-text" required>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class = "form-group row">
+                                                    <div class = "col-md-1  offset-md-9" style = "margin-right: 35px" >
+                                                        <button class = "btn" type = "button" id = 'cancel-btn'><strong style = "color:grey">CANCEL</strong></button>
+                                                    </div>
+                                                    <div class = "col-md-1" >
+                                                        <button type = "submit" id = 'comment-btn' class = "btn bg-light"><strong>COMMENT</strong></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
-                            <% } %>
-                        </div>
+
+                            <!--div for all the comments-->
+                            <div id = "comment-section" class = "container">
+                                
+                            </div>
+
+                            
+                         </div>
+
+
+
                         <br>
 
                         <div style=" text-align:center ">
@@ -78,9 +128,9 @@
 
                                 <div class=" col-md-4" style="display: flex;flex-direction: row;">
                                     <div style="margin-right:5px;width: 100%; height: 100%;text-align: center">
-                                    <button type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
+                                    <a type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
                                                 data-toggle="modal" data-target="#myModal"
-                                    >Report Post</button>
+                                    >Report Post</a>
                                     </div>
                                     <% if (post.userid === user_id) { %>
                                     <div style="width: 100%; height: 100%;text-align: center">
@@ -133,6 +183,105 @@
 
 <script type="text/javascript">
 
+    function createComment(commentValue)
+    {
+        //comment div
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('row', 'row-content');
+        
+        //col element
+        const col = document.createElement('div');
+        col.classList.add('col-12');
+
+        //comment content
+        const commentContent = document.createElement('div');
+        commentContent.classList.add('media', 'mt-5');
+
+        //Comment profile image
+        const profileImg = document.createElement('img');
+        profileImg.classList.add('d-flex', 'mr-3');
+        profileImg.style.width = "40px";
+        profileImg.style.height = "40px";
+        profileImg.style.borderRadius = "50%";
+        profileImg.src = "<%- url %>";
+
+        //Comment body: name, time, content
+        const commentBody = document.createElement('div');
+        commentBody.classList.add('media-body');
+
+        //Comment picture and timestamp
+        const postInfo = document.createElement('div');
+        const name = document.createElement('h6');
+        name.textContent = "Name  ";
+        name.classList.add("mt-0");
+        name.style.display = "inline";
+        const timeStamp = document.createElement('i');
+        const date = new Date();
+        timeStamp.textContent = date.toLocaleString();
+
+        //Comment text
+        const commentText = document.createElement('div');
+        commentText.classList.add('text-break');
+        commentText.textContent = commentValue;
+
+        //append and format elements
+        postInfo.append(name, timeStamp);
+        commentBody.append(postInfo, commentText);
+        commentContent.append(profileImg, commentBody);
+        col.append(commentContent);
+        commentDiv.append(col);
+        return commentDiv;
+    }
+
+    function changeCommentButtonToGrey()
+    {
+        commentButton.classList.remove('bg-primary');
+        commentButton.classList.add('bg-light');
+        commentButton.style.color = "grey";
+    }
+    
+    function changeCommentButtonToBlue()
+    {
+        commentButton.classList.remove('bg-light');
+        commentButton.classList.add('bg-primary');
+        commentButton.style.color = "white";
+    }
+
+    function resetComment(){
+        formInput.value = '';
+        changeCommentButtonToGrey();
+    }
+
+     //check if there is any text
+    const formInput = document.getElementById('comment-input');
+    const commentButton = document.getElementById('comment-btn');
+    const form = document.getElementById('user-comment');
+
+    commentButton.style.color = "grey";
+
+    formInput.addEventListener('input', ()=>{
+        if(formInput.value === '')
+        {
+            changeCommentButtonToGrey();
+        } else {
+            changeCommentButtonToBlue();
+        }
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if(formInput.value.length > 0){
+            //create the html elements
+            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value));
+            changeCommentButtonToGrey();
+            resetComment();
+        }
+    });
+
+    const cancelButton = document.getElementById('cancel-btn');
+    cancelButton.addEventListener('click', resetComment);
+    
+
     function submit(e) {
 
         var text = document.getElementById("comment");
@@ -149,5 +298,9 @@
     }
 
     document.getElementById("report-btn").addEventListener("click", submit);
+
+    
+
+    
 
 </script>
