@@ -62,13 +62,14 @@
                         </div>
 
                          <!--Comment Section-->
-                        <div class = "container">
+                        <div class = "container" style="margin-bottom: 100px;">
                             <!--Number of comments-->
                             <div class = "row row-content" style = "padding: 15px 0px 10px 0px; border-bottom: 1px ridge;">
-                                <h5 class = "col-12"><%- comments.length -%> Comments</h5>
+                                <h5 class = "col-12" id = "numComments"><%- comments.length -%> Comments</h5>
                             </div>
 
                             <!--div for user to post a comment-->
+                            <%if (user_id !== undefined) {%>
                             <div class = "row row-content">
                                 <div class = "col-12">
                                     <div class = "media">
@@ -94,6 +95,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <%}%>
 
 
 
@@ -103,7 +105,7 @@
                                     <script type="text/javascript">
                                         $(document).ready(() => {
 
-                                            let timeStampString = '<%- comments[i].timestamp -%>';
+                                            let timeStampString = '<%- comments[i].timestamp -%>'.substring(0,21);
 
 
                                             const commentSection = createComment('<%- comments[i].content -%>', timeStampString);
@@ -116,8 +118,7 @@
                             </div>
 
 
-                         </div>
-                        <br>
+                        </div>
 
                         <div style=" text-align:center ">
                             <div class=" row " style="justify-content: space-between">
@@ -311,9 +312,14 @@
             addCommentToDB(formInput.value);
 
             let timePosted = new Date();
-            timePosted = timePosted;
+            timePosted = timePosted.toDateString().substring(0,21)
             const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value, timePosted));
 
+            //update comment numbers:
+            let currNumComments = document.getElementById('numComments');
+            let currCommentsArray = currNumComments.textContent.split(' ');
+            const updatedNumComments = parseInt(currCommentsArray[0]) + 1;
+            currNumComments.textContent = updatedNumComments + " Comments";
 
             changeCommentButtonToGrey();
             resetComment();
