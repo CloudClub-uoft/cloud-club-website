@@ -20,13 +20,12 @@
                             d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                     </svg> Request Rejected<br> You don't have access to view this page or the post is not found!
 
-
                     <!--Internal Server Error-->
                 </div>
                 <% } %>
                     <% if(post !=undefined){ %>
                         <!--Loading animations-->
-                        <div class="jumbotron" style="text-align:center">
+                        <div class="jumbotron" id = "post_main_content" data-id = <%- post.postid -%> style="text-align:center">
                             <div class="container">
                                 <div mane="userid">
                                     <!-- chenge the name to name="% post.body %" -->
@@ -66,7 +65,7 @@
                         <div class = "container">
                             <!--Number of comments-->
                             <div class = "row row-content" style = "padding: 15px 0px 10px 0px; border-bottom: 1px ridge;">
-                                <h5 class = "col-12">(#) Comments</h5>
+                                <h5 class = "col-12"><%- comments.length -%> Comments</h5>
                             </div>
 
                             <!--div for user to post a comment-->
@@ -100,14 +99,24 @@
 
                             <!--div for all the comments-->
                             <div id = "comment-section" class = "container">
-                                
+                                <% for(let i = 0; i < comments.length; i++){%>
+                                    <script type="text/javascript">
+                                        $(document).ready(() => {
+
+                                            let timeStampString = '<%- comments[i].timestamp -%>';
+
+
+                                            const commentSection = createComment('<%- comments[i].content -%>', timeStampString);
+                                            document.getElementById('comment-section').appendChild(commentSection);
+                                        });
+                                    </script>
+                                <%}%>
+
+
                             </div>
 
-                            
+
                          </div>
-
-
-
                         <br>
 
                         <div style=" text-align:center ">
@@ -183,7 +192,7 @@
 
 <script type="text/javascript">
 
-    function createComment(commentValue)
+    function createComment(commentValue, timeStampString)
     {
         //comment div
         const commentDiv = document.createElement('div');
@@ -216,8 +225,7 @@
         name.classList.add("mt-0");
         name.style.display = "inline";
         const timeStamp = document.createElement('i');
-        const date = new Date();
-        timeStamp.textContent = date.toLocaleString();
+        timeStamp.textContent = timeStampString;
 
         //Comment text
         const commentText = document.createElement('div');
@@ -252,12 +260,13 @@
         changeCommentButtonToGrey();
     }
 
-     //check if there is any text
+    //check if there is any text
     const formInput = document.getElementById('comment-input');
     const commentButton = document.getElementById('comment-btn');
     const form = document.getElementById('user-comment');
 
     commentButton.style.color = "grey";
+
 
     formInput.addEventListener('input', ()=>{
         if(formInput.value === '')
@@ -268,11 +277,44 @@
         }
     });
 
+
+    function addCommentToDB(commentBody)
+    {
+        // create request object
+        var xhttp = new XMLHttpRequest();
+
+        // define callback function that is executed when data is recevied 
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+            var response = JSON.parse(xhttp.response)
+                console.log(response.message);
+            }
+        }
+
+        // open a post request
+        xhttp.open("POST", "/comment", true);
+
+        //set header
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        const postId = document.getElementById('post_main_content').getAttribute('data-id');
+
+        // send body with comment, post_id, and camefrom
+        xhttp.send(JSON.stringify({content: commentBody, post_id: postId, camefrom: ''}));
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         if(formInput.value.length > 0){
-            //create the html elements
-            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value));
+
+
+            addCommentToDB(formInput.value);
+
+            let timePosted = new Date();
+            timePosted = timePosted;
+            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value, timePosted));
+
+
             changeCommentButtonToGrey();
             resetComment();
         }
