@@ -21,7 +21,7 @@ exports.up = function (db, callback) {
 		{
 			email: { type: "string", notNull: true, autoIncrement: false, primaryKey: true },
 			"first-name": { type: "string", notNull: true },
-      "last-name": { type: "string", notNull: true },
+      		"last-name": { type: "string", notNull: true },
 			timestamp: {type: "timestamp", notNull: true, defaultValue: new String("current_timestamp()")},
 			uuid: {type:"string", notNull: true}
 		},

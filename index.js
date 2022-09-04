@@ -32,6 +32,8 @@ app.use("/newpost", verify);
 app.use("/deletepost", verify);
 app.use("/editpost", verify);
 app.use("/profile", verify);
+app.use("/comment", verify);
+app.use("/replyToComment", verify);
 
 // Dynamic routing
 app.use(expressLayouts)
