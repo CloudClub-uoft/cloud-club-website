@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
 		if (req.method === "GET" && req.originalUrl === "/profile") {
 			next();
 		} else {
-			return res.redirect("/verifypage");
+			return res.status(404).redirect("/verifypage");
 		}
 	} else {
 		next();

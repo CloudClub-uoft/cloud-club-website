@@ -4,13 +4,12 @@
 <body>
     <!-- Heading and Description of Forum Page -->
     <%- include('partials/forum-subheader') %>
-
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000
             stye="positon:absolute;">
             <div class="toast-header">
                 <strong class="mr-auto" id="toasttitle"></strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"       <span aria-hidden="true">&aria-label="Close">
+              times;</span>
                 </button>
             </div>
             <div class="toast-body"></div>
@@ -32,50 +31,51 @@
         </script>
         <div class="container">
             <div class="sorting">
-                    <form id="sort" class="form-inline " action="/forum" method="GET">    
-                        <select class="custom-select my-1 mr-sm-2" name="sortby" id="sortby">
-                            <% if (sortby === 'newest') { %>
-                                <option value="newest" selected>Newest First</option>
+                <form id="sort" class="form-inline " action="/forum" method="GET">    
+                    <select class="custom-select my-1 mr-sm-2" name="sortby" id="sortby">
+                        <% if (sortby === 'newest') { %>
+                            <option value="newest" selected>Newest First</option>
+                        <% } else { %>
+                            <option value="newest">Newest First</option>
+                        <% } if (sortby === 'oldest') { %>
+                            <option value="oldest" selected>Oldest First</option>
+                        <% } else { %>
+                            <option value="oldest">Oldest First</option>
+                        <% } if (sortby === 'firstname') { %>
+                            <option value="firstname" selected>Name</option>
+                        <% } else { %>
+                            <option value="firstname">Name</option>
+                        <% } if (sortby === 'title') { %>
+                            <option value="title" selected>Post Title</option>
+                        <% } else { %>
+                            <option value="title">Post Title</option>
+                        <% } %>                            
+                    </select>
+                    
+                    <label for="limit">
+                        Show&nbsp
+                        <select class="custom-select my-1 mr-sm-2" name="limit" id="limit">
+                            <% if (limit == 10) { %>
+                                <option value="10" selected>10</option>
                             <% } else { %>
-                                <option value="newest">Newest First</option>
-                            <% } if (sortby === 'oldest') { %>
-                                <option value="oldest" selected>Oldest First</option>
+                                <option value="10">10</option>
+                            <% } if (limit == 25) { %>
+                                <option value="25" selected>25</option>
                             <% } else { %>
-                                <option value="oldest">Oldest First</option>
-                            <% } if (sortby === 'firstname') { %>
-                                <option value="firstname" selected>Name</option>
+                                <option value="25">25</option>
+                            <% } if (limit == 50) { %>
+                                <option value="50" selected>50</option>
                             <% } else { %>
-                                <option value="firstname">Name</option>
-                            <% } if (sortby === 'title') { %>
-                                <option value="title" selected>Post Title</option>
-                            <% } else { %>
-                                <option value="title">Post Title</option>
+                                <option value="50">50</option>
                             <% } %>                            
                         </select>
-                        
-                        <label for="limit">
-                            Show&nbsp
-                            <select class="custom-select my-1 mr-sm-2" name="limit" id="limit">
-                                <% if (limit == 10) { %>
-                                    <option value="10" selected>10</option>
-                                <% } else { %>
-                                    <option value="10">10</option>
-                                <% } if (limit == 25) { %>
-                                    <option value="25" selected>25</option>
-                                <% } else { %>
-                                    <option value="25">25</option>
-                                <% } if (limit == 50) { %>
-                                    <option value="50" selected>50</option>
-                                <% } else { %>
-                                    <option value="50">50</option>
-                                <% } %>                            
-                            </select>
-                            Entries
-                        </label>
+                        Entries
+                    </label>
 
-                        <input type="submit" id="submit-sort" class="sort-btn btn btn-success" value="Sort">
-                    </form>
+                    <input type="submit" id="submit-sort" class="sort-btn btn btn-success" value="Sort">
+                </form>
             </div>
+
             <div class="col">
                 <table id="table_id" class="table reverse-false">
                     <thead>
@@ -175,11 +175,8 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
-
-        
 </body>
 
 
