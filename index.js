@@ -30,7 +30,9 @@ app.set("view engine", "ejs")
 const verify = require("./middleware/verify");
 app.use("/newpost", verify);
 app.use("/deletepost", verify);
+app.use("/deletecomment", verify);
 app.use("/editpost", verify);
+app.use("/editcomment", verify);
 app.use("/profile", verify);
 app.use("/comment", verify);
 app.use("/replyToComment", verify);
