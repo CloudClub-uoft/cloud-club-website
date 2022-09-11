@@ -33,14 +33,11 @@
                                         <%- post.subject -%>
                                     </h1><br>
                                 </div>
-                                <% if(profile_path === undefined || profile_path === '') {%>
-                                <% var initial=email.substring(0,email.indexOf("@")) %>
-                                    <% var url=`https://ui-avatars.com/api/?name=${initial}&background=random` %>
-                                    <% }  else {var url = profile_path}%>
+                               
                                         <h5>
-                                            <img class="img-thumbnail" width="10%" src="<%- url -%>">
+                                           
                                             <br>
-                                            <%- email -%>
+                                           
                                         </h5><br>
                                         <h3>
                                             <%- post.timestamp.toDateString() -%>
@@ -107,10 +104,14 @@
                                     <script type="text/javascript">
                                         $(document).ready(() => {
 
+                                        
+                                            
+                                            
+
                                             let timeStampString = '<%- comments[i].timestamp -%>'.substring(0,21);
 
-                                            
-                                            
+
+                            
 
                                             
 
@@ -125,11 +126,6 @@
 
                             </div>
 
-<<<<<<< HEAD
-
-=======
-                            <% } %>
->>>>>>> wu_feature_forum_comments
                         </div>
 
                         <div style=" text-align:center ">
@@ -225,7 +221,8 @@
         profileImg.style.width = "40px";
         profileImg.style.height = "40px";
         profileImg.style.borderRadius = "50%";
-        profileImg.src = "<%- url %>";
+        profileImg.src = "";
+        
 
         //Comment body: name, time, content
         const commentBody = document.createElement('div');
@@ -234,7 +231,7 @@
         //Comment picture and timestamp
         const postInfo = document.createElement('div');
         const name = document.createElement('h6');
-        name.textContent = "Name  ";
+        name.textContent = 'Name '
         name.classList.add("mt-0");
         name.style.display = "inline";
         const timeStamp = document.createElement('i');
@@ -253,6 +250,8 @@
         commentDiv.append(col);
         return commentDiv;
     }
+
+    
 
     function changeCommentButtonToGrey()
     {
