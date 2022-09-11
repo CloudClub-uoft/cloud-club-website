@@ -21,26 +21,95 @@
 module.exports = (app, db) => {
 	app.get("/post", (req, res) => {
 		if (!req.query.id) {
-			return res.redirect("/forum");
+			return res.redirect("/forum")
 		}
-		db.query(`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`, (err1, res1) => {
-			if (err1) { return res.redirect("/forum?tm=Internal Server Error 500&ts=false"); }
 
-			db.query(`SELECT * FROM cloudclub.comments WHERE post_id='${req.query.id}'`, (err2, res2) => {
-				if (err2) { return res.redirect("/forum?tm=Internal Server Error 500&ts=false"); }
+		db.query(
+			`SELECT * FROM cloudclub.forum WHERE postid='${req.query.id}'`,
+			(err1, res1) => {
+				if (err1) {
+					return res.redirect(
+						"/forum?tm=Internal Server Error 500&ts=false"
+					)
+				}
 
-				db.query(`SELECT email, \`first-name\`, \`last-name\`, profile_path, user_id FROM cloudclub.comments JOIN cloudclub.profiles JOIN cloudclub.logins ON comments.user_id=profiles.userid AND comments.user_id=logins.id AND comments.post_id='${req.query.id}'`, (err3, res3) => {
-					if (err3) { console.log(err3); return res.status(500).json({ error: "Internal Server Error 500" }); }
-					
-					db.query(`SELECT email FROM cloudclub.logins WHERE id='${res1[0].userid}'`, (err4, emailResult) => {
-						if (err4) { return res.status(500).json({ error: "Internal Server Error 500" }); }
-						db.query(`SELECT * FROM cloudclub.profiles WHERE userid='${res1[0].userid}' `, (err5, profilePathResult) => {
-							if (err5) { return res.status(500).json({ error: "Internal Server Error 500" }); }
-						if (profilePathResult[0] === undefined) { return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": result[0], "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  "" });}
-						return res.render("post", { "selected": "forum", "title": "CloudClub | Forum", "post": res1[0], "comments": res2, "userInfo": res3[0], "email": emailResult[0].email, "user_id":req.session.userid, "profile_path":  profilePathResult[0].profile_path});
-					})
-				});
-			});
-		});
-	});
+				db.query(
+					`SELECT * FROM cloudclub.comments WHERE post_id='${req.query.id}'`,
+					(err2, res2) => {
+						if (err2) {
+							return res.redirect(
+								"/forum?tm=Internal Server Error 500&ts=false"
+							)
+						}
+
+						let query = `SELECT email, \`first-name\`, \`last-name\`, profile_path, user_id FROM cloudclub.comments JOIN cloudclub.profiles JOIN cloudclub.logins ON comments.user_id=profiles.userid AND comments.user_id=logins.id AND comments.post_id='${req.query.id}'`
+
+						db.query(query, (err3, res3) => {
+							if (err3) {
+								console.log(err3)
+								return res
+									.status(500)
+									.json({
+										error: "Internal Server Error 500",
+									})
+							}
+
+							db.query(
+								`SELECT email FROM cloudclub.logins WHERE id='${res1[0].userid}'`,
+								(err4, emailResult) => {
+									if (err4) {
+										return res
+											.status(500)
+											.json({
+												error: "Internal Server Error 500",
+											})
+									}
+
+									db.query(
+										`SELECT * FROM cloudclub.profiles WHERE userid='${res1[0].userid}'`,
+										(err5, profilePathResult) => {
+											if (err5) {
+												return res
+													.status(500)
+													.json({
+														error: "Internal Server Error 500",
+													})
+											}
+
+											if (
+												profilePathResult[0] ===
+												undefined
+											) {
+												return res.render("post", {
+													selected: "forum",
+													title: "CloudClub | Forum",
+													post: res1[0],
+													email: emailResult[0].email,
+													user_id: req.session.userid,
+													profile_path: "",
+												})
+											}
+
+											return res.render("post", {
+												selected: "forum",
+												title: "CloudClub | Forum",
+												post: res1[0],
+												comments: res2,
+												userInfo: res3[0],
+												email: emailResult[0].email,
+												user_id: req.session.userid,
+												profile_path:
+													profilePathResult[0]
+														.profile_path,
+											})
+										}
+									)
+								}
+							)
+						})
+					}
+				)
+			}
+		)
+	})
 }
