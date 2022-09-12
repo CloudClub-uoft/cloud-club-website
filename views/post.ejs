@@ -19,13 +19,12 @@
                         <path
                             d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                     </svg> Request Rejected<br> You don't have access to view this page or the post is not found!
-
                     <!--Internal Server Error-->
                 </div>
                 <% } %>
                     <% if(post !=undefined){ %>
                         <!--Loading animations-->
-                        <div class="jumbotron" id = "post_main_content" data-id = <%- post.postid -%> style="text-align:center">
+                        <div class="jumbotron" style="text-align:center">
                             <div class="container">
                                 <div mane="userid">
                                     <!-- chenge the name to name="% post.body %" -->
@@ -33,32 +32,35 @@
                                         <%- post.subject -%>
                                     </h1><br>
                                 </div>
-                               
+                                <% if(profile_path === undefined || profile_path === '') {%>
+                                <% var initial=email.substring(0,email.indexOf("@")) %>
+                                    <% var url=`https://ui-avatars.com/api/?name=${initial}&background=random` %>
+                                    <% }  else {var url = profile_path}%>
                                         <h5>
-                                           
+                                            <img class="img-thumbnail" width="10%" src="<%- url -%>">
                                             <br>
-                                           
+                                            <%- email -%>
                                         </h5><br>
                                         <h3>
                                             <%- post.timestamp.toDateString() -%>
                                         </h3><br>
                             </div>
-
-                            <!--Post content module-->
-                            <div class=" panel panel-primary " style = "text-align: left;">
-                                <div class=" jumbotron bg-white">
-                                    <h6 style="word-wrap:break-word;white-space:normal">
-                                        <%- post.body -%>
-                                    </h6>
-                                </div>
-                                <% } %>
+                        </div>
+                        <!--Post content module-->
+                        <div class=" panel panel-primary ">
+                            <div class=" jumbotron ">
+                                <h6 style="word-wrap:break-word;white-space:normal">
+                                    <%- post.body -%>
+                                </h6>
                             </div>
+                            <% } %>
+                        </div>
                             <br>
 
 
 
 
-                        </div>
+                        
 
                          <!--Comment Section-->
                         <div class = "container" style="margin-bottom: 100px;">
@@ -72,7 +74,7 @@
                                 <div class = "row row-content">
                                     <div class = "col-12">
                                         <div class = "media">
-                                            <img class="d-flex mr-3 align-self-center mb-4" width="40" height="40" src="" style = "border-radius: 50%;">
+                                            <img class="d-flex mr-3 align-self-center mb-4" width="40" height="40" src="<%-profile_path-%>" style = "border-radius: 50%;">
                                             <div class = "media-body mt-5">
                                                 <form id = "user-comment">
                                                     <div class = "form-group row">
@@ -104,19 +106,23 @@
                                     <script type="text/javascript">
                                         $(document).ready(() => {
 
-                                        
-                                            
+                                            let commenterInfo = getCommentInfo('<%- comments[i].user_id -%>');
+                                            const commenterFirstName = commenterInfo['first-name'];
+                                            const commenterLastName =  commenterInfo['last-name'];
+                                            const commenterPhoto = commenterInfo['profile_path'];
                                             
 
                                             let timeStampString = '<%- comments[i].timestamp -%>'.substring(0,21);
 
+
+                                            
 
                             
 
                                             
 
 
-                                            const commentSection = createComment('<%- comments[i].content -%>', timeStampString);
+                                            const commentSection = createComment('<%- comments[i].content -%>', timeStampString, commenterFirstName, commenterLastName, commenterPhoto);
                                             
                                             document.getElementById('comment-section').appendChild(commentSection);
                                         });
@@ -201,7 +207,7 @@
 
 <script type="text/javascript">
 
-    function createComment(commentValue, timeStampString)
+    function createComment(commentValue, timeStampString, commenterFirstName, commenterLastName, commenterPhoto)
     {
         //comment div
         const commentDiv = document.createElement('div');
@@ -221,7 +227,7 @@
         profileImg.style.width = "40px";
         profileImg.style.height = "40px";
         profileImg.style.borderRadius = "50%";
-        profileImg.src = "";
+        profileImg.src = (commenterPhoto == '') ? '/assets/CloudClub.png' : commenterPhoto;
         
 
         //Comment body: name, time, content
@@ -231,7 +237,7 @@
         //Comment picture and timestamp
         const postInfo = document.createElement('div');
         const name = document.createElement('h6');
-        name.textContent = 'Name '
+        name.textContent = (commenterFirstName + ' ' + commenterLastName + ' ');
         name.classList.add("mt-0");
         name.style.display = "inline";
         const timeStamp = document.createElement('i');
@@ -251,6 +257,17 @@
         return commentDiv;
     }
 
+    function getCommentInfo(commenterId)
+    {
+        const userInfo = JSON.parse('<%- JSON.stringify(userInfo)-%>');
+        for(let i = 0; i < userInfo.length; i++)
+        {
+            if(userInfo[i].user_id == commenterId)
+            {
+                return userInfo[i];
+            }
+        }
+    }
     
 
     function changeCommentButtonToGrey()
@@ -322,9 +339,11 @@
 
             addCommentToDB(formInput.value);
 
+
+
             let timePosted = new Date();
             timePosted = timePosted.toDateString().substring(0,21)
-            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value, timePosted));
+            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value, timePosted, 'You', '', '<%-profile_path-%>'));
 
             //update comment numbers:
             let currNumComments = document.getElementById('numComments');
