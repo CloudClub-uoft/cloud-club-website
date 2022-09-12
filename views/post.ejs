@@ -19,14 +19,12 @@
                         <path
                             d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                     </svg> Request Rejected<br> You don't have access to view this page or the post is not found!
-
-
                     <!--Internal Server Error-->
                 </div>
                 <% } %>
                     <% if(post !=undefined){ %>
                         <!--Loading animations-->
-                        <div class="jumbotron" style="text-align:center">
+                        <div class="jumbotron" id = "post_main_content" data-id=<%-post.postid-%> style="text-align:center">
                             <div class="container">
                                 <div mane="userid">
                                     <!-- chenge the name to name="% post.body %" -->
@@ -48,7 +46,6 @@
                                         </h3><br>
                             </div>
                         </div>
-
                         <!--Post content module-->
                         <div class=" panel panel-primary ">
                             <div class=" jumbotron ">
@@ -56,10 +53,72 @@
                                     <%- post.body -%>
                                 </h6>
                             </div>
-
                             <% } %>
                         </div>
-                        <br>
+                            <br>
+
+
+                         <!--Comment Section-->
+                        <div class = "container" style="margin-bottom: 100px;">
+                            <!--Number of comments-->
+                            <div class = "row row-content" style = "padding: 15px 0px 10px 0px; border-bottom: 1px ridge;">
+                                <h5 class = "col-12" id = "numComments"><%- comments.length -%> Comments</h5>
+                            </div>
+
+                            <!--div for user to post a comment-->
+                            <%if (user_id !== undefined) {%>
+                                <div class = "row row-content">
+                                    <div class = "col-12">
+                                        <div class = "media">
+                                            <img class="d-flex mr-3 align-self-center mb-4" width="40" height="40" src="<%-profile_path-%>" style = "border-radius: 50%;">
+                                            <div class = "media-body mt-5">
+                                                <form id = "user-comment">
+                                                    <div class = "form-group row">
+                                                        <div class = "col-12">
+                                                            <input type = "text" id = 'comment-input' class = "form-control" placeholder="Add a comment..."/ name = "comment-text" required>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class = "form-group row">
+                                                        <div class = "col-md-1  offset-md-9" style = "margin-right: 35px" >
+                                                            <button class = "btn" type = "button" id = 'cancel-btn'><strong style = "color:grey">CANCEL</strong></button>
+                                                        </div>
+                                                        <div class = "col-md-1" >
+                                                            <button type = "submit" id = 'comment-btn' class = "btn bg-light"><strong>COMMENT</strong></button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%}%>
+
+                            <!--div for all the comments-->
+                            <div id = "comment-section" class = "container">
+                                <% for(let i = 0; i < comments.length; i++){%>
+                                    <script type="text/javascript">
+                                        $(document).ready(() => {
+
+                                            let commenterInfo = getCommentInfo('<%- comments[i].user_id -%>');
+                                            const commenterFirstName = commenterInfo['first-name'];
+                                            const commenterLastName =  commenterInfo['last-name'];
+                                            const commenterPhoto = commenterInfo['profile_path'];
+                                            
+
+                                            let timeStampString = '<%- comments[i].timestamp -%>'.substring(0,21);
+
+                                            const commentSection = createComment('<%- comments[i].content -%>', timeStampString, commenterFirstName, commenterLastName, commenterPhoto);
+                                            
+                                            document.getElementById('comment-section').appendChild(commentSection);
+                                        });
+                                    </script>
+                                <%}%>
+
+
+                            </div>
+
+                        </div>
 
                         <div style=" text-align:center ">
                             <div class=" row " style="justify-content: space-between">
@@ -79,9 +138,9 @@
 
                                 <div class=" col-md-4" style="display: flex;flex-direction: row;">
                                     <div style="margin-right:5px;width: 100%; height: 100%;text-align: center">
-                                    <button type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
+                                    <a type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
                                                 data-toggle="modal" data-target="#myModal"
-                                    >Report Post</button>
+                                    >Report Post</a>
                                     </div>
                                     <% if (post.userid === user_id) { %>
                                     <div style="width: 100%; height: 100%;text-align: center">
@@ -134,6 +193,159 @@
 
 <script type="text/javascript">
 
+    function createComment(commentValue, timeStampString, commenterFirstName, commenterLastName, commenterPhoto)
+    {
+        //comment div
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('row', 'row-content');
+        
+        //col element
+        const col = document.createElement('div');
+        col.classList.add('col-12');
+
+        //comment content
+        const commentContent = document.createElement('div');
+        commentContent.classList.add('media', 'mt-5');
+
+        //Comment profile image
+        const profileImg = document.createElement('img');
+        profileImg.classList.add('d-flex', 'mr-3');
+        profileImg.style.width = "40px";
+        profileImg.style.height = "40px";
+        profileImg.style.borderRadius = "50%";
+        profileImg.src = (commenterPhoto == '') ? '/assets/CloudClub.png' : commenterPhoto;
+        
+
+        //Comment body: name, time, content
+        const commentBody = document.createElement('div');
+        commentBody.classList.add('media-body');
+
+        //Comment picture and timestamp
+        const postInfo = document.createElement('div');
+        const name = document.createElement('h6');
+        name.textContent = (commenterFirstName + ' ' + commenterLastName + ' ');
+        name.classList.add("mt-0");
+        name.style.display = "inline";
+        const timeStamp = document.createElement('i');
+        timeStamp.textContent = timeStampString;
+
+        //Comment text
+        const commentText = document.createElement('div');
+        commentText.classList.add('text-break');
+        commentText.textContent = commentValue;
+
+        //append and format elements
+        postInfo.append(name, timeStamp);
+        commentBody.append(postInfo, commentText);
+        commentContent.append(profileImg, commentBody);
+        col.append(commentContent);
+        commentDiv.append(col);
+        return commentDiv;
+    }
+
+    function getCommentInfo(commenterId)
+    {
+        const userInfo = JSON.parse('<%- JSON.stringify(userInfo)-%>');
+        for(let i = 0; i < userInfo.length; i++)
+        {
+            if(userInfo[i].user_id == commenterId)
+            {
+                return userInfo[i];
+            }
+        }
+    }
+    
+
+    function changeCommentButtonToGrey()
+    {
+        commentButton.classList.remove('bg-primary');
+        commentButton.classList.add('bg-light');
+        commentButton.style.color = "grey";
+    }
+    
+    function changeCommentButtonToBlue()
+    {
+        commentButton.classList.remove('bg-light');
+        commentButton.classList.add('bg-primary');
+        commentButton.style.color = "white";
+    }
+
+    function resetComment(){
+        formInput.value = '';
+        changeCommentButtonToGrey();
+    }
+
+    //check if there is any text
+    const formInput = document.getElementById('comment-input');
+    const commentButton = document.getElementById('comment-btn');
+    const form = document.getElementById('user-comment');
+
+    commentButton.style.color = "grey";
+
+
+    formInput.addEventListener('input', ()=>{
+        if(formInput.value === '')
+        {
+            changeCommentButtonToGrey();
+        } else {
+            changeCommentButtonToBlue();
+        }
+    });
+
+
+    function addCommentToDB(commentBody)
+    {
+        // create request object
+        var xhttp = new XMLHttpRequest();
+
+        // define callback function that is executed when data is recevied 
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+            var response = JSON.parse(xhttp.response)
+                console.log(response.message);
+            }
+        }
+
+        // open a post request
+        xhttp.open("POST", "/comment", true);
+
+        //set header
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        const postId = document.getElementById('post_main_content').getAttribute('data-id');
+
+        // send body with comment, post_id, and camefrom
+        xhttp.send(JSON.stringify({content: commentBody, post_id: postId, camefrom: ''}));
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if(formInput.value.length > 0){
+
+
+            addCommentToDB(formInput.value);
+
+
+
+            let timePosted = new Date();
+            timePosted = timePosted.toDateString().substring(0,21)
+            const commentSection = document.getElementById('comment-section').appendChild(createComment(formInput.value, timePosted, 'You', '', '<%-profile_path-%>'));
+
+            //update comment numbers:
+            let currNumComments = document.getElementById('numComments');
+            let currCommentsArray = currNumComments.textContent.split(' ');
+            const updatedNumComments = parseInt(currCommentsArray[0]) + 1;
+            currNumComments.textContent = updatedNumComments + " Comments";
+
+            changeCommentButtonToGrey();
+            resetComment();
+        }
+    });
+
+    const cancelButton = document.getElementById('cancel-btn');
+    cancelButton.addEventListener('click', resetComment);
+    
+
     function submit(e) {
 
         var text = document.getElementById("comment");
@@ -150,5 +362,9 @@
     }
 
     document.getElementById("report-btn").addEventListener("click", submit);
+
+    
+
+    
 
 </script>
