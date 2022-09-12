@@ -87,6 +87,8 @@ module.exports = (app, db) => {
 													email: emailResult[0].email,
 													user_id: req.session.userid,
 													profile_path: "",
+													comments: res2,
+													userInfo: res3,
 												})
 											}
 
@@ -95,7 +97,7 @@ module.exports = (app, db) => {
 												title: "CloudClub | Forum",
 												post: res1[0],
 												comments: res2,
-												userInfo: res3[0],
+												userInfo: res3,
 												email: emailResult[0].email,
 												user_id: req.session.userid,
 												profile_path:
