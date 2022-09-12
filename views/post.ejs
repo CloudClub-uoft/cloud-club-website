@@ -24,7 +24,7 @@
                 <% } %>
                     <% if(post !=undefined){ %>
                         <!--Loading animations-->
-                        <div class="jumbotron" style="text-align:center">
+                        <div class="jumbotron" id = "post_main_content" data-id=<%-post.postid-%> style="text-align:center">
                             <div class="container">
                                 <div mane="userid">
                                     <!-- chenge the name to name="% post.body %" -->
@@ -57,10 +57,6 @@
                         </div>
                             <br>
 
-
-
-
-                        
 
                          <!--Comment Section-->
                         <div class = "container" style="margin-bottom: 100px;">
@@ -98,8 +94,6 @@
                                 </div>
                             <%}%>
 
-
-
                             <!--div for all the comments-->
                             <div id = "comment-section" class = "container">
                                 <% for(let i = 0; i < comments.length; i++){%>
@@ -113,14 +107,6 @@
                                             
 
                                             let timeStampString = '<%- comments[i].timestamp -%>'.substring(0,21);
-
-
-                                            
-
-                            
-
-                                            
-
 
                                             const commentSection = createComment('<%- comments[i].content -%>', timeStampString, commenterFirstName, commenterLastName, commenterPhoto);
                                             
