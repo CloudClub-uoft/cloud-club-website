@@ -47,33 +47,27 @@ module.exports = (app, db) => {
 						db.query(query, (err3, res3) => {
 							if (err3) {
 								console.log(err3)
-								return res
-									.status(500)
-									.json({
-										error: "Internal Server Error 500",
-									})
+								return res.status(500).json({
+									error: "Internal Server Error 500",
+								})
 							}
 
 							db.query(
 								`SELECT email FROM cloudclub.logins WHERE id='${res1[0].userid}'`,
 								(err4, emailResult) => {
 									if (err4) {
-										return res
-											.status(500)
-											.json({
-												error: "Internal Server Error 500",
-											})
+										return res.status(500).json({
+											error: "Internal Server Error 500",
+										})
 									}
 
 									db.query(
 										`SELECT * FROM cloudclub.profiles WHERE userid='${res1[0].userid}'`,
 										(err5, profilePathResult) => {
 											if (err5) {
-												return res
-													.status(500)
-													.json({
-														error: "Internal Server Error 500",
-													})
+												return res.status(500).json({
+													error: "Internal Server Error 500",
+												})
 											}
 
 											if (

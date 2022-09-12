@@ -7,8 +7,10 @@
 <body>
     <!-- Heading and Description of Forum Page -->
     <%- include('partials/forum-subheader') %>
-        <!--The big container-->
+        
+    <!--The big container-->
         <div class="container">
+           
             <!-- alert saying that the user does not have access to this page-->
             <% if(post==undefined){ %>
                 <div class="alert alert-danger" role="alert">
@@ -21,8 +23,9 @@
                     </svg> Request Rejected<br> You don't have access to view this page or the post is not found!
                     <!--Internal Server Error-->
                 </div>
-                <% } %>
+            <% } %>
                     <% if(post !=undefined){ %>
+                        
                         <!--Loading animations-->
                         <div class="jumbotron" id = "post_main_content" data-id=<%-post.postid-%> style="text-align:center">
                             <div class="container">
@@ -33,9 +36,9 @@
                                     </h1><br>
                                 </div>
                                 <% if(profile_path === undefined || profile_path === '') {%>
-                                <% var initial=email.substring(0,email.indexOf("@")) %>
+                                    <% var initial=email.substring(0,email.indexOf("@")) %>
                                     <% var url=`https://ui-avatars.com/api/?name=${initial}&background=random` %>
-                                    <% }  else {var url = profile_path}%>
+                                <% }  else {var url = profile_path}%>
                                         <h5>
                                             <img class="img-thumbnail" width="10%" src="<%- url -%>">
                                             <br>
@@ -46,6 +49,7 @@
                                         </h3><br>
                             </div>
                         </div>
+                        
                         <!--Post content module-->
                         <div class=" panel panel-primary ">
                             <div class=" jumbotron ">
@@ -55,10 +59,9 @@
                             </div>
                             <% } %>
                         </div>
-                            <br>
-
-
-                         <!--Comment Section-->
+                        <br>
+                        
+                        <!--Comment Section-->
                         <div class = "container" style="margin-bottom: 100px;">
                             <!--Number of comments-->
                             <div class = "row row-content" style = "padding: 15px 0px 10px 0px; border-bottom: 1px ridge;">
@@ -114,13 +117,13 @@
                                         });
                                     </script>
                                 <%}%>
-
-
                             </div>
 
                         </div>
 
+                        <!--Button Section-->
                         <div style=" text-align:center ">
+                            
                             <div class=" row " style="justify-content: space-between">
                                 <div class=" col-md-4 ">
                                     <a id=" a " name=" a " style=" text-decoration:none " class=" a btn btn-block
@@ -138,18 +141,23 @@
 
                                 <div class=" col-md-4" style="display: flex;flex-direction: row;">
                                     <div style="margin-right:5px;width: 100%; height: 100%;text-align: center">
-                                    <a type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
-                                                data-toggle="modal" data-target="#myModal"
-                                    >Report Post</a>
+                                        <a type=" button " id= "reportButton" class=" a btn btn-block btn-lg btn-warning"
+                                                    data-toggle="modal" data-target="#myModal">
+                                                    Report Post
+                                        </a>
                                     </div>
                                     <% if (post.userid === user_id) { %>
-                                    <div style="width: 100%; height: 100%;text-align: center">
-                                    <a type=" button " class=" a btn btn-block btn-lg btn-info"
-                                            href="/editpost?id=<%- post.postid -%>">Edit Post</a>
+                                        <div style="width: 100%; height: 100%;text-align: center">
+                                            <a type=" button " class=" a btn btn-block btn-lg btn-info"
+                                                    href="/editpost?id=<%- post.postid -%>">Edit Post</a>
+                                        </div>
                                     <% } %>
-                                    </div>
+                                </div>
                             </div>
+
                         </div>
+
+                        <!-- Report Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
 
@@ -176,17 +184,22 @@
                                         </div>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000
-                            stye="positon:absolute;">
+
+                        <!-- Toasting Module -->
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay=2000 stye="positon:absolute;">
+
                             <div class="toast-header">
                                 <strong class="mr-auto" id="toasttitle"></strong>
-                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"
-                                    aria-label="Close"></button>
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" />
                             </div>
+
                             <div class="toast-body"></div>
+
                         </div>
+
                     </div>
         </div>
 </body>
@@ -255,7 +268,6 @@
         }
     }
     
-
     function changeCommentButtonToGrey()
     {
         commentButton.classList.remove('bg-primary');
@@ -282,7 +294,6 @@
 
     commentButton.style.color = "grey";
 
-
     formInput.addEventListener('input', ()=>{
         if(formInput.value === '')
         {
@@ -291,7 +302,6 @@
             changeCommentButtonToBlue();
         }
     });
-
 
     function addCommentToDB(commentBody)
     {
@@ -343,9 +353,9 @@
     });
 
     const cancelButton = document.getElementById('cancel-btn');
+    
     cancelButton.addEventListener('click', resetComment);
     
-
     function submit(e) {
 
         var text = document.getElementById("comment");
@@ -362,9 +372,5 @@
     }
 
     document.getElementById("report-btn").addEventListener("click", submit);
-
-    
-
-    
 
 </script>

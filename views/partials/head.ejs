@@ -16,48 +16,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <% if (selected == 'forum') {%>
-        <%-' <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script> <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script> <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">'%>
-            <!-- Removed: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script> 
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> 
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">          
+    <%}%>
+
+    <!-- Register Page -->
+    <% if (selected=='register') {%>
+        <%-'<link rel="stylesheet" href="/assets/css/register.css">'%>
             <%}%>
+    <% if (selected=='resetpassword') {%>
+        <%-'<link rel="stylesheet" href="/assets/css/resetpassword.css">'%>
+            <%}%>
+    <% if (selected=='reset') {%>
+        <%-'<link rel="stylesheet" href="/assets/css/reset.css">'%>
+    <%}%>
 
-                <!-- Register Page -->
-                <% if (selected=='register') {%>
-                    <%-'<link rel="stylesheet" href="/assets/css/register.css">'%>
-                        <%}%>
-                <% if (selected=='resetpassword') {%>
-                    <%-'<link rel="stylesheet" href="/assets/css/resetpassword.css">'%>
-                        <%}%>
-                <% if (selected=='reset') {%>
-                    <%-'<link rel="stylesheet" href="/assets/css/reset.css">'%>
-                        <%}%>
+    <!-- Login Page -->
+    <% if (selected=='login') {%>
+        <%-'<link rel="stylesheet" href="/assets/css/login.css">'%>
+    <%}%>
 
-                            <!-- Login Page -->
-                            <% if (selected=='login') {%>
-                                <%-'<link rel="stylesheet" href="/assets/css/login.css">'%>
-                                    <%}%>
+    <script>
+        function openInNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+    </script>
 
-                                        <script>
-                                            function openInNewTab(url) {
-                                                var win = window.open(url, '_blank');
-                                                win.focus();
-                                            }
-                                        </script>
+    <style>
+        #project-stab {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
 
-                                        <style>
-                                            #project-stab {
-                                                padding-left: 15px;
-                                                padding-right: 15px;
-                                            }
-                                        </style>
+    <!-- Originally from index.ejs -->
+    <script type="text/javascript">
+        function refresh() {
+            $.ajax({
+                url: 'refresh',
+                type: 'POST'
+            })
+        }
+        window.setInterval(refresh(), 60 * 60 * 1000); // 1 hour refresh
+    </script>
 
-                                        <!-- Originally from index.ejs -->
-                                        <script type="text/javascript">
-                                            function refresh() {
-                                                $.ajax({
-                                                    url: 'refresh',
-                                                    type: 'POST'
-                                                })
-                                            }
-                                            window.setInterval(refresh(), 60 * 60 * 1000); // 1 hour refresh
-                                        </script>
 </head>
