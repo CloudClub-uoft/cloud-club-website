@@ -20,7 +20,7 @@ Website for the UofT CloudClub.
 2. Install Node.JS dependencies by navigating to the folder using a terminal and executing `npm install`.
 3. Launch MySQL instance. (Jump to the database setup section for help with this section.)
 4. Create an empty file called `.env`at the root of the cloned repository. The file should be named exactly as .env (pronounced dotenv) and paste in it the environment variables shared by the project administrator.
-5. Start the server by executing `node .` in the terminal.
+5. Start the server by executing `node .` in the terminal at the root of the repository.
 6. View the webpage by navigating to `localhost` in your browser.
 
 ## Frontend Testing
