@@ -21,7 +21,7 @@ Website for the UofT CloudClub.
 3. Launch MySQL instance. (Jump to the database setup section for help with this section.)
 4. Create an empty file called `.env`at the root of the cloned repository. The file should be named exactly as .env (pronounced dotenv) and paste in it the environment variables shared by the project administrator.
 5. Start the server by executing `node .` in the terminal at the root of the repository.
-6. View the webpage by navigating to `localhost` in your browser.
+6. View the webpage by navigating to `localhost:PORT` in your browser. Here `PORT` is a placeholder for the port number specified by the "PORT" variable in the .env file.
 
 ## Frontend Testing
 
