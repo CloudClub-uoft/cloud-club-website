@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link
+			rel="icon"
+			href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"
+		/>
+		<title>Severless Functions</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+			crossorigin="anonymous"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/monaco-editor/min/vs/loader.js"
+		></script>
+		<link rel="stylesheet" href="/assets/css/serverless.css" />
+	</head>
+	<body id="body_div">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="row mb-3">
+						<div class="col-8 custom-col">
+							<h2>Cloud Functions</h2>
+							<h5 class="text-muted">
+								Enter in your code and click submit. We will take care of
+								installing libraries and deploying your code.
+							</h5>
+						</div>
+
+						<div class="col-4 custom-col" id="div_mod">
+							<img
+								id="cc-image"
+								alt="CloudClub"
+								src="https://cloudclub.ca/assets/CloudClub.png"
+								class="img-fluid rounded"
+							/>
+						</div>
+					</div>
+					<div class="row my-bg-box">
+						<div class="col-10 d-flex flex-column">
+							<div class="form-group flex-grow-1 d-flex flex-column">
+								<div class="editor">
+									<div class="editor__code">
+										<div id="editorCode"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-2">
+							<form id="theForm" action="/post_form" method="post">
+								<div class="row mb-4">
+									<div class="col-12">
+										<label>Function:</label>
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="radio"
+												name="function"
+												id="function1"
+												value="JS"												
+											/>
+											<label class="form-check-label" for="function1">JS</label>
+										</div>
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="radio"
+												name="function"
+												id="function2"
+												value="Python"
+											/>
+											<label class="form-check-label" for="function2"
+												>Python</label
+											>
+										</div>
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="row mb-5 mt-2">
+									<div class="col-12">
+										<label>Trigger:</label>
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="radio"
+												name="trigger"
+												id="trigger1"
+												value="HTTP Request"												
+											/>
+											<label class="form-check-label" for="trigger1"
+												>HTTP Request</label
+											>
+										</div>
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="radio"
+												name="trigger"
+												id="trigger2"
+												value="Timed"												
+											/>
+											<label class="form-check-label" for="trigger2"
+												>Timed</label
+											>
+										</div>
+									</div>
+								</div>
+								<div class="row mt-5">
+									<div class="col-12"></div>
+								</div>
+								<div class="row mt-5">
+									<div class="col-12">
+										<div class="d-grid gap-2">
+											<button
+												class="btn btn-block btn-lg btn-dark btn-sm"
+												type="button"
+												id="format_button"
+											>
+												FORMAT CODE
+											</button>
+											<button
+												class="btn btn-block btn-lg btn-dark btn-sm"
+												type="button"
+												disabled
+											>
+												TEST
+											</button>
+											<button
+												class="btn btn-success btn-lg btn-block btn-sm"
+												type="button"
+												id="submit_button"
+											>
+												SUBMIT
+											</button>
+											<input type="textarea" id="code" name="code" hidden />
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript" src="/assets/js/serverless.js"></script>
