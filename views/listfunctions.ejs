@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <title><strong>Functions</strong></title>
+        <meta charset="UTF-8" />
+        <style>
+            table, th, td {
+                border: 1px solid gray;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Function ID</th>
+                <th>Function Name</th>
+                <th>Function Contents</th>
+                <th>Language</th>
+                <th>Trigger Type</th>
+                <th>Timestamp</th>
+            </tr>
+
+            <% for (var i=0; i < result.length ; i++) { %>
+                <tr>
+                    <td><%- result[i].user_id -%></td>
+                    <td><%- result[i].function_id -%></td>
+                    <td><%- result[i].function_name -%></td>
+                    <td><%- result[i].function_contents -%></td>
+                    <td><%- result[i].language -%></td>
+                    <td><%- result[i].trigger_type -%></td>
+                    <td><%- result[i].timestamp -%></td>
+                </tr>
+            <% } %>
+            
+        </table>
+    </body>
+
+</html>
