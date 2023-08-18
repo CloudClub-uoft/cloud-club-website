@@ -1,3 +1,5 @@
+const functions = require("../function.js");
+
 module.exports = (app, db) => {
     app.get("/list-functions", (req, res) => {
         const sesh = req.session
@@ -5,6 +7,9 @@ module.exports = (app, db) => {
             return res.redirect("/?tm=You Aren't Logged In!&ts=false")
         }
         // res.send("You are logged in " + sesh.userid)
+
+        // Query data from MySQL database
+        /*
         var query = `SELECT * FROM cloudclub.functions WHERE user_id = '${sesh.userid}'`
         db.query(query, 
             (err1,res1) => {
@@ -22,5 +27,15 @@ module.exports = (app, db) => {
                 );
             }
         );
+        */
+
+        // OpenWhisk
+        functions.list().then((res) => {
+            res.render("listfunctions", { 
+                "result": res,
+                "title": "CloudClub | List Functions", 
+                "selected": "listfunctions",
+            });
+        });
     });
 };
