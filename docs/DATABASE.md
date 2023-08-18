@@ -21,7 +21,7 @@ The cloud-club-website database relies on the db-migrate NPM module for revision
 
 8. Run `npm i` in the command line to install all packages.
 
-9. Run at the root of the repository: `npx db-migrate up --config .\database\database.json`
+9. Run at the root of the repository: `npx db-migrate up --config ./database/database.json`. The .env file is required to perform this step.
 
 10. Refresh the phpmyadmin page to ensure that there are new tables inside it. (Fig 4.)
 
