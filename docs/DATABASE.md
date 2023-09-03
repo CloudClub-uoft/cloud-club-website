@@ -45,6 +45,22 @@ The cloud-club-website database relies on the db-migrate NPM module for revision
 
 ![Figure 4](./../docs/docimg/db_figure_4.png)
 
+### Troubleshooting
+If you get this error (in red) when starting MySQL on XAMPP: 
+```
+8:06:45 PM  [mysql] 	Problem detected!
+8:06:45 PM  [mysql] 	Port 3306 in use by ""C:\Program Files\MariaDB 10.11\bin\mysqld.exe" "--defaults-file=C:\Program Files\MariaDB 10.11\data\my.ini" "MariaDB""!
+8:06:45 PM  [mysql] 	MySQL WILL NOT start without the configured ports free!
+8:06:45 PM  [mysql] 	You need to uninstall/disable/reconfigure the blocking application
+8:06:45 PM  [mysql] 	or reconfigure MySQL and the Control Panel to listen on a different port
+```
+
+and `localhost/phpmyadmin` is displaying a series of errors including this: `mysqli::real_connect(): (HY000/2054): The server requested authentication method unknown to the client [auth_gssapi_client]`
+
+Follow this video to resolve error: https://www.youtube.com/watch?v=8-8CYHJBCeQ
+
+After following the steps to the video, navigating to `http://localhost/phpmyadmin/` you should see the regular database page.
+
 
 
 
