@@ -106,13 +106,13 @@ Setup VSCode workspace for linting and formatting. [Link (Slide 12)](https://doc
 
 
 ### Troubleshooting
-1. after running `node .`, I'm getting this redis error:
+1. After running `node .`, I'm getting this redis error:
 
 ```
 Redis connection failed: Error: Redis connection to redis-17266.c8.us-east-1-2.ec2.cloud.redislabs.com:17266 failed - getaddrinfo ENOTFOUND redis-17266.c8.us-east-1-2.ec2.cloud.redislabs.com
 ```
 - this error exists when the Redis account is deactivated. Please contact the project admin for help.
-2. how do I open VS Code?
+2. How do I open VS Code?
 - click on the serach bar at the bottom of your computer (Windows) or type `command + space bar` (Mac), search for `Visual Studio Code`
 - click on the two file button near the top-left of VS Code, then click Open Folder
 - navigate to the cloud-club-website folder that you've cloned from GitHub and open
