@@ -94,7 +94,7 @@ module.exports = (app, db, _, transporter) => {
 										let htmlToSend = template(data)
 										transporter.sendMail(
 											{
-												from: `"CloudClub" <${process.env.EMAIL_USER}>`,
+												from: process.env.AUTH_EMAIL,
 												to: email,
 												subject:
 													"Requested Password Reset",
