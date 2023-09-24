@@ -45,7 +45,7 @@ The cloud-club-website database relies on the db-migrate NPM module for revision
 
 ![Figure 4](./../docs/docimg/db_figure_4.png)
 
-### Troubleshooting
+### Troubleshooting - Only Follow if you Run into these Specific Errors!
 If you get this error (in red) when starting MySQL on XAMPP: 
 ```
 8:06:45 PM  [mysql] 	Problem detected!
