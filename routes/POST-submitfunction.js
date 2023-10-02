@@ -11,6 +11,8 @@ module.exports = (app, db) => {
                 res.render("functionlink", {
                     link_name: result,
                     api_host: process.env.__OW_API_HOST,
+                    "title": "CloudClub | Functions",
+                    "selected": "function-link"
                 });
             }
         });
